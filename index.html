@@ -351,6 +351,12 @@
 <body onload="showHome()">
 
     <div class="main-content">
+        <div id="videoWrapper" class="video-wrapper">
+            <div class="video-container">
+                <iframe id="mainPlayer" src="about:blank" allowfullscreen></iframe>
+            </div>
+        </div>
+
         <div class="page-card">
             <div id="pageContent"></div>
         </div>
@@ -384,7 +390,7 @@
                     <div><i class="fas fa-server"></i> Windows Server 2003</div>
                     <div><i class="fab fa-windows"></i> Windows Vista</div>
                     <div><i class="fas fa-server"></i> Windows Server 2008</div>
-                    <div><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7')"><i class="fab fa-windows"></i> Windows 7</div>
                     <div><i class="fab fa-windows"></i> Windows 8</div>
                     <div><i class="fab fa-windows"></i> Windows 10</div>
                     <div><i class="fab fa-windows"></i> Windows 11</div>
@@ -422,6 +428,13 @@
     </nav>
 
     <script>
+        function playVideo(url, title) {
+            document.getElementById('videoWrapper').style.display = 'block';
+            document.getElementById('mainPlayer').src = url;
+            document.getElementById('pageContent').innerHTML = `<h1 class="video-page-title">${title}</h1>`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function showHome() {
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="home-title">OPERATING SYSTEM</h1>
