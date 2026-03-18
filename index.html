@@ -14,7 +14,6 @@
         :root {
             --bg-overlay: rgba(0, 0, 0, 0.65); 
             --text-light: #f8fafc;
-            --text-muted: #cbd5e1;
             --text-dark: #1e293b;
             --accent-blue: #3b82f6;   
             --nav-bg: rgba(15, 23, 42, 0.95);
@@ -105,7 +104,7 @@
                     <div onclick="showDHCP()"><i class="fas fa-network-wired"></i> DHCP Server</div>
                     <div onclick="showWebServerLab()"><i class="fas fa-globe"></i> Application & Web Server</div>
                     <div onclick="showRaidLab()"><i class="fas fa-hdd"></i> RAID Installation</div>
-                    <div onclick="playVideo('', 'Group Policy', 'Detailed configuration for system-wide policies.')"><i class="fas fa-shield-alt"></i> Group Policy</div>
+                    <div onclick="playVideo('', 'Group Policy', 'Detailed configuration for system-wide security and administration policies.')"><i class="fas fa-shield-alt"></i> Group Policy</div>
                     <div onclick="showFileServerLab()"><i class="fas fa-folder-open"></i> File Server</div>
                 </div>
             </li>
@@ -113,25 +112,34 @@
             <li class="menu-item">
                 <a class="menu-link">Windows <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="playVideo('https://www.youtube.com/embed/ZFZBsTLm9yo', 'Windows 95', 'A classic look at the operating system that introduced the Start menu.')"><i class="fab fa-windows"></i> Windows 95</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation and features of one of the most stable Windows releases.')"><i class="fab fa-windows"></i> Windows 7</div>
-                    <div onclick="playVideo('', 'Windows XP', 'Documentation for legacy system configuration.')"><i class="fab fa-windows"></i> Windows XP</div>
-                    <div onclick="playVideo('', 'Windows 10', 'Overview of modern OS features and enterprise deployment.')"><i class="fab fa-windows"></i> Windows 10</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/ZFZBsTLm9yo', 'Windows 95', 'Operating system introduced in 1995.')"><i class="fab fa-windows"></i> Windows 95</div>
+                    <div onclick="playVideo('', 'Windows 98', 'Operating system introduced in 1998.')"><i class="fab fa-windows"></i> Windows 98</div>
+                    <div onclick="playVideo('', 'Windows NT', 'Operating system for workstations and servers.')"><i class="fab fa-windows"></i> Windows NT</div>
+                    <div onclick="playVideo('', 'Windows 2000', 'Enterprise-grade operating system.')"><i class="fab fa-windows"></i> Windows 2000</div>
+                    <div onclick="playVideo('', 'Windows ME', 'Windows Millennium Edition.')"><i class="fab fa-windows"></i> Windows ME</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', 'Installation and configuration of Windows XP Professional.')"><i class="fab fa-windows"></i> Windows XP</div>
+                    <div onclick="playVideo('', 'Windows Server 2003', 'Server operating system produced by Microsoft.')"><i class="fas fa-server"></i> Windows Server 2003</div>
+                    <div onclick="playVideo('', 'Windows Vista', 'Operating system focused on security and visual style.')"><i class="fab fa-windows"></i> Windows Vista</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', 'Complete installation of Windows Server 2008 R2.')"><i class="fas fa-server"></i> Windows Server 2008</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation and features of Windows 7.')"><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('', 'Windows 8', 'Introduction of the tiled interface and touch support.')"><i class="fab fa-windows"></i> Windows 8</div>
+                    <div onclick="playVideo('', 'Windows 10', 'The most popular modern Windows operating system.')"><i class="fab fa-windows"></i> Windows 10</div>
+                    <div onclick="playVideo('', 'Windows 11', 'The latest Windows OS with centered start menu.')"><i class="fab fa-windows"></i> Windows 11</div>
                 </div>
             </li>
 
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="playVideo('', 'PART 1: DOMAIN CONTROLLER', 'Overview of the primary domain controller setup.')"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
+                    <div onclick="playVideo('', 'PART 1: DOMAIN CONTROLLER', 'Configuration of the Active Directory Domain Services role.')"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
                     <div onclick="showCS2()"><i class="fas fa-users"></i> Part 2: Adding Users</div>
                     <div onclick="showCS3()"><i class="fas fa-database"></i> Part 3: DHCP Server</div>
                     <div onclick="showCS4()"><i class="fas fa-file-alt"></i> Part 4: File Sharing</div>
                     <div onclick="showCS5()"><i class="fas fa-save"></i> Part 5: RAID</div>
-                    <div onclick="playVideo('', 'PART 6: REMOTE DESKTOP', 'Configuration of Remote Desktop services for network management.')"><i class="fas fa-desktop"></i> Part 6: Remote Desktop</div>
+                    <div onclick="playVideo('', 'PART 6: REMOTE DESKTOP', 'Enabling and securing remote administrative access.')"><i class="fas fa-desktop"></i> Part 6: Remote Desktop</div>
                     <div onclick="showCS7()"><i class="fas fa-globe"></i> Part 7: Web Server</div>
-                    <div onclick="playVideo('', 'PART 8: GROUP POLICIES', 'Implementing security and administrative control via Group Policies.')"><i class="fas fa-user-shield"></i> Part 8: Group Policies</div>
-                    <div onclick="playVideo('', 'PART 9: WINDOWS DEPLOYMENT', 'Network-based deployment strategies for Windows operating systems.')"><i class="fas fa-window-restore"></i> Part 9: Windows Deployment</div>
+                    <div onclick="playVideo('', 'PART 8: GROUP POLICIES', 'Implementing security restrictions through GPO.')"><i class="fas fa-user-shield"></i> Part 8: Group Policies</div>
+                    <div onclick="playVideo('', 'PART 9: WINDOWS DEPLOYMENT', 'OS deployment over the network using WDS.')"><i class="fas fa-window-restore"></i> Part 9: Windows Deployment</div>
                 </div>
             </li>
             
@@ -145,8 +153,7 @@
                     <h3 class="about-title">About Project</h3>
                     <p style="font-size: 0.85rem; color: #475569; line-height: 1.6; margin-top: 8px;">
                         This digital portfolio is the final project for <strong>ITOS220-T (Operating Systems)</strong>. 
-                        It showcases technical proficiency in Windows Server 2008 management, network configuration, 
-                        and storage virtualization.
+                        It showcases technical proficiency in Windows Server 2008 management.
                     </p>
                 </div>
             </li>
@@ -169,34 +176,34 @@
             document.getElementById('pageContent').innerHTML = `
                 <div style="text-align:center">
                     <h1 class="content-title">OPERATING SYSTEM</h1>
-                    <p class="content-text">Welcome to the ITOS220-T portfolio. Navigate through the menu below to view laboratory activities and case study documentation.</p>
+                    <p class="content-text">Welcome to the ITOS220-T portfolio of Emmanuel C. Capuno. Navigate using the menu below.</p>
                 </div>
             `;
         }
 
         function showCS2() {
             playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 2: ADDING USERS', 
-            `In Windows Server 2008, adding users is a straightforward process performed through the ADUC console. In this video, I demonstrated bulk user creation.<br><br>Code Link: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
+            `In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.<br><br>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
         }
 
         function showCS3() {
             playVideo('https://www.youtube.com/embed/CUjtsNc3-oA', 'PART 3: DHCP SERVER', 
-            `A DHCP server automatically assigns IP addresses and network parameters to client devices, simplifying network administration and reducing IP conflicts.`);
+            `A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.`);
         }
 
         function showCS4() {
             playVideo('https://www.youtube.com/embed/97SWEZBB17Y', 'PART 4: FILE SHARING', 
-            `Configuration of shared folders and NTFS permissions to control resource access across the domain efficiently.`);
+            `File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.`);
         }
 
         function showCS5() {
             playVideo('https://www.youtube.com/embed/RUJFKDdjQ80', 'PART 5: RAID', 
-            `RAID technology implementation for improved performance and data redundancy using Windows Server 2008 software-based management.`);
+            `RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).`);
         }
 
         function showCS7() {
             playVideo('https://www.youtube.com/embed/6VuNQgEzraw', 'PART 7: WEB SERVER', 
-            `Hosting and managing websites using Internet Information Services (IIS) 7.0 for secure and scalable web applications.`);
+            `Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.`);
         }
 
         function showActiveDirectory() {
@@ -204,11 +211,12 @@
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/ixw2amZnk60";
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">Active Directory - Adding Users</h1>
+                <p class="content-text">In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p>
                 <div class="instruction-box">
                     <ul class="instruction-list">
-                        <li>Create User Accounts of all BSIT Students with common passwords.</li>
+                        <li>Create accounts for all BSIT Students with common passwords.</li>
                         <li>Group students according to their section.</li>
-                        <li>Emmanuel C. Capuno account set to Administrators (User cannot change password).</li>
+                        <li>Admin account: Emmanuel C. Capuno (User cannot change password).</li>
                     </ul>
                 </div>
             `;
@@ -219,11 +227,11 @@
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/CUjtsNc3-oA";
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">DHCP Server Role</h1>
+                <p class="content-text">A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>
                 <div class="instruction-box">
                     <ul class="instruction-list">
                         <li>Male IP block: 10.0.0.0 /8 | Female IP block: 172.16.0.0 /16</li>
                         <li>16hr Lease | Exclude First & Last 10 IPs.</li>
-                        <li>Client OS: WinXP (Class A) and Win7 (Class B) connected via DHCP.</li>
                     </ul>
                 </div>
             `;
@@ -234,21 +242,22 @@
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/6VuNQgEzraw";
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">Application & Web Server</h1>
+                <p class="content-text">Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>
                 <div class="instruction-box">
                     <ul class="instruction-list">
-                        <li>Install ASP.NET, Windows Auth, and IIS 6 Compatibility.</li>
-                        <li>Create a simple ASP.NET application accessible via domain name.</li>
+                        <li>Install ASP.NET, Windows Auth, and Dynamic Content Compression.</li>
+                        <li>Accessible via local domain name.</li>
                     </ul>
                 </div>
             `;
         }
 
         function showRaidLab() {
-            playVideo('https://www.youtube.com/embed/RUJFKDdjQ80', 'RAID Installation', 'Step-by-step setup of Stripped (RAID 0), Mirrored (RAID 1), Spanned, and RAID 5 volumes.');
+            playVideo('https://www.youtube.com/embed/RUJFKDdjQ80', 'RAID Installation', 'RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).');
         }
 
         function showFileServerLab() {
-            playVideo('https://www.youtube.com/embed/97SWEZBB17Y', 'File Server Role', 'Management of Public, VB.Net, and C_Programs folders with specific file format permissions.');
+            playVideo('https://www.youtube.com/embed/97SWEZBB17Y', 'File Server Role', 'File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.');
         }
     </script>
 </body>
