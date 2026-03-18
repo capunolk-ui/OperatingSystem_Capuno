@@ -66,12 +66,11 @@
         .menu-link:hover { color: #fff; }
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
-            background: #fff; min-width: 320px; border-radius: 15px; padding: 20px;
+            background: #fff; min-width: 320px; border-radius: 15px; padding: 15px;
             opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
         
-        /* Items inside Case Study & Lab */
         .dropdown div {
             display: flex; align-items: center; padding: 10px; color: #334155;
             text-decoration: none; font-size: 0.85rem; border-radius: 8px; cursor: pointer;
@@ -80,7 +79,6 @@
         .dropdown i { margin-right: 10px; color: var(--accent-blue); width: 20px; text-align: center; }
         .scrollable { max-height: 400px; overflow-y: auto; }
 
-        /* About Section Titles */
         .about-title { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-top: 10px; text-transform: uppercase; }
         .link-text { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
     </style>
@@ -113,6 +111,16 @@
             </li>
 
             <li class="menu-item">
+                <a class="menu-link">Windows <i class="fas fa-chevron-up"></i></a>
+                <div class="dropdown scrollable">
+                    <div onclick="playVideo('https://www.youtube.com/embed/ZFZBsTLm9yo', 'Windows 95', 'A classic look at the operating system that introduced the Start menu.')"><i class="fab fa-windows"></i> Windows 95</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation and features of one of the most stable Windows releases.')"><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('', 'Windows XP', 'Documentation for legacy system configuration.')"><i class="fab fa-windows"></i> Windows XP</div>
+                    <div onclick="playVideo('', 'Windows 10', 'Overview of modern OS features and enterprise deployment.')"><i class="fab fa-windows"></i> Windows 10</div>
+                </div>
+            </li>
+
+            <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
                     <div onclick="playVideo('', 'PART 1: DOMAIN CONTROLLER', 'Overview of the primary domain controller setup.')"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
@@ -133,14 +141,12 @@
                     <p style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Developer</p>
                     <h2 style="color:var(--accent-blue); font-size:1.4rem; margin-bottom: 2px;">EMMANUEL C. CAPUNO</h2>
                     <p style="font-weight:600; font-size:0.85rem; color:#64748b;">BSIT - NS2A</p>
-                    
                     <hr style="border:0; border-top: 1px solid #f1f5f9; margin: 15px 0;">
-                    
                     <h3 class="about-title">About Project</h3>
                     <p style="font-size: 0.85rem; color: #475569; line-height: 1.6; margin-top: 8px;">
                         This digital portfolio is the final project for <strong>ITOS220-T (Operating Systems)</strong>. 
                         It showcases technical proficiency in Windows Server 2008 management, network configuration, 
-                        and storage virtualization through documented laboratory activities and case studies.
+                        and storage virtualization.
                     </p>
                 </div>
             </li>
@@ -168,7 +174,6 @@
             `;
         }
 
-        /* Case Study Functions */
         function showCS2() {
             playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 2: ADDING USERS', 
             `In Windows Server 2008, adding users is a straightforward process performed through the ADUC console. In this video, I demonstrated bulk user creation.<br><br>Code Link: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
@@ -194,7 +199,6 @@
             `Hosting and managing websites using Internet Information Services (IIS) 7.0 for secure and scalable web applications.`);
         }
 
-        /* Lab Activities Functions */
         function showActiveDirectory() {
             document.getElementById('videoWrapper').style.display = 'block';
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/ixw2amZnk60";
