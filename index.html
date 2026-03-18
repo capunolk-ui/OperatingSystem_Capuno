@@ -369,12 +369,12 @@
             <li class="menu-item">
                 <a class="menu-link">Lab Activities <i class="fas fa-chevron-up" style="font-size:0.65em; margin-left:5px;"></i></a>
                 <div class="dropdown">
-                    <div onclick="playVideo('https://www.youtube.com/embed/ZXYlduKxtnM', 'Active Directory: Creating Users')"><i class="fas fa-users"></i> Active Directory: Creating Users</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/6Fls97KnV74', 'DHCP Role and Joining Domain')"><i class="fas fa-network-wired"></i> DHCP Role and Joining Domain</div>
-                    <div><i class="fas fa-globe"></i> Application and Web Server</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/_UjVK-te7_0', 'RAID Installation')"><i class="fas fa-hdd"></i> RAID Installation</div>
+                    <div onclick="showCreatingUsers()"><i class="fas fa-users"></i> Active Directory: Creating Users</div>
+                    <div onclick="showDhcp()"><i class="fas fa-network-wired"></i> DHCP Role and Joining Domain</div>
+                    <div onclick="showApplicationWebServer()"><i class="fas fa-globe"></i> Application and Web Server</div>
+                    <div onclick="showRaid()"><i class="fas fa-hdd"></i> RAID Installation</div>
                     <div><i class="fas fa-shield-alt"></i> Group Policy Management</div>
-                    <div><i class="fas fa-folder-open"></i> File Server</div>
+                    <div onclick="showFileServer()"><i class="fas fa-folder-open"></i> File Server</div>
                 </div>
             </li>
 
@@ -405,7 +405,7 @@
                     <div><i class="fas fa-network-wired"></i> Part 3: DHCP Server</div>
                     <div><i class="fas fa-folder-open"></i> Part 4: File Sharing</div>
                     <div><i class="fas fa-hdd"></i> Part 5: Raid</div>
-                    <div><i class="fas fa-globe"></i> Part 6: Webserver</div>
+                    <a onclick="playVideo('https://youtu.be/6VuNQgEzraw', 'Part 6: Webserver')"><i class="fas fa-globe"></i> Part 6: Webserver</a>
                     <div><i class="fas fa-shield-alt"></i> Part 7: Group Policies</div>
                     <div><i class="fas fa-upload"></i> Part 8: Windows Deployment</div>
                 </div>
@@ -488,6 +488,24 @@
                         <strong>Technological University of the Philippines - Taguig</strong><br>
                         ITOS220-T Operating Systems Portfolio
                     </p>
+                </div>
+            `;
+        }
+
+        function showApplicationWebServer() {
+            document.getElementById('pageContent').innerHTML = `
+                <h1 class="video-page-title">Application and Web Server</h1>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 16px; margin-top: 20px;">
+                    <iframe src="https://www.youtube.com/embed/6VuNQgEzraw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+                </div>
+            `;
+        }
+
+        function showFileServer() {
+            document.getElementById('pageContent').innerHTML = `
+                <h1 class="video-page-title">File Server</h1>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 16px; margin-top: 20px;">
+                    <iframe src="https://www.youtube.com/embed/eIZ1Zy3SE5g" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
                 </div>
             `;
         }
