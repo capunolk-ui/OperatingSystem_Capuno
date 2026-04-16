@@ -41,6 +41,8 @@
 
         .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; }
         .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
+        .content-text a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+        .content-text a:hover { text-decoration: underline; }
         
         .instruction-list { list-style: none; margin-bottom: 15px; }
         .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; font-size: 0.95rem; line-height: 1.5; }
@@ -131,13 +133,13 @@
                 <div class="dropdown scrollable">
                     <div onclick="playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT', '')"><i class="fab fa-windows"></i> Windows NT</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', '')"><i class="fab fa-windows"></i> Windows 95</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista', '')"><i class="fab fa-windows"></i> Windows Vista</div>
+                    <div onclick="showVista()"><i class="fab fa-windows"></i> Windows Vista</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', '')"><i class="fab fa-windows"></i> Windows XP</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', '')"><i class="fas fa-terminal"></i> Server 2008</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', '')"><i class="fab fa-windows"></i> Windows 7</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8', '')"><i class="fab fa-windows"></i> Windows 8</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', '')"><i class="fab fa-windows"></i> Windows 10</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', '')"><i class="fab fa-windows"></i> Windows 11</div>
+                    <div onclick="showWin8()"><i class="fab fa-windows"></i> Windows 8</div>
+                    <div onclick="showWin10()"><i class="fab fa-windows"></i> Windows 10</div>
+                    <div onclick="showWin11()"><i class="fab fa-windows"></i> Windows 11</div>
                 </div>
             </li>
 
@@ -206,8 +208,34 @@
             `;
         }
 
+        /* --- WINDOWS INSTALLATION CAPTIONS --- */
+        function showVista() {
+            playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista', 
+            `<p class="content-text">Windows Vista ISO Link: <a href="https://archive.org/details/win-vista-ultimate-x64" target="_blank">Download Here</a><br>
+            <strong>PROD KEY:</strong> X9HTF-MKJQQ-XK376-TJ7T4-76PKF</p>`);
+        }
+
+        function showWin8() {
+            playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8', 
+            `<p class="content-text">Windows 8 ISO Link: <a href="https://www.techworm.net/2023/03/download-windows-8-1-iso-files.html" target="_blank">Download Here</a><br>
+            <strong>PROD KEY:</strong> 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH</p>`);
+        }
+
+        function showWin10() {
+            playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', 
+            `<p class="content-text">Windows 10 ISO Link: <a href="https://www.microsoft.com/en-in/software-download/windows10" target="_blank">Download Here</a></p>`);
+        }
+
+        function showWin11() {
+            playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', 
+            `<p class="content-text">Windows 11 ISO Link: <a href="https://support.microsoft.com/en-us/windows/create-an-iso-file-for-windows-11-f2fe5a20-a186-4d1b-9ef8-59a2e0eb1178" target="_blank">Download Here</a></p>`);
+        }
+
         /* --- CASE STUDY FUNCTIONS --- */
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>In Windows Server 2008, adding users is a straightforward process... Bulk adding code: <a href='https://ggle.in/bulkusers' target='_blank'>https://ggle.in/bulkusers</a></p>`); }
+        function showCS1() { 
+            playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", 
+            `<p class='content-text'>In Windows Server 2008, adding users is a straightforward process... Bulk adding code: <a href='https://ggle.in/bulkusers' target='_blank'>https://ggle.in/bulkusers</a></p>`); 
+        }
         function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>A DHCP server automatically assigns IP addresses and network configuration parameters to client devices.</p>`); }
         function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>File sharing allows users and administrators to store and manage files across a network efficiently.</p>`); }
         function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>RAID technology combines multiple physical disks into a single logical unit for redundancy and performance.</p>`); }
