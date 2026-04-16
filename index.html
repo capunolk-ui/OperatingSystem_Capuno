@@ -27,7 +27,7 @@
                         url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070&auto=format&fit=crop');
             background-size: cover; background-position: center; background-attachment: fixed;
             color: var(--text-light); font-family: 'Inter', sans-serif;
-            min-height: 100vh; padding-bottom: 120px;
+            min-height: 100vh; padding-bottom: 150px;
         }
 
         .main-content { max-width: 850px; margin: 0 auto; padding: 40px 20px; text-align: center; }
@@ -49,13 +49,13 @@
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; }
-        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
+        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; white-space: pre-line; }
         
         .instruction-box { background: #f1f5f9; padding: 25px; border-radius: 15px; border-left: 6px solid var(--accent-blue); margin-top: 20px; }
-        .instruction-title { font-weight: 700; color: #0f172a; margin-bottom: 10px; display: block; }
+        .instruction-title { font-weight: 700; color: #0f172a; margin-bottom: 10px; display: block; text-transform: uppercase; font-size: 0.9rem; }
         .instruction-list { list-style: none; margin-bottom: 15px; }
-        .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; font-size: 0.95rem; }
-        .instruction-list li::before { content: "•"; color: var(--accent-blue); position: absolute; left: 0; font-weight: 900; }
+        .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; font-size: 0.95rem; line-height: 1.5; }
+        .instruction-list li::before { content: "-"; color: var(--accent-blue); position: absolute; left: 0; font-weight: 900; }
 
         nav {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -72,7 +72,7 @@
         
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
-            background: #fff; min-width: 300px; border-radius: 18px; padding: 15px;
+            background: #fff; min-width: 320px; border-radius: 18px; padding: 15px;
             opacity: 0; visibility: hidden; transition: 0.3s; 
             box-shadow: 0 15px 45px rgba(0,0,0,0.7);
         }
@@ -84,9 +84,9 @@
         }
         .dropdown div:hover { background: #f0f7ff; color: var(--accent-blue); }
         .dropdown i { margin-right: 15px; color: var(--accent-blue); width: 20px; text-align: center; }
-        .scrollable { max-height: 380px; overflow-y: auto; }
+        .scrollable { max-height: 400px; overflow-y: auto; }
         
-        .link-text { color: var(--accent-blue); text-decoration: none; font-weight: 700; }
+        .bold-label { font-weight: 700; color: #0f172a; }
     </style>
 </head>
 <body onload="showHome()">
@@ -117,32 +117,34 @@
             </li>
 
             <li class="menu-item">
-                <a class="menu-link">OS Versions <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link">Windows <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', 'Legacy environment setup.')"><i class="fab fa-windows"></i> Windows 95</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', 'Professional configuration.')"><i class="fab fa-windows"></i> Windows XP</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', 'Core Server R2 installation.')"><i class="fas fa-terminal"></i> Server 2008</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5EgVT5UYgpk', 'Windows 7', 'Client workstation integration.')"><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', '')"><i class="fab fa-windows"></i> Windows 95</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', '')"><i class="fab fa-windows"></i> Windows XP</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', '')"><i class="fas fa-terminal"></i> Server 2008</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', '')"><i class="fab fa-windows"></i> Windows 7</div>
                 </div>
             </li>
 
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="showCombinedCS1()"><i class="fas fa-database"></i> Part 1: Domain Controller</div>
-                    <div onclick="showCS2_DHCP()"><i class="fas fa-route"></i> Part 2: DHCP Server</div>
-                    <div onclick="showCS3_FileSharing()"><i class="fas fa-share-alt"></i> Part 3: File Sharing</div>
-                    <div onclick="showCS4_RAID()"><i class="fas fa-hdd"></i> Part 4: RAID</div>
-                    <div onclick="showCS5_WebServer()"><i class="fas fa-cloud"></i> Part 5: Web Server</div>
-                    <div onclick="playVideo('', 'PART 6: GROUP POLICIES', 'Implementing security controls.')"><i class="fas fa-shield-virus"></i> Part 6: Group Policies</div>
-                    <div onclick="playVideo('', 'PART 7: WINDOWS DEPLOYMENT', 'Network OS deployment (WDS).')"><i class="fas fa-rocket"></i> Part 7: Windows Deployment</div>
+                    <div onclick="showCombinedCS1()"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
+                    <div onclick="showCS2_AddingUsers()"><i class="fas fa-users"></i> Part 2: Adding Users</div>
+                    <div onclick="showCS3_DHCP()"><i class="fas fa-database"></i> Part 3: DHCP Server</div>
+                    <div onclick="showCS4_FileSharing()"><i class="fas fa-file-alt"></i> Part 4: File Sharing</div>
+                    <div onclick="showCS5_RAID()"><i class="fas fa-save"></i> Part 5: RAID</div>
+                    <div onclick="playVideo('', 'Part 6: Remote Desktop', '')"><i class="fas fa-desktop"></i> Part 6: Remote Desktop</div>
+                    <div onclick="showCS7_WebServer()"><i class="fas fa-globe"></i> Part 7: Web Server</div>
+                    <div onclick="playGroupPolicy()"><i class="fas fa-user-shield"></i> Part 8: Group Policies</div>
+                    <div onclick="playVideo('', 'Part 9: Windows Deployment', '')"><i class="fas fa-copy"></i> Part 9: Windows Deployment</div>
                 </div>
             </li>
             
             <li class="menu-item">
-                <a class="menu-link">Profile <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link">About <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown">
-                    <p style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 800;">Administrator</p>
+                    <p style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 800;">Developer</p>
                     <h2 style="color:var(--accent-blue); font-size:1.3rem;">EMMANUEL C. CAPUNO</h2>
                     <p style="font-weight:600; font-size:0.8rem; color:#64748b;">BSIT - NS2A</p>
                 </div>
@@ -156,7 +158,7 @@
             document.getElementById('mainPlayer').src = url ? url : 'about:blank';
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">${title}</h1>
-                <p class="content-text">${text}</p>
+                <div class="content-text">${text}</div>
             `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -167,107 +169,154 @@
                 <div style="text-align:center; padding: 10px 0;">
                     <i class="fas fa-network-wired" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 25px;"></i>
                     <h1 class="content-title">OPERATING SYSTEM PORTFOLIO</h1>
-                    <p class="content-text">Explore the comprehensive setup and configuration of Windows Server 2008 R2.</p>
+                    <p class="content-text">Welcome to the technical documentation of Emmanuel C. Capuno for ITOS220-T.</p>
                 </div>
             `;
         }
 
-        /* --- LAB ACTIVITY FUNCTIONS (FIXED) --- */
+        /* --- LITERAL CAPTIONS FROM SCREENSHOTS --- */
 
         function showActiveDirectory() {
             playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory: Creating Users", `
-                <p class="content-text">Active Directory - Adding Users</p>
-                <div class="instruction-box">
-                    <ul class="instruction-list">
-                        <li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li>
-                        <li>Group the students according to their section.</li>
-                        <li>Your account belongs to Administrators.</li>
-                    </ul>
-                    <span class="instruction-title">Show administrator account:</span>
-                    <ul class="instruction-list">
-                        <li>User cannot change password.</li>
-                        <li>Password never expires.</li>
-                    </ul>
-                    <p class="content-text"><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>
-                </div>
+                <p>Active Directory - Adding Users</p>
+                <ul class="instruction-list">
+                    <li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li>
+                    <li>Group the students according to their section.</li>
+                    <li>Your account belongs to Administrators.</li>
+                </ul>
+                <p>Show administrator account:</p>
+                <ul class="instruction-list">
+                    <li>User cannot change password.</li>
+                    <li>Password never expires.</li>
+                </ul>
+                <p><span class="bold-label">Domain:</span> bsit.com</p>
+                <p><span class="bold-label">Common password:</span> User123</p>
             `);
         }
 
         function showDHCP() {
-            playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP Server Role", `
-                <div class="instruction-box">
-                    <span class="instruction-title">Scopes:</span>
-                    <ul class="instruction-list">
-                        <li>IP block 10.0.0.0 /8 for male students per section requirement.</li>
-                        <li>IP block 172.16.0.0 /16 for female students per section requirement.</li>
-                        <li>Server: Last Usable IP add | Lease Time: 16 hours</li>
-                        <li>Exclude: First & Last (10 usable IP Addresses)</li>
-                    </ul>
-                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #cbd5e1;">
-                    <ul class="instruction-list">
-                        <li>Connect Windows XP and Windows 7 clients via DHCP.</li>
-                        <li>XP must belong to Class A; Win 7 must belong to Class B.</li>
-                    </ul>
-                </div>
+            playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP Server", `
+                <p class="bold-label">Scopes:</p>
+                <ul class="instruction-list">
+                    <li>number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.</li>
+                    <li>number of female students per yr and section is the host requirement with the ip block 172.16.0.0 /16</li>
+                    <li>Server: Last Usable IP add</li>
+                    <li>Exclude: First & Last (10 usable IP Addresses)</li>
+                    <li>Lease Time: 16 hours</li>
+                    <li>Router: Server IP Address</li>
+                    <li>DNS: Server IP Address (8.8.8.8)</li>
+                </ul>
+                <ol class="instruction-list" style="list-style: decimal; padding-left: 20px;">
+                    <li>Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)</li>
+                    <li>Connect the two (2) client OS to your Windows Server Domain USING DHCP</li>
+                    <li style="list-style:none; margin-left:-20px;">- WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li>
+                    <li style="list-style:none; margin-left:-20px;">- WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li>
+                    <li>LOGIN 5 student accounts per section per OS</li>
+                </ol>
             `);
         }
 
         function showWebServerLab() {
             playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "Application and Web Server", `
-                <div class="instruction-box">
-                    <ul class="instruction-list">
-                        <li>Add Application and Web Server Roles.</li>
-                        <li>Enable: ASP.NET, Windows Authentication, IIS 6 Compatibility.</li>
-                        <li>Create a simple ASP.NET app accessible via domain name.</li>
-                    </ul>
-                </div>
+                <ol class="instruction-list" style="list-style: decimal; padding-left: 20px;">
+                    <li>Add Application Server Role</li>
+                    <li>Add Web Server Role</li>
+                    <li>Add features:</li>
+                    <li style="list-style:none; margin-left:-20px;">- asp.net</li>
+                    <li style="list-style:none; margin-left:-20px;">- windows authentication</li>
+                    <li style="list-style:none; margin-left:-20px;">- dynamic content compression</li>
+                    <li style="list-style:none; margin-left:-20px;">- IIS 6 Management Compatibility</li>
+                    <li>After installation, create a simple asp.net web application.</li>
+                    <li>The web page must be accessible to client browser.</li>
+                    <li>Use the domain name in accessing the web page, not the IP address of the server.</li>
+                </ol>
             `);
         }
 
         function showRaidLab() {
             playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID Installation", `
-                <div class="instruction-box">
-                    <span class="instruction-title">Perform installation for:</span>
-                    <ul class="instruction-list">
-                        <li>Stripped Volume (RAID 0)</li>
-                        <li>Mirrored Volume (RAID 1)</li>
-                        <li>Spanned Volume (JBOD) & RAID 5</li>
-                    </ul>
-                </div>
+                <p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations. Each RAID level offers distinct trade-offs to suit different needs.</p>
+                <p class="bold-label" style="margin-top:20px;">Instructions:</p>
+                <p>Perform the RAID installation of the following level:</p>
+                <ul class="instruction-list">
+                    <li>Stripped Volume</li>
+                    <li>Mirrored Volume</li>
+                    <li>Spanned Volume</li>
+                    <li>RAID 5</li>
+                </ul>
             `);
         }
 
         function playGroupPolicy() {
             playVideo("https://www.youtube.com/embed/LOAWrQ_iBeA", "Group Policy Management", `
-                <div class="instruction-box">
-                    <span class="instruction-title">Enforce Rules:</span>
-                    <ul class="instruction-list">
-                        <li>Remove Windows Update access for Users.</li>
-                        <li>Restrict Start Menu (Run, Help, Network Connections).</li>
-                        <li>Prohibit CMD, Registry, and Control Panel access.</li>
-                    </ul>
-                </div>
+                <p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.</p>
+                <p class="bold-label" style="margin-top:20px;">Instructions</p>
+                <p>Perform the following rules in Group Policy:</p>
+                <ul class="instruction-list">
+                    <li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li>
+                    <li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li>
+                    <li>Remove Help menu from the Start Menu: User(Enable), Admin(Disable)</li>
+                    <li>Remove Run menu from the Start Menu: User(Enable), Admin(Disable)</li>
+                    <li>Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
+                    <li>Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
+                    <li>Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
+                    <li>Add Logoff on the Start Menu: Enable</li>
+                    <li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li>
+                    <li>Internet Explorer Browser Title: Title Bar Text:</li>
+                    <li>Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)</li>
+                    <li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li>
+                    <li>Prevent access to registry editing tools: User(Enable), Admin(Disable)</li>
+                    <li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li>
+                </ul>
             `);
         }
 
         function showFileServerLab() {
             playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "File Server", `
-                <div class="instruction-box">
-                    <ul class="instruction-list">
-                        <li>Public Folder: Block .exe, .com, .vb, .vbs</li>
-                        <li>VB.Net Folder: Allow .zip, .rar</li>
-                        <li>C_Programs: Allow .c, .cpp</li>
-                    </ul>
+                <p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.</p>
+                <p class="bold-label" style="margin-top:20px;">Instructions</p>
+                <p>Add roles: File Services, and perform the following:</p>
+                <div style="margin-top:15px;">
+                    <p class="bold-label">1. Create a "Public" folder</p>
+                    <p>Permissions: Read/Write</p>
+                    <p>Users: All</p>
+                    <p>Files: All files format except *.exe, *.com, *.vb, *.vbs</p>
+                </div>
+                <div style="margin-top:15px;">
+                    <p class="bold-label">2. Folder: VB.Net</p>
+                    <p>Permissions: Read/Write</p>
+                    <p>Users: All</p>
+                    <p>Files: *.zip, *.rar</p>
+                </div>
+                <div style="margin-top:15px;">
+                    <p class="bold-label">3. Folder: C_Programs</p>
+                    <p>Permissions: Read/Write</p>
+                    <p>Users: All</p>
+                    <p>Files: *.c, *.cpp</p>
+                </div>
+                <div style="margin-top:15px;">
+                    <p class="bold-label">4. Folder: Surname_Section</p>
+                    <p>Permissions: Full Control</p>
+                    <p>Users: Domain User</p>
+                    <p>Files: *.c, *.cpp, *.pdf, *.rar, *.docx, *.ppt, *.dwg</p>
+                </div>
+                <div style="margin-top:15px;">
+                    <p class="bold-label">5. Folder: PHOTO_Male & PHOTO_Female</p>
+                    <p>Permissions: Read/Write</p>
+                    <p>Users: Based on Users Gender</p>
+                    <p>Files: *.jpg, *.gif, *.png</p>
                 </div>
             `);
         }
 
-        /* --- CASE STUDY FUNCTIONS --- */
-        function showCombinedCS1() { playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'Part 1: Domain Controller', 'Primary Domain Controller setup.'); }
-        function showCS2_DHCP() { playVideo('https://www.youtube.com/embed/buwvfMCYZrk', 'Part 2: DHCP Server', 'Automated IP assignment.'); }
-        function showCS3_FileSharing() { playVideo('https://www.youtube.com/embed/xRTsGrQinik', 'Part 3: File Sharing', 'NTFS and Share permissions.'); }
-        function showCS4_RAID() { playVideo('https://www.youtube.com/embed/XXjX_WqLi1o', 'Part 4: RAID', 'Data redundancy configuration.'); }
-        function showCS5_WebServer() { playVideo('https://www.youtube.com/embed/GnK0fzOGLw4', 'Part 5: Web Server', 'IIS 7.0 configuration.'); }
+        /* --- CASE STUDY WRAPPERS --- */
+        function showCombinedCS1() { playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'Part 1: Domain Controller', 'Primary setup for the server environment.'); }
+        function showCS2_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 2: Adding Users"; }
+        function showCS3_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 3: DHCP Server"; }
+        function showCS4_FileSharing() { showFileServerLab(); document.querySelector('.content-title').innerText = "Part 4: File Sharing"; }
+        function showCS5_RAID() { showRaidLab(); document.querySelector('.content-title').innerText = "Part 5: RAID"; }
+        function showCS7_WebServer() { showWebServerLab(); document.querySelector('.content-title').innerText = "Part 7: Web Server"; }
+
     </script>
 </body>
 </html>
