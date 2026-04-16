@@ -12,7 +12,6 @@
     
     <style>
         :root {
-            /* Deeper, more "Technical" color palette */
             --bg-overlay: rgba(10, 15, 28, 0.85); 
             --text-light: #f8fafc;
             --text-dark: #0f172a;
@@ -24,16 +23,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Background changed to a Tech/Server Room aesthetic */
             background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
                         url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; 
-            background-position: center; 
-            background-attachment: fixed;
-            color: var(--text-light); 
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh; 
-            padding-bottom: 120px;
+            background-size: cover; background-position: center; background-attachment: fixed;
+            color: var(--text-light); font-family: 'Inter', sans-serif;
+            min-height: 100vh; padding-bottom: 120px;
         }
 
         .main-content { max-width: 850px; margin: 0 auto; padding: 40px 20px; text-align: center; }
@@ -57,10 +51,10 @@
         .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; }
         .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
         
-        .instruction-box { background: #f1f5f9; padding: 25px; border-radius: 15px; border-left: 6px solid var(--accent-blue); margin-top: 20px; font-size: 0.95rem; }
+        .instruction-box { background: #f1f5f9; padding: 25px; border-radius: 15px; border-left: 6px solid var(--accent-blue); margin-top: 20px; }
         .instruction-title { font-weight: 700; color: #0f172a; margin-bottom: 10px; display: block; }
-        .instruction-list { list-style: none; }
-        .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; }
+        .instruction-list { list-style: none; margin-bottom: 15px; }
+        .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; font-size: 0.95rem; }
         .instruction-list li::before { content: "•"; color: var(--accent-blue); position: absolute; left: 0; font-weight: 900; }
 
         nav {
@@ -79,29 +73,20 @@
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
             background: #fff; min-width: 300px; border-radius: 18px; padding: 15px;
-            opacity: 0; visibility: hidden; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            opacity: 0; visibility: hidden; transition: 0.3s; 
             box-shadow: 0 15px 45px rgba(0,0,0,0.7);
         }
-        .menu-item:hover .dropdown { opacity: 1; visibility: visible; bottom: calc(100% + 25px); }
+        .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
         
         .dropdown div {
             display: flex; align-items: center; padding: 10px 15px; color: #334155;
-            text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer; transition: 0.2s;
+            text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer;
         }
         .dropdown div:hover { background: #f0f7ff; color: var(--accent-blue); }
-        .dropdown i { margin-right: 15px; color: var(--accent-blue); width: 20px; text-align: center; font-size: 1rem; }
+        .dropdown i { margin-right: 15px; color: var(--accent-blue); width: 20px; text-align: center; }
         .scrollable { max-height: 380px; overflow-y: auto; }
-
-        .link-text { color: var(--accent-blue); text-decoration: none; font-weight: 700; }
         
-        /* Custom Scrollbar for Dropdown */
-        .scrollable::-webkit-scrollbar { width: 6px; }
-        .scrollable::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-
-        @media (max-width: 600px) {
-            .menu-link { padding: 10px; font-size: 0.7rem; }
-            .dropdown { min-width: 250px; }
-        }
+        .link-text { color: var(--accent-blue); text-decoration: none; font-weight: 700; }
     </style>
 </head>
 <body onload="showHome()">
@@ -120,29 +105,29 @@
             <li class="menu-item"><a class="menu-link" onclick="showHome()"><i class="fas fa-home"></i></a></li>
             
             <li class="menu-item">
-                <a class="menu-link">Lab Activities <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <a class="menu-link">Lab Activities <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown">
                     <div onclick="showActiveDirectory()"><i class="fas fa-users-cog"></i> Active Directory</div>
                     <div onclick="showDHCP()"><i class="fas fa-network-wired"></i> DHCP Server</div>
                     <div onclick="showWebServerLab()"><i class="fas fa-globe"></i> App & Web Server</div>
                     <div onclick="showRaidLab()"><i class="fas fa-microchip"></i> RAID Installation</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/LOAWrQ_iBeA', 'Group Policy', 'Security management through GPO.')"><i class="fas fa-user-lock"></i> Group Policy</div>
+                    <div onclick="playGroupPolicy()"><i class="fas fa-user-lock"></i> Group Policy</div>
                     <div onclick="showFileServerLab()"><i class="fas fa-server"></i> File Server</div>
                 </div>
             </li>
 
             <li class="menu-item">
-                <a class="menu-link">OS Versions <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <a class="menu-link">OS Versions <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
                     <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', 'Legacy environment setup.')"><i class="fab fa-windows"></i> Windows 95</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', 'Professional configuration.')"><i class="fab fa-windows"></i> Windows XP</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', 'Core Server R2 installation.')"><i class="fas fa-terminal"></i> Server 2008</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Client workstation integration.')"><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5EgVT5UYgpk', 'Windows 7', 'Client workstation integration.')"><i class="fab fa-windows"></i> Windows 7</div>
                 </div>
             </li>
 
             <li class="menu-item">
-                <a class="menu-link">Case Study <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
                     <div onclick="showCombinedCS1()"><i class="fas fa-database"></i> Part 1: Domain Controller</div>
                     <div onclick="showCS2_DHCP()"><i class="fas fa-route"></i> Part 2: DHCP Server</div>
@@ -155,15 +140,11 @@
             </li>
             
             <li class="menu-item">
-                <a class="menu-link">Profile <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <a class="menu-link">Profile <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown">
-                    <p style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 800; margin-bottom: 5px;">Administrator</p>
-                    <h2 style="color:var(--accent-blue); font-size:1.3rem; margin-bottom: 2px;">EMMANUEL C. CAPUNO</h2>
+                    <p style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 800;">Administrator</p>
+                    <h2 style="color:var(--accent-blue); font-size:1.3rem;">EMMANUEL C. CAPUNO</h2>
                     <p style="font-weight:600; font-size:0.8rem; color:#64748b;">BSIT - NS2A</p>
-                    <hr style="border:0; border-top: 1px solid #f1f5f9; margin: 15px 0;">
-                    <p style="font-size: 0.8rem; color: #475569; line-height: 1.6;">
-                        Technical documentation for <strong>ITOS220-T</strong>. Demonstrating mastery in enterprise server environments.
-                    </p>
                 </div>
             </li>
         </ul>
@@ -186,58 +167,107 @@
                 <div style="text-align:center; padding: 10px 0;">
                     <i class="fas fa-network-wired" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 25px;"></i>
                     <h1 class="content-title">OPERATING SYSTEM PORTFOLIO</h1>
-                    <p class="content-text">Explore the comprehensive setup and configuration of Windows Server 2008 R2, including network roles, storage management, and legacy system integration.</p>
+                    <p class="content-text">Explore the comprehensive setup and configuration of Windows Server 2008 R2.</p>
                 </div>
             `;
         }
 
-        /* --- CASE STUDY FUNCTIONS --- */
-        function showCombinedCS1() {
-            playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 1: DOMAIN CONTROLLER', 
-            `Primary Domain Controller setup and Active Directory configuration. <br><br>
-            <a href="https://ggle.in/bulkusers" target="_blank" class="link-text"><i class="fas fa-external-link-alt"></i> Bulk User Creation Script</a>`);
-        }
+        /* --- LAB ACTIVITY FUNCTIONS (FIXED) --- */
 
-        function showCS2_DHCP() {
-            playVideo('https://www.youtube.com/embed/buwvfMCYZrk', 'PART 2: DHCP SERVER', 
-            `Deployment of DHCP Role and configuration of address scopes and exclusion lists.`);
-        }
-
-        function showCS3_FileSharing() {
-            playVideo('https://www.youtube.com/embed/xRTsGrQinik', 'PART 3: FILE SHARING', 
-            `Configuration of File Services with advanced NTFS and Share permissions.`);
-        }
-
-        function showCS4_RAID() {
-            playVideo('https://www.youtube.com/embed/XXjX_WqLi1o', 'PART 4: RAID', 
-            `Disk management implementation for data protection and high-availability storage.`);
-        }
-
-        function showCS5_WebServer() {
-            playVideo('https://www.youtube.com/embed/GnK0fzOGLw4', 'PART 5: WEB SERVER', 
-            `Internet Information Services (IIS) installation for hosting enterprise web apps.`);
-        }
-
-        /* --- LAB ACTIVITY FUNCTIONS --- */
         function showActiveDirectory() {
-            playVideo('https://www.youtube.com/embed/ZXYlduKxtnM', 'AD: Creating Users', 'Hands-on creation of Organizational Units and user credentials.');
+            playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory: Creating Users", `
+                <p class="content-text">Active Directory - Adding Users</p>
+                <div class="instruction-box">
+                    <ul class="instruction-list">
+                        <li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li>
+                        <li>Group the students according to their section.</li>
+                        <li>Your account belongs to Administrators.</li>
+                    </ul>
+                    <span class="instruction-title">Show administrator account:</span>
+                    <ul class="instruction-list">
+                        <li>User cannot change password.</li>
+                        <li>Password never expires.</li>
+                    </ul>
+                    <p class="content-text"><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>
+                </div>
+            `);
         }
 
         function showDHCP() {
-            playVideo('https://www.youtube.com/embed/6Fls97KnV74', 'DHCP Scope Lab', 'Step-by-step role installation and scope authorization.');
+            playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP Server Role", `
+                <div class="instruction-box">
+                    <span class="instruction-title">Scopes:</span>
+                    <ul class="instruction-list">
+                        <li>IP block 10.0.0.0 /8 for male students per section requirement.</li>
+                        <li>IP block 172.16.0.0 /16 for female students per section requirement.</li>
+                        <li>Server: Last Usable IP add | Lease Time: 16 hours</li>
+                        <li>Exclude: First & Last (10 usable IP Addresses)</li>
+                    </ul>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #cbd5e1;">
+                    <ul class="instruction-list">
+                        <li>Connect Windows XP and Windows 7 clients via DHCP.</li>
+                        <li>XP must belong to Class A; Win 7 must belong to Class B.</li>
+                    </ul>
+                </div>
+            `);
         }
 
         function showWebServerLab() {
-            playVideo('https://www.youtube.com/embed/6VuNQgEzraw', 'IIS Installation Lab', 'Role-based setup of Application and Web Server features.');
+            playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "Application and Web Server", `
+                <div class="instruction-box">
+                    <ul class="instruction-list">
+                        <li>Add Application and Web Server Roles.</li>
+                        <li>Enable: ASP.NET, Windows Authentication, IIS 6 Compatibility.</li>
+                        <li>Create a simple ASP.NET app accessible via domain name.</li>
+                    </ul>
+                </div>
+            `);
         }
 
         function showRaidLab() {
-            playVideo('https://www.youtube.com/embed/_UjVK-te7_0', 'RAID Configuration Lab', 'Virtual disk provisioning and RAID-level configuration.');
+            playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID Installation", `
+                <div class="instruction-box">
+                    <span class="instruction-title">Perform installation for:</span>
+                    <ul class="instruction-list">
+                        <li>Stripped Volume (RAID 0)</li>
+                        <li>Mirrored Volume (RAID 1)</li>
+                        <li>Spanned Volume (JBOD) & RAID 5</li>
+                    </ul>
+                </div>
+            `);
+        }
+
+        function playGroupPolicy() {
+            playVideo("https://www.youtube.com/embed/LOAWrQ_iBeA", "Group Policy Management", `
+                <div class="instruction-box">
+                    <span class="instruction-title">Enforce Rules:</span>
+                    <ul class="instruction-list">
+                        <li>Remove Windows Update access for Users.</li>
+                        <li>Restrict Start Menu (Run, Help, Network Connections).</li>
+                        <li>Prohibit CMD, Registry, and Control Panel access.</li>
+                    </ul>
+                </div>
+            `);
         }
 
         function showFileServerLab() {
-            playVideo('https://www.youtube.com/embed/eIZ1Zy3SE5g', 'File Services Lab', 'Implementing File Screening and Quota management policies.');
+            playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "File Server", `
+                <div class="instruction-box">
+                    <ul class="instruction-list">
+                        <li>Public Folder: Block .exe, .com, .vb, .vbs</li>
+                        <li>VB.Net Folder: Allow .zip, .rar</li>
+                        <li>C_Programs: Allow .c, .cpp</li>
+                    </ul>
+                </div>
+            `);
         }
+
+        /* --- CASE STUDY FUNCTIONS --- */
+        function showCombinedCS1() { playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'Part 1: Domain Controller', 'Primary Domain Controller setup.'); }
+        function showCS2_DHCP() { playVideo('https://www.youtube.com/embed/buwvfMCYZrk', 'Part 2: DHCP Server', 'Automated IP assignment.'); }
+        function showCS3_FileSharing() { playVideo('https://www.youtube.com/embed/xRTsGrQinik', 'Part 3: File Sharing', 'NTFS and Share permissions.'); }
+        function showCS4_RAID() { playVideo('https://www.youtube.com/embed/XXjX_WqLi1o', 'Part 4: RAID', 'Data redundancy configuration.'); }
+        function showCS5_WebServer() { playVideo('https://www.youtube.com/embed/GnK0fzOGLw4', 'Part 5: Web Server', 'IIS 7.0 configuration.'); }
     </script>
 </body>
 </html>
