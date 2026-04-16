@@ -1,128 +1,243 @@
-/* --- UPDATED LAB ACTIVITY FUNCTIONS WITH YOUR CONTENT --- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITOS220-T | Emmanuel C. Capuno</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Deeper, more "Technical" color palette */
+            --bg-overlay: rgba(10, 15, 28, 0.85); 
+            --text-light: #f8fafc;
+            --text-dark: #0f172a;
+            --accent-blue: #3b82f6;   
+            --nav-bg: rgba(15, 23, 42, 0.92);
+            --card-glass: rgba(255, 255, 255, 0.98);
+        }
 
-function showActiveDirectory() {
-    document.getElementById('videoWrapper').style.display = 'block';
-    document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/ZXYlduKxtnM";
-    document.getElementById('pageContent').innerHTML = `
-        <h1 class="content-title">Active Directory: Creating Users</h1>
-        <p class="content-text">Active Directory - Adding Users</p>
-        <div class="instruction-box">
-            <ul class="instruction-list">
-                <li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li>
-                <li>Group the students according to their section.</li>
-                <li>Your account belongs to Administrators.</li>
-            </ul>
-            <br>
-            <span class="instruction-title">Show administrator account:</span>
-            <ul class="instruction-list">
-                <li>User cannot change password.</li>
-                <li>Password never expires.</li>
-            </ul>
-            <p class="content-text" style="margin-top:15px;"><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>
-        </div>
-    `;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-function showDHCP() {
-    document.getElementById('videoWrapper').style.display = 'block';
-    document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/6Fls97KnV74";
-    document.getElementById('pageContent').innerHTML = `
-        <h1 class="content-title">DHCP Server Role</h1>
-        <div class="instruction-box">
-            <span class="instruction-title">Scopes:</span>
-            <ul class="instruction-list">
-                <li>Number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.</li>
-                <li>Number of female students per yr and section is the host requirement with the ip block 172.16.0.0 /16</li>
-                <li>Server: Last Usable IP add</li>
-                <li>Exclude: First & Last (10 usable IP Addresses)</li>
-                <li>Lease Time: 16 hours</li>
-                <li>Router: Server IP Address</li>
-                <li>DNS: Server IP Address (8.8.8.8)</li>
-            </ul>
-            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #cbd5e1;">
-            <ul class="instruction-list">
-                <li>1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7 (LASTNAME-WIN7)</li>
-                <li>2. Connect the two (2) client OS to your Windows Server Domain USING DHCP</li>
-                <li>WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li>
-                <li>WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li>
-                <li>3. LOGIN 5 student accounts per section per OS</li>
-            </ul>
-        </div>
-    `;
-}
+        body {
+            /* Background changed to a Tech/Server Room aesthetic */
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
+                        url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            color: var(--text-light); 
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh; 
+            padding-bottom: 120px;
+        }
 
-function showWebServerLab() {
-    document.getElementById('videoWrapper').style.display = 'block';
-    document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/6VuNQgEzraw";
-    document.getElementById('pageContent').innerHTML = `
-        <h1 class="content-title">Application and Web Server</h1>
-        <div class="instruction-box">
-            <ul class="instruction-list">
-                <li>1. Add Application Server Role</li>
-                <li>2. Add Web Server Role</li>
-                <li>3. Add features: asp.net, windows authentication, dynamic content compression, IIS 6 Management Compatibility</li>
-                <li>4. After installation, create a simple asp.net web application.</li>
-                <li>5. The web page must be accessible to client browser.</li>
-                <li>6. Use the domain name in accessing the web page, not the IP address of the server.</li>
-            </ul>
-        </div>
-    `;
-}
+        .main-content { max-width: 850px; margin: 0 auto; padding: 40px 20px; text-align: center; }
 
-function showRaidLab() {
-    document.getElementById('videoWrapper').style.display = 'block';
-    document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/_UjVK-te7_0";
-    document.getElementById('pageContent').innerHTML = `
-        <h1 class="content-title">RAID Installation</h1>
-        <p class="content-text">RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both.</p>
-        <div class="instruction-box">
-            <span class="instruction-title">Perform the RAID installation of the following levels:</span>
-            <ul class="instruction-list">
-                <li>Stripped Volume (RAID 0)</li>
-                <li>Mirrored Volume (RAID 1)</li>
-                <li>Spanned Volume (JBOD)</li>
-                <li>RAID 5</li>
-            </ul>
-        </div>
-    `;
-}
+        .page-card {
+            background: var(--card-glass); border-radius: 24px; padding: 40px;
+            color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: left;
+            backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);
+        }
 
-// Ensure your "Group Policy" div in the dropdown calls playGroupPolicy()
-function playGroupPolicy() {
-    document.getElementById('videoWrapper').style.display = 'block';
-    document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/LOAWrQ_iBeA";
-    document.getElementById('pageContent').innerHTML = `
-        <h1 class="content-title">Group Policy Management</h1>
-        <p class="content-text">Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers.</p>
-        <div class="instruction-box">
-            <span class="instruction-title">Perform the following rules in Group Policy:</span>
-            <ul class="instruction-list" style="font-size: 0.85rem;">
-                <li>Remove access to Windows Update: User(Enable), Admin(Disable)</li>
-                <li>Remove Network Connections/Help/Run/Pictures/Music from Start Menu: User(Enable), Admin(Disable)</li>
-                <li>Add Logoff on the Start Menu: Enable</li>
-                <li>Remove Task Manager (CTRL+ALT+DEL): User(Enable), Admin(Disable)</li>
-                <li>Prohibit access to properties of LAN Connections: User(Enable), Admin(Disable)</li>
-                <li>Prevent access to Command Prompt, Registry, and Control Panel: User(Enable), Admin(Disable)</li>
-            </ul>
-        </div>
-    `;
-}
+        .video-wrapper {
+            width: 100%; background: #000; border-radius: 16px; overflow: hidden;
+            margin-bottom: 30px; display: none; 
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); 
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
 
-function showFileServerLab() {
-    document.getElementById('videoWrapper').style.display = 'block';
-    document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/eIZ1Zy3VE5g";
-    document.getElementById('pageContent').innerHTML = `
-        <h1 class="content-title">File Server</h1>
-        <p class="content-text">A centralized storage system allowing users to store and manage data with access control and permissions.</p>
-        <div class="instruction-box">
-            <span class="instruction-title">Add roles: File Services, and perform the following:</span>
-            <ul class="instruction-list">
-                <li><strong>Public Folder:</strong> Read/Write | All Users | Block .exe, .com, .vb, .vbs</li>
-                <li><strong>VB.Net Folder:</strong> Read/Write | All Users | Files: .zip, .rar</li>
-                <li><strong>C_Programs Folder:</strong> Read/Write | All Users | Files: .c, .cpp</li>
-                <li><strong>Surname_Section Folder:</strong> Full Control | Domain User | Various Formats</li>
-                <li><strong>PHOTO_Male & PHOTO_Female:</strong> Read/Write | Based on Gender | Image Formats</li>
-            </ul>
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
+        
+        .instruction-box { background: #f1f5f9; padding: 25px; border-radius: 15px; border-left: 6px solid var(--accent-blue); margin-top: 20px; font-size: 0.95rem; }
+        .instruction-title { font-weight: 700; color: #0f172a; margin-bottom: 10px; display: block; }
+        .instruction-list { list-style: none; }
+        .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; }
+        .instruction-list li::before { content: "•"; color: var(--accent-blue); position: absolute; left: 0; font-weight: 900; }
+
+        nav {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: var(--nav-bg); backdrop-filter: blur(20px); border-radius: 100px;
+            padding: 8px 25px; z-index: 1000; border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        .menu { display: flex; list-style: none; align-items: center; }
+        .menu-link {
+            display: block; padding: 12px 18px; color: #94a3b8; text-decoration: none;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+        }
+        .menu-link:hover { color: #fff; transform: translateY(-2px); }
+        
+        .dropdown {
+            position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
+            background: #fff; min-width: 300px; border-radius: 18px; padding: 15px;
+            opacity: 0; visibility: hidden; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+        }
+        .menu-item:hover .dropdown { opacity: 1; visibility: visible; bottom: calc(100% + 25px); }
+        
+        .dropdown div {
+            display: flex; align-items: center; padding: 10px 15px; color: #334155;
+            text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer; transition: 0.2s;
+        }
+        .dropdown div:hover { background: #f0f7ff; color: var(--accent-blue); }
+        .dropdown i { margin-right: 15px; color: var(--accent-blue); width: 20px; text-align: center; font-size: 1rem; }
+        .scrollable { max-height: 380px; overflow-y: auto; }
+
+        .link-text { color: var(--accent-blue); text-decoration: none; font-weight: 700; }
+        
+        /* Custom Scrollbar for Dropdown */
+        .scrollable::-webkit-scrollbar { width: 6px; }
+        .scrollable::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        @media (max-width: 600px) {
+            .menu-link { padding: 10px; font-size: 0.7rem; }
+            .dropdown { min-width: 250px; }
+        }
+    </style>
+</head>
+<body onload="showHome()">
+
+    <div class="main-content">
+        <div id="videoWrapper" class="video-wrapper">
+            <div class="video-container">
+                <iframe id="mainPlayer" src="about:blank" allowfullscreen></iframe>
+            </div>
         </div>
-    `;
-}
+        <div class="page-card" id="pageContent"></div>
+    </div>
+
+    <nav>
+        <ul class="menu">
+            <li class="menu-item"><a class="menu-link" onclick="showHome()"><i class="fas fa-home"></i></a></li>
+            
+            <li class="menu-item">
+                <a class="menu-link">Lab Activities <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <div class="dropdown">
+                    <div onclick="showActiveDirectory()"><i class="fas fa-users-cog"></i> Active Directory</div>
+                    <div onclick="showDHCP()"><i class="fas fa-network-wired"></i> DHCP Server</div>
+                    <div onclick="showWebServerLab()"><i class="fas fa-globe"></i> App & Web Server</div>
+                    <div onclick="showRaidLab()"><i class="fas fa-microchip"></i> RAID Installation</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/LOAWrQ_iBeA', 'Group Policy', 'Security management through GPO.')"><i class="fas fa-user-lock"></i> Group Policy</div>
+                    <div onclick="showFileServerLab()"><i class="fas fa-server"></i> File Server</div>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link">OS Versions <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <div class="dropdown scrollable">
+                    <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', 'Legacy environment setup.')"><i class="fab fa-windows"></i> Windows 95</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', 'Professional configuration.')"><i class="fab fa-windows"></i> Windows XP</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', 'Core Server R2 installation.')"><i class="fas fa-terminal"></i> Server 2008</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Client workstation integration.')"><i class="fab fa-windows"></i> Windows 7</div>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-link">Case Study <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <div class="dropdown scrollable">
+                    <div onclick="showCombinedCS1()"><i class="fas fa-database"></i> Part 1: Domain Controller</div>
+                    <div onclick="showCS2_DHCP()"><i class="fas fa-route"></i> Part 2: DHCP Server</div>
+                    <div onclick="showCS3_FileSharing()"><i class="fas fa-share-alt"></i> Part 3: File Sharing</div>
+                    <div onclick="showCS4_RAID()"><i class="fas fa-hdd"></i> Part 4: RAID</div>
+                    <div onclick="showCS5_WebServer()"><i class="fas fa-cloud"></i> Part 5: Web Server</div>
+                    <div onclick="playVideo('', 'PART 6: GROUP POLICIES', 'Implementing security controls.')"><i class="fas fa-shield-virus"></i> Part 6: Group Policies</div>
+                    <div onclick="playVideo('', 'PART 7: WINDOWS DEPLOYMENT', 'Network OS deployment (WDS).')"><i class="fas fa-rocket"></i> Part 7: Windows Deployment</div>
+                </div>
+            </li>
+            
+            <li class="menu-item">
+                <a class="menu-link">Profile <i class="fas fa-chevron-up" style="font-size: 0.6rem; margin-left: 5px;"></i></a>
+                <div class="dropdown">
+                    <p style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 800; margin-bottom: 5px;">Administrator</p>
+                    <h2 style="color:var(--accent-blue); font-size:1.3rem; margin-bottom: 2px;">EMMANUEL C. CAPUNO</h2>
+                    <p style="font-weight:600; font-size:0.8rem; color:#64748b;">BSIT - NS2A</p>
+                    <hr style="border:0; border-top: 1px solid #f1f5f9; margin: 15px 0;">
+                    <p style="font-size: 0.8rem; color: #475569; line-height: 1.6;">
+                        Technical documentation for <strong>ITOS220-T</strong>. Demonstrating mastery in enterprise server environments.
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        function playVideo(url, title, text) {
+            document.getElementById('videoWrapper').style.display = url ? 'block' : 'none';
+            document.getElementById('mainPlayer').src = url ? url : 'about:blank';
+            document.getElementById('pageContent').innerHTML = `
+                <h1 class="content-title">${title}</h1>
+                <p class="content-text">${text}</p>
+            `;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showHome() {
+            document.getElementById('videoWrapper').style.display = 'none';
+            document.getElementById('pageContent').innerHTML = `
+                <div style="text-align:center; padding: 10px 0;">
+                    <i class="fas fa-network-wired" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 25px;"></i>
+                    <h1 class="content-title">OPERATING SYSTEM PORTFOLIO</h1>
+                    <p class="content-text">Explore the comprehensive setup and configuration of Windows Server 2008 R2, including network roles, storage management, and legacy system integration.</p>
+                </div>
+            `;
+        }
+
+        /* --- CASE STUDY FUNCTIONS --- */
+        function showCombinedCS1() {
+            playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 1: DOMAIN CONTROLLER', 
+            `Primary Domain Controller setup and Active Directory configuration. <br><br>
+            <a href="https://ggle.in/bulkusers" target="_blank" class="link-text"><i class="fas fa-external-link-alt"></i> Bulk User Creation Script</a>`);
+        }
+
+        function showCS2_DHCP() {
+            playVideo('https://www.youtube.com/embed/buwvfMCYZrk', 'PART 2: DHCP SERVER', 
+            `Deployment of DHCP Role and configuration of address scopes and exclusion lists.`);
+        }
+
+        function showCS3_FileSharing() {
+            playVideo('https://www.youtube.com/embed/xRTsGrQinik', 'PART 3: FILE SHARING', 
+            `Configuration of File Services with advanced NTFS and Share permissions.`);
+        }
+
+        function showCS4_RAID() {
+            playVideo('https://www.youtube.com/embed/XXjX_WqLi1o', 'PART 4: RAID', 
+            `Disk management implementation for data protection and high-availability storage.`);
+        }
+
+        function showCS5_WebServer() {
+            playVideo('https://www.youtube.com/embed/GnK0fzOGLw4', 'PART 5: WEB SERVER', 
+            `Internet Information Services (IIS) installation for hosting enterprise web apps.`);
+        }
+
+        /* --- LAB ACTIVITY FUNCTIONS --- */
+        function showActiveDirectory() {
+            playVideo('https://www.youtube.com/embed/ZXYlduKxtnM', 'AD: Creating Users', 'Hands-on creation of Organizational Units and user credentials.');
+        }
+
+        function showDHCP() {
+            playVideo('https://www.youtube.com/embed/6Fls97KnV74', 'DHCP Scope Lab', 'Step-by-step role installation and scope authorization.');
+        }
+
+        function showWebServerLab() {
+            playVideo('https://www.youtube.com/embed/6VuNQgEzraw', 'IIS Installation Lab', 'Role-based setup of Application and Web Server features.');
+        }
+
+        function showRaidLab() {
+            playVideo('https://www.youtube.com/embed/_UjVK-te7_0', 'RAID Configuration Lab', 'Virtual disk provisioning and RAID-level configuration.');
+        }
+
+        function showFileServerLab() {
+            playVideo('https://www.youtube.com/embed/eIZ1Zy3SE5g', 'File Services Lab', 'Implementing File Screening and Quota management policies.');
+        }
+    </script>
+</body>
+</html>
