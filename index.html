@@ -112,7 +112,7 @@
             <li class="menu-item">
                 <a class="menu-link">Windows <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', 'Successful installation and configuration of Windows 95 within a virtual environment, demonstrating the foundational interface of modern computing.')"><i class="fab fa-windows"></i> Windows 95</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', 'Successful installation and configuration of Windows 95 within a virtual environment.')"><i class="fab fa-windows"></i> Windows 95</div>
                     <div onclick="playVideo('', 'Windows 98', 'Operating system introduced in 1998.')"><i class="fab fa-windows"></i> Windows 98</div>
                     <div onclick="playVideo('', 'Windows NT', 'Operating system for workstations and servers.')"><i class="fab fa-windows"></i> Windows NT</div>
                     <div onclick="playVideo('', 'Windows 2000', 'Enterprise-grade operating system.')"><i class="fab fa-windows"></i> Windows 2000</div>
@@ -121,7 +121,7 @@
                     <div onclick="playVideo('', 'Windows Server 2003', 'Server operating system produced by Microsoft.')"><i class="fas fa-server"></i> Windows Server 2003</div>
                     <div onclick="playVideo('', 'Windows Vista', 'Operating system focused on security and visual style.')"><i class="fab fa-windows"></i> Windows Vista</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', 'Complete installation of Windows Server 2008 R2.')"><i class="fas fa-server"></i> Windows Server 2008</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation and configuration of Windows 7 as a client workstation, integrated into the network domain.')"><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation and configuration of Windows 7 as a client workstation.')"><i class="fab fa-windows"></i> Windows 7</div>
                     <div onclick="playVideo('', 'Windows 8', 'Introduction of the tiled interface and touch support.')"><i class="fab fa-windows"></i> Windows 8</div>
                     <div onclick="playVideo('', 'Windows 10', 'The most popular modern Windows operating system.')"><i class="fab fa-windows"></i> Windows 10</div>
                     <div onclick="playVideo('', 'Windows 11', 'The latest Windows OS with centered start menu.')"><i class="fab fa-windows"></i> Windows 11</div>
@@ -131,14 +131,14 @@
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="showCombinedCS1()"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
-                    <div onclick="showCS3()"><i class="fas fa-database"></i> Part 3: DHCP Server</div>
-                    <div onclick="showCS4()"><i class="fas fa-file-alt"></i> Part 4: File Sharing</div>
-                    <div onclick="showCS5()"><i class="fas fa-save"></i> Part 5: RAID</div>
-                    <div onclick="playVideo('', 'PART 6: REMOTE DESKTOP', 'Enabling and securing remote administrative access.')"><i class="fas fa-desktop"></i> Part 6: Remote Desktop</div>
-                    <div onclick="showCS7()"><i class="fas fa-globe"></i> Part 7: Web Server</div>
-                    <div onclick="playVideo('', 'PART 8: GROUP POLICIES', 'Implementing security restrictions through GPO.')"><i class="fas fa-user-shield"></i> Part 8: Group Policies</div>
-                    <div onclick="playVideo('', 'PART 9: WINDOWS DEPLOYMENT', 'OS deployment over the network using WDS.')"><i class="fas fa-window-restore"></i> Part 9: Windows Deployment</div>
+                    <div onclick="showCombinedCS1()"><i class="fas fa-server"></i> Part 1: Domain Controller</div>
+                    <div onclick="showCS2_DHCP()"><i class="fas fa-network-wired"></i> Part 2: DHCP Server</div>
+                    <div onclick="showCS3_FileSharing()"><i class="fas fa-folder-open"></i> Part 3: File Sharing</div>
+                    <div onclick="showCS4_RAID()"><i class="fas fa-hdd"></i> Part 4: RAID</div>
+                    <div onclick="playVideo('', 'PART 5: REMOTE DESKTOP', 'Enabling and securing remote administrative access.')"><i class="fas fa-desktop"></i> Part 5: Remote Desktop</div>
+                    <div onclick="showCS6_WebServer()"><i class="fas fa-globe"></i> Part 6: Web Server</div>
+                    <div onclick="playVideo('', 'PART 7: GROUP POLICIES', 'Implementing security restrictions through GPO.')"><i class="fas fa-user-shield"></i> Part 7: Group Policies</div>
+                    <div onclick="playVideo('', 'PART 8: WINDOWS DEPLOYMENT', 'OS deployment over the network using WDS.')"><i class="fas fa-window-restore"></i> Part 8: Windows Deployment</div>
                 </div>
             </li>
             
@@ -180,6 +180,8 @@
             `;
         }
 
+        /* --- CASE STUDY FUNCTIONS --- */
+
         function showCombinedCS1() {
             playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 1: DOMAIN CONTROLLER', 
             `This section covers the configuration of the Active Directory Domain Services role and the management of network users. 
@@ -191,25 +193,27 @@
             Access the code used for bulk adding users here: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
         }
 
-        function showCS3() {
-            playVideo('https://www.youtube.com/embed/CUjtsNc3-oA', 'PART 3: DHCP SERVER', 
+        function showCS2_DHCP() {
+            playVideo('https://www.youtube.com/embed/CUjtsNc3-oA', 'PART 2: DHCP SERVER', 
             `A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.`);
         }
 
-        function showCS4() {
-            playVideo('https://www.youtube.com/embed/97SWEZBB17Y', 'PART 4: FILE SHARING', 
+        function showCS3_FileSharing() {
+            playVideo('https://www.youtube.com/embed/97SWEZBB17Y', 'PART 3: FILE SHARING', 
             `File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.`);
         }
 
-        function showCS5() {
-            playVideo('https://www.youtube.com/embed/RUJFKDdjQ80', 'PART 5: RAID', 
+        function showCS4_RAID() {
+            playVideo('https://www.youtube.com/embed/RUJFKDdjQ80', 'PART 4: RAID', 
             `RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).`);
         }
 
-        function showCS7() {
-            playVideo('https://www.youtube.com/embed/6VuNQgEzraw', 'PART 7: WEB SERVER', 
+        function showCS6_WebServer() {
+            playVideo('https://www.youtube.com/embed/6VuNQgEzraw', 'PART 6: WEB SERVER', 
             `Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.`);
         }
+
+        /* --- LAB ACTIVITY FUNCTIONS --- */
 
         function showActiveDirectory() {
             document.getElementById('videoWrapper').style.display = 'block';
@@ -284,10 +288,9 @@
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/_UjVK-te7_0";
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">RAID Installation</h1>
-                <p class="content-text">RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations. Each RAID level offers distinct trade-offs to suit different needs.</p>
+                <p class="content-text">RAID is a storage technology that combines multiple physical disks into logical units.</p>
                 <div class="instruction-box">
                     <span class="instruction-title">Instructions:</span>
-                    <p class="content-text" style="font-size:0.9rem; margin-bottom:10px;">Perform the RAID installation of the following level:</p>
                     <ul class="instruction-list">
                         <li>Stripped Volume</li>
                         <li>Mirrored Volume</li>
@@ -303,15 +306,15 @@
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/eIZ1Zy3SE5g";
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">File Server Role</h1>
-                <p class="content-text">A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.</p>
+                <p class="content-text">A file server is a centralized storage system within a network.</p>
                 <div class="instruction-box">
-                    <span class="instruction-title">Instructions: Add roles: File Services, and perform the following:</span>
+                    <span class="instruction-title">Instructions:</span>
                     <ul class="instruction-list">
-                        <li>1. Create a "Public" folder (Permissions: Read/Write, Users: All, Files: All files format except *.exe, *.com, *.vb, *.vbs)</li>
-                        <li>2. Folder: VB.Net (Permissions: Read/Write, Users: All, Files: *.zip, *.rar)</li>
-                        <li>3. Folder: C_Programs (Permissions: Read/Write, Users: All, Files: *.c, *.cpp)</li>
-                        <li>4. Folder: Surname_Section (Permissions: Full Control, Users: Domain User, Files: *.c, *.cpp, *.pdf, *.rar, *.docx, *.ppt, *.dwg)</li>
-                        <li>5. Folder: PHOTO_Male & PHOTO_FEMALE (Permissions: Read/Write, Users: Based on Users Gender, Files: *.jpg, *.gif, *.png)</li>
+                        <li>1. Create a "Public" folder</li>
+                        <li>2. Folder: VB.Net</li>
+                        <li>3. Folder: C_Programs</li>
+                        <li>4. Folder: Surname_Section</li>
+                        <li>5. Folder: PHOTO_Male & PHOTO_FEMALE</li>
                     </ul>
                 </div>
             `;
