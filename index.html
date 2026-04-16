@@ -39,38 +39,6 @@
             margin-bottom: 30px;
         }
 
-        .home-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .home-feature {
-            background: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            transition: 0.3s;
-        }
-        .home-feature i {
-            font-size: 2rem;
-            color: var(--accent-blue);
-            margin-bottom: 15px;
-        }
-        .home-feature h3 { font-size: 1.1rem; margin-bottom: 10px; color: #1e293b; }
-        .home-feature p { font-size: 0.85rem; color: #64748b; line-height: 1.6; }
-
-        .video-wrapper {
-            width: 100%; background: #000; border-radius: 16px; overflow: hidden;
-            display: none; 
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); 
-            border: 2px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
         .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; }
         .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
         
@@ -78,6 +46,39 @@
         .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; font-size: 0.95rem; line-height: 1.5; }
         .instruction-list li::before { content: "-"; color: var(--accent-blue); position: absolute; left: 0; font-weight: 900; }
 
+        /* Footer Note */
+        .footer-note {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+        }
+
+        .bottom-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            width: 100%;
+        }
+
+        /* Video Styles */
+        .video-wrapper {
+            width: 100%; background: #000; border-radius: 16px; overflow: hidden;
+            display: none; 
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); 
+            border: 2px solid rgba(59, 130, 246, 0.3);
+        }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* Navigation Styles */
         nav {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
             background: var(--nav-bg); backdrop-filter: blur(20px); border-radius: 100px;
@@ -90,7 +91,6 @@
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
         .menu-link:hover { color: #fff; transform: translateY(-2px); }
-        
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
             background: #fff; min-width: 320px; border-radius: 18px; padding: 15px;
@@ -98,7 +98,6 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.7);
         }
         .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
-        
         .dropdown div {
             display: flex; align-items: center; padding: 10px 15px; color: #334155;
             text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer;
@@ -107,12 +106,14 @@
         .dropdown i { margin-right: 15px; color: var(--accent-blue); width: 20px; text-align: center; }
         .scrollable { max-height: 400px; overflow-y: auto; }
         
-        .bold-label { font-weight: 700; color: #0f172a; }
-        
         .flex-container { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; }
     </style>
 </head>
 <body onload="showHome()">
+
+    <div class="footer-note">
+        FOR ACADEMIC PURPOSE ONLY | © 2026 Emmanuel C. Capuno BSIT-NS-2A
+    </div>
 
     <div class="main-content">
         <div class="page-card" id="pageContent"></div>
@@ -121,6 +122,10 @@
             <div class="video-container">
                 <iframe id="mainPlayer" src="" allowfullscreen></iframe>
             </div>
+        </div>
+
+        <div class="bottom-footer">
+            <p>© 2026 Emmanuel C. Capuno | BSIT-NS-2A | Technological University of the Philippines</p>
         </div>
     </div>
 
@@ -153,13 +158,13 @@
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="showCS1_AddingUsers()"><i class="fas fa-users"></i> Part 1: Adding Users</div>
-                    <div onclick="showCS2_DHCP()"><i class="fas fa-database"></i> Part 2: DHCP Server</div>
-                    <div onclick="showCS3_FileSharing()"><i class="fas fa-file-alt"></i> Part 3: File Sharing</div>
-                    <div onclick="showCS4_RAID()"><i class="fas fa-save"></i> Part 4: RAID</div>
-                    <div onclick="showCS5_WebServer()"><i class="fas fa-globe"></i> Part 5: Web Server</div>
-                    <div onclick="showCS6_GroupPolicy()"><i class="fas fa-user-shield"></i> Part 6: Group Policies</div>
-                    <div onclick="showCS7_Deployment()"><i class="fas fa-copy"></i> Part 7: Windows Deployment</div>
+                    <div onclick="showCS1()"><i class="fas fa-users"></i> Part 1: Adding Users</div>
+                    <div onclick="showCS2()"><i class="fas fa-database"></i> Part 2: DHCP Server</div>
+                    <div onclick="showCS3()"><i class="fas fa-file-alt"></i> Part 3: File Sharing</div>
+                    <div onclick="showCS4()"><i class="fas fa-save"></i> Part 4: RAID</div>
+                    <div onclick="showCS5()"><i class="fas fa-globe"></i> Part 5: Web Server</div>
+                    <div onclick="showCS6()"><i class="fas fa-user-shield"></i> Part 6: Group Policies</div>
+                    <div onclick="showCS7()"><i class="fas fa-copy"></i> Part 7: Windows Deployment</div>
                 </div>
             </li>
             
@@ -189,121 +194,9 @@
         function showHome() {
             const homeContent = `
                 <h1 class="content-title">OPERATING SYSTEM</h1>
-                <p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It handles tasks like running applications, managing memory, organizing files, controlling devices, and ensuring security. OS types include desktop systems (Windows, macOS), mobile systems (Android, iOS), servers (Linux), and embedded systems. Without an OS, computers couldn't function or run programs.</p>
-                
-                <div class="home-grid">
-                    <div class="home-feature">
-                        <i class="fas fa-microchip"></i>
-                        <h3>Resource Management</h3>
-                        <p>Efficiently allocates and manages hardware resources like CPU, memory, and storage for smooth system operation.</p>
-                    </div>
-                    <div class="home-feature">
-                        <i class="fas fa-user-circle"></i>
-                        <h3>User Interface</h3>
-                        <p>It provides a graphical or command-based interface, allowing users to interact with the computer easily.</p>
-                    </div>
-                    <div class="home-feature">
-                        <i class="fab fa-windows"></i>
-                        <h3>Software Execution</h3>
-                        <p>Enables applications to run by handling processes, multitasking, and ensuring compatibility between software and hardware.</p>
-                    </div>
-                </div>
+                <p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It handles tasks like running applications, managing memory, organizing files, controlling devices, and ensuring security.</p>
             `;
             playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", homeContent);
-        }
-
-        /* --- CONTENT FUNCTIONS --- */
-        function showActiveDirectory() {
-            playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory: Creating Users", `
-                <p>Active Directory - Adding Users</p>
-                <ul class="instruction-list">
-                    <li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li>
-                    <li>Group the students according to their section.</li>
-                    <li>Your account belongs to Administrators.</li>
-                </ul>
-                <p>Show administrator account:</p>
-                <ul class="instruction-list">
-                    <li>User cannot change password.</li>
-                    <li>Password never expires.</li>
-                </ul>
-                <p><span class="bold-label">Domain:</span> bsit.com</p>
-                <p><span class="bold-label">Common password:</span> User123</p>
-            `);
-        }
-
-        function showDHCP() {
-            playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP Server", `
-                <p class="bold-label">Scopes:</p>
-                <ul class="instruction-list">
-                    <li>number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.</li>
-                    <li>number of female students per yr and section is the host requirement with the ip block 172.16.0.0 /16</li>
-                    <li>Server: Last Usable IP add</li>
-                    <li>Exclude: First & Last (10 usable IP Addresses)</li>
-                    <li>Lease Time: 16 hours</li>
-                    <li>Router: Server IP Address</li>
-                    <li>DNS: Server IP Address (8.8.8.8)</li>
-                </ul>
-                <ol class="instruction-list" style="list-style: decimal; padding-left: 20px;">
-                    <li>Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)</li>
-                    <li>Connect the two (2) client OS to your Windows Server Domain USING DHCP</li>
-                    <li>WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li>
-                    <li>WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li>
-                    <li>LOGIN 5 student accounts per section per OS</li>
-                </ol>
-            `);
-        }
-
-        function showWebServerLab() {
-            playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "Application and Web Server", `
-                <ol class="instruction-list" style="list-style: decimal; padding-left: 20px;">
-                    <li>Add Application Server Role</li>
-                    <li>Add Web Server Role</li>
-                    <li>Add features:</li>
-                    <li style="list-style:none;">- asp.net</li>
-                    <li style="list-style:none;">- windows authentication</li>
-                    <li style="list-style:none;">- dynamic content compression</li>
-                    <li style="list-style:none;">- IIS 6 Management Compatibility</li>
-                    <li>After installation, create a simple asp.net web application.</li>
-                    <li>The web page must be accessible to client browser.</li>
-                    <li>Use the domain name in accessing the web page, not the IP address of the server.</li>
-                </ol>
-            `);
-        }
-
-        function showRaidLab() {
-            playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID Installation", `
-                <p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both.</p>
-                <p class="bold-label" style="margin-top:20px;">Instructions:</p>
-                <ul class="instruction-list">
-                    <li>Stripped Volume</li>
-                    <li>Mirrored Volume</li>
-                    <li>Spanned Volume</li>
-                    <li>RAID 5</li>
-                </ul>
-            `);
-        }
-
-        function playGroupPolicy() {
-            playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "Group Policy Management", `
-                <p>Group Policy Management allows administrators to manage and enforce settings for users and computers within an Active Directory domain.</p>
-                <p class="bold-label" style="margin-top:20px;">Instructions</p>
-                <ul class="instruction-list">
-                    <li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li>
-                    <li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li>
-                    <li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li>
-                    <li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li>
-                </ul>
-            `);
-        }
-
-        function showFileServerLab() {
-            playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "File Server", `
-                <p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data.</p>
-                <p class="bold-label" style="margin-top:20px;">Instructions</p>
-                <div style="margin-top:10px;"><p class="bold-label">1. Create a "Public" folder</p><p>Permissions: Read/Write | Users: All</p></div>
-                <div style="margin-top:10px;"><p class="bold-label">2. Folder: Surname_Section</p><p>Permissions: Full Control | Users: Domain User</p></div>
-            `);
         }
 
         function showAbout() {
@@ -313,32 +206,68 @@
                     <div style="flex: 1;">
                         <h1 class="content-title" style="text-align:left;">ABOUT</h1>
                         <h2 style="color:var(--accent-blue); margin-bottom:10px;">EMMANUEL C. CAPUNO</h2>
-                        <p style="font-weight:700; color:#64748b; margin-bottom:20px;">BSIT - NS2A</p>
+                        <p style="font-weight:700; color:#64748b; margin-bottom:20px;">BSIT - NS-2A</p>
                         <p class="content-text">This website serves as the final project for our Operating Systems course, offering a comprehensive guide to Windows OS installation, configuration, and management. Here, you'll find:</p>
                         <ul class="instruction-list">
                             <li>Hands-on labs covering key OS concepts.</li>
                             <li>Step-by-step video demonstrations of Windows installations.</li>
                             <li>Case Study Finals which cover system setup, user management, and security.</li>
                         </ul>
-                        <div style="font-size: 1.5rem; gap: 20px; display: flex; margin-top: 20px; color: var(--text-dark);">
-                            <i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-github"></i>
-                        </div>
                     </div>
                     <div style="flex: 0 0 250px;">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel&top=shortHair&eyebrows=flatNatural&mouth=smile" alt="Boy Drawing" style="width:100%;">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel&top=shortHair" alt="Profile" style="width:100%;">
                     </div>
                 </div>
             `;
         }
 
         /* --- UPDATED CASE STUDY FUNCTIONS --- */
-        function showCS1_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 1: Adding Users"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/Fbf34o2YjZI"; }
-        function showCS2_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 2: DHCP Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/buwvfMCYZrk"; }
-        function showCS3_FileSharing() { showFileServerLab(); document.querySelector('.content-title').innerText = "Part 3: File Sharing"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/xRTsGrQinik"; }
-        function showCS4_RAID() { showRaidLab(); document.querySelector('.content-title').innerText = "Part 4: RAID"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/XXjX_WqLi1o"; }
-        function showCS5_WebServer() { showWebServerLab(); document.querySelector('.content-title').innerText = "Part 5: Web Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/GnK0fzOGLw4"; }
-        function showCS6_GroupPolicy() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", ""); }
-        function showCS7_Deployment() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", ""); }
+
+        function showCS1() {
+            const text = `
+                <p class="content-text">In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p>
+                <p class="content-text">To access the code I used in adding users in bulk method, kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank" style="color:var(--accent-blue);">https://ggle.in/bulkusers</a></p>
+            `;
+            playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", text);
+        }
+
+        function showCS2() {
+            const text = `<p class="content-text">A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`;
+            playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", text);
+        }
+
+        function showCS3() {
+            const text = `<p class="content-text">File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`;
+            playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", text);
+        }
+
+        function showCS4() {
+            const text = `<p class="content-text">RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`;
+            playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", text);
+        }
+
+        function showCS5() {
+            const text = `<p class="content-text">Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`;
+            playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", text);
+        }
+
+        function showCS6() {
+            const text = `<p class="content-text">Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`;
+            playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", text);
+        }
+
+        function showCS7() {
+            const text = `<p class="content-text">Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`;
+            playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", text);
+        }
+
+        /* --- OTHER LAB FUNCTIONS --- */
+        function showActiveDirectory() { showCS1(); }
+        function showDHCP() { showCS2(); }
+        function showWebServerLab() { showCS5(); }
+        function showRaidLab() { showCS4(); }
+        function playGroupPolicy() { showCS6(); }
+        function showFileServerLab() { showCS3(); }
 
     </script>
 </body>
