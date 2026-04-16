@@ -39,6 +39,29 @@
             margin-bottom: 30px;
         }
 
+        /* Home Grid Layout */
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .home-feature {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+        .home-feature i {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+        }
+        .home-feature h3 { font-size: 1.1rem; margin-bottom: 10px; color: #1e293b; }
+        .home-feature p { font-size: 0.85rem; color: #64748b; line-height: 1.6; }
+
         .video-wrapper {
             width: 100%; background: #000; border-radius: 16px; overflow: hidden;
             display: none; 
@@ -49,11 +72,9 @@
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; }
         .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
         
-        .instruction-box { background: #f1f5f9; padding: 25px; border-radius: 15px; border-left: 6px solid var(--accent-blue); margin-top: 20px; }
-        .instruction-title { font-weight: 700; color: #0f172a; margin-bottom: 10px; display: block; text-transform: uppercase; font-size: 0.9rem; }
         .instruction-list { list-style: none; margin-bottom: 15px; }
         .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; font-size: 0.95rem; line-height: 1.5; }
         .instruction-list li::before { content: "-"; color: var(--accent-blue); position: absolute; left: 0; font-weight: 900; }
@@ -97,7 +118,7 @@
 
         <div id="videoWrapper" class="video-wrapper">
             <div class="video-container">
-                <iframe id="mainPlayer" src="about:blank" allowfullscreen></iframe>
+                <iframe id="mainPlayer" src="" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -164,30 +185,43 @@
             const wrapper = document.getElementById('videoWrapper');
             if(url) {
                 wrapper.style.display = 'block';
-                // Convert youtu.be or watch?v= to embed format if necessary
-                let embedUrl = url.replace("youtu.be/", "www.youtube.com/embed/").replace("watch?v=", "embed/");
+                let embedUrl = url.includes('embed') ? url : url.replace("watch?v=", "embed/");
                 document.getElementById('mainPlayer').src = embedUrl;
             } else {
                 wrapper.style.display = 'none';
-                document.getElementById('mainPlayer').src = 'about:blank';
+                document.getElementById('mainPlayer').src = '';
             }
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function showHome() {
-            document.getElementById('videoWrapper').style.display = 'none';
-            document.getElementById('pageContent').innerHTML = `
-                <div style="text-align:center; padding: 10px 0;">
-                    <i class="fas fa-network-wired" style="font-size: 3.5rem; color: var(--accent-blue); margin-bottom: 25px;"></i>
-                    <h1 class="content-title">OPERATING SYSTEM PORTFOLIO</h1>
-                    <p class="content-text">Welcome to the technical documentation of Emmanuel C. Capuno for ITOS220-T.</p>
+            const homeContent = `
+                <h1 class="content-title">OPERATING SYSTEM</h1>
+                <p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It handles tasks like running applications, managing memory, organizing files, controlling devices, and ensuring security. OS types include desktop systems (Windows, macOS), mobile systems (Android, iOS), servers (Linux), and embedded systems. Without an OS, computers couldn't function or run programs.</p>
+                
+                <div class="home-grid">
+                    <div class="home-feature">
+                        <i class="fas fa-microchip"></i>
+                        <h3>Resource Management</h3>
+                        <p>Efficiently allocates and manages hardware resources like CPU, memory, and storage for smooth system operation.</p>
+                    </div>
+                    <div class="home-feature">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>User Interface</h3>
+                        <p>It provides a graphical or command-based interface, allowing users to interact with the computer easily.</p>
+                    </div>
+                    <div class="home-feature">
+                        <i class="fab fa-windows"></i>
+                        <h3>Software Execution</h3>
+                        <p>Enables applications to run by handling processes, multitasking, and ensuring compatibility between software and hardware.</p>
+                    </div>
                 </div>
             `;
+            playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", homeContent);
+            document.querySelector('.content-title').innerText = "OPERATING SYSTEM";
         }
 
-        /* --- CONTENT FUNCTIONS --- */
-
+        /* --- CONTENT FUNCTIONS (RETAINED) --- */
         function showActiveDirectory() {
             playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory: Creating Users", `
                 <p>Active Directory - Adding Users</p>
@@ -221,8 +255,8 @@
                 <ol class="instruction-list" style="list-style: decimal; padding-left: 20px;">
                     <li>Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)</li>
                     <li>Connect the two (2) client OS to your Windows Server Domain USING DHCP</li>
-                    <li style="list-style:none; margin-left:-20px;">- WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li>
-                    <li style="list-style:none; margin-left:-20px;">- WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li>
+                    <li>WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li>
+                    <li>WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li>
                     <li>LOGIN 5 student accounts per section per OS</li>
                 </ol>
             `);
@@ -234,10 +268,10 @@
                     <li>Add Application Server Role</li>
                     <li>Add Web Server Role</li>
                     <li>Add features:</li>
-                    <li style="list-style:none; margin-left:-20px;">- asp.net</li>
-                    <li style="list-style:none; margin-left:-20px;">- windows authentication</li>
-                    <li style="list-style:none; margin-left:-20px;">- dynamic content compression</li>
-                    <li style="list-style:none; margin-left:-20px;">- IIS 6 Management Compatibility</li>
+                    <li style="list-style:none;">- asp.net</li>
+                    <li style="list-style:none;">- windows authentication</li>
+                    <li style="list-style:none;">- dynamic content compression</li>
+                    <li style="list-style:none;">- IIS 6 Management Compatibility</li>
                     <li>After installation, create a simple asp.net web application.</li>
                     <li>The web page must be accessible to client browser.</li>
                     <li>Use the domain name in accessing the web page, not the IP address of the server.</li>
@@ -247,9 +281,8 @@
 
         function showRaidLab() {
             playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID Installation", `
-                <p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations. Each RAID level offers distinct trade-offs to suit different needs.</p>
+                <p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations.</p>
                 <p class="bold-label" style="margin-top:20px;">Instructions:</p>
-                <p>Perform the RAID installation of the following level:</p>
                 <ul class="instruction-list">
                     <li>Stripped Volume</li>
                     <li>Mirrored Volume</li>
@@ -261,23 +294,14 @@
 
         function playGroupPolicy() {
             playVideo("https://www.youtube.com/embed/LOAWrQ_iBeA", "Group Policy Management", `
-                <p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.</p>
+                <p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs).</p>
                 <p class="bold-label" style="margin-top:20px;">Instructions</p>
-                <p>Perform the following rules in Group Policy:</p>
                 <ul class="instruction-list">
                     <li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li>
                     <li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li>
                     <li>Remove Help menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove Run menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
                     <li>Add Logoff on the Start Menu: Enable</li>
-                    <li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li>
-                    <li>Internet Explorer Browser Title: Title Bar Text:</li>
-                    <li>Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)</li>
                     <li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li>
-                    <li>Prevent access to registry editing tools: User(Enable), Admin(Disable)</li>
                     <li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li>
                 </ul>
             `);
@@ -285,69 +309,19 @@
 
         function showFileServerLab() {
             playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "File Server", `
-                <p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.</p>
+                <p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data.</p>
                 <p class="bold-label" style="margin-top:20px;">Instructions</p>
-                <p>Add roles: File Services, and perform the following:</p>
-                <div style="margin-top:15px;">
-                    <p class="bold-label">1. Create a "Public" folder</p>
-                    <p>Permissions: Read/Write | Users: All | Files: All files format except *.exe, *.com, *.vb, *.vbs</p>
-                </div>
-                <div style="margin-top:15px;">
-                    <p class="bold-label">2. Folder: VB.Net</p>
-                    <p>Permissions: Read/Write | Users: All | Files: *.zip, *.rar</p>
-                </div>
-                <div style="margin-top:15px;">
-                    <p class="bold-label">3. Folder: C_Programs</p>
-                    <p>Permissions: Read/Write | Users: All | Files: *.c, *.cpp</p>
-                </div>
-                <div style="margin-top:15px;">
-                    <p class="bold-label">4. Folder: Surname_Section</p>
-                    <p>Permissions: Full Control | Users: Domain User | Files: *.c, *.cpp, *.pdf, *.rar, *.docx, *.ppt, *.dwg</p>
-                </div>
-                <div style="margin-top:15px;">
-                    <p class="bold-label">5. Folder: PHOTO_Male & PHOTO_Female</p>
-                    <p>Permissions: Read/Write | Users: Based on Users Gender | Files: *.jpg, *.gif, *.png</p>
-                </div>
+                <div style="margin-top:10px;"><p class="bold-label">1. Create a "Public" folder</p><p>Permissions: Read/Write | Users: All</p></div>
+                <div style="margin-top:10px;"><p class="bold-label">2. Folder: Surname_Section</p><p>Permissions: Full Control | Users: Domain User</p></div>
             `);
         }
 
-        /* --- CASE STUDY UPDATED VIDEOS --- */
         function showCombinedCS1() { playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'Part 1: Domain Controller', 'Primary setup for the server environment.'); }
-        
-        function showCS2_AddingUsers() { 
-            showActiveDirectory(); 
-            document.querySelector('.content-title').innerText = "Part 2: Adding Users"; 
-            let embedUrl = "https://www.youtube.com/embed/Fbf34o2YjZI";
-            document.getElementById('mainPlayer').src = embedUrl;
-        }
-        
-        function showCS3_DHCP() { 
-            showDHCP(); 
-            document.querySelector('.content-title').innerText = "Part 3: DHCP Server"; 
-            let embedUrl = "https://www.youtube.com/embed/buwvfMCYZrk";
-            document.getElementById('mainPlayer').src = embedUrl;
-        }
-        
-        function showCS4_FileSharing() { 
-            showFileServerLab(); 
-            document.querySelector('.content-title').innerText = "Part 4: File Sharing"; 
-            let embedUrl = "https://www.youtube.com/embed/xRTsGrQinik";
-            document.getElementById('mainPlayer').src = embedUrl;
-        }
-        
-        function showCS5_RAID() { 
-            showRaidLab(); 
-            document.querySelector('.content-title').innerText = "Part 5: RAID"; 
-            let embedUrl = "https://www.youtube.com/embed/XXjX_WqLi1o";
-            document.getElementById('mainPlayer').src = embedUrl;
-        }
-        
-        function showCS7_WebServer() { 
-            showWebServerLab(); 
-            document.querySelector('.content-title').innerText = "Part 7: Web Server"; 
-            let embedUrl = "https://www.youtube.com/embed/GnK0fzOGLw4";
-            document.getElementById('mainPlayer').src = embedUrl;
-        }
+        function showCS2_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 2: Adding Users"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/Fbf34o2YjZI"; }
+        function showCS3_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 3: DHCP Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/buwvfMCYZrk"; }
+        function showCS4_FileSharing() { showFileServerLab(); document.querySelector('.content-title').innerText = "Part 4: File Sharing"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/xRTsGrQinik"; }
+        function showCS5_RAID() { showRaidLab(); document.querySelector('.content-title').innerText = "Part 5: RAID"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/XXjX_WqLi1o"; }
+        function showCS7_WebServer() { showWebServerLab(); document.querySelector('.content-title').innerText = "Part 7: Web Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/GnK0fzOGLw4"; }
 
     </script>
 </body>
