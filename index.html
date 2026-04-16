@@ -156,17 +156,17 @@
 
     <script>
         function playVideo(url, title, text) {
-            // Update Text Content
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">${title}</h1>
                 <div class="content-text">${text}</div>
             `;
             
-            // Handle Video Wrapper
             const wrapper = document.getElementById('videoWrapper');
             if(url) {
                 wrapper.style.display = 'block';
-                document.getElementById('mainPlayer').src = url;
+                // Convert youtu.be or watch?v= to embed format if necessary
+                let embedUrl = url.replace("youtu.be/", "www.youtube.com/embed/").replace("watch?v=", "embed/");
+                document.getElementById('mainPlayer').src = embedUrl;
             } else {
                 wrapper.style.display = 'none';
                 document.getElementById('mainPlayer').src = 'about:blank';
@@ -186,7 +186,7 @@
             `;
         }
 
-        /* --- LITERAL CAPTIONS RESTORED --- */
+        /* --- CONTENT FUNCTIONS --- */
 
         function showActiveDirectory() {
             playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory: Creating Users", `
@@ -290,8 +290,7 @@
                 <p>Add roles: File Services, and perform the following:</p>
                 <div style="margin-top:15px;">
                     <p class="bold-label">1. Create a "Public" folder</p>
-                    <p>Permissions: Read/Write | Users: All</p>
-                    <p>Files: All files format except *.exe, *.com, *.vb, *.vbs</p>
+                    <p>Permissions: Read/Write | Users: All | Files: All files format except *.exe, *.com, *.vb, *.vbs</p>
                 </div>
                 <div style="margin-top:15px;">
                     <p class="bold-label">2. Folder: VB.Net</p>
@@ -312,13 +311,43 @@
             `);
         }
 
-        /* --- CASE STUDY WRAPPERS (Text TOP, Vid BOTTOM) --- */
+        /* --- CASE STUDY UPDATED VIDEOS --- */
         function showCombinedCS1() { playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'Part 1: Domain Controller', 'Primary setup for the server environment.'); }
-        function showCS2_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 2: Adding Users"; }
-        function showCS3_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 3: DHCP Server"; }
-        function showCS4_FileSharing() { showFileServerLab(); document.querySelector('.content-title').innerText = "Part 4: File Sharing"; }
-        function showCS5_RAID() { showRaidLab(); document.querySelector('.content-title').innerText = "Part 5: RAID"; }
-        function showCS7_WebServer() { showWebServerLab(); document.querySelector('.content-title').innerText = "Part 7: Web Server"; }
+        
+        function showCS2_AddingUsers() { 
+            showActiveDirectory(); 
+            document.querySelector('.content-title').innerText = "Part 2: Adding Users"; 
+            let embedUrl = "https://www.youtube.com/embed/Fbf34o2YjZI";
+            document.getElementById('mainPlayer').src = embedUrl;
+        }
+        
+        function showCS3_DHCP() { 
+            showDHCP(); 
+            document.querySelector('.content-title').innerText = "Part 3: DHCP Server"; 
+            let embedUrl = "https://www.youtube.com/embed/buwvfMCYZrk";
+            document.getElementById('mainPlayer').src = embedUrl;
+        }
+        
+        function showCS4_FileSharing() { 
+            showFileServerLab(); 
+            document.querySelector('.content-title').innerText = "Part 4: File Sharing"; 
+            let embedUrl = "https://www.youtube.com/embed/xRTsGrQinik";
+            document.getElementById('mainPlayer').src = embedUrl;
+        }
+        
+        function showCS5_RAID() { 
+            showRaidLab(); 
+            document.querySelector('.content-title').innerText = "Part 5: RAID"; 
+            let embedUrl = "https://www.youtube.com/embed/XXjX_WqLi1o";
+            document.getElementById('mainPlayer').src = embedUrl;
+        }
+        
+        function showCS7_WebServer() { 
+            showWebServerLab(); 
+            document.querySelector('.content-title').innerText = "Part 7: Web Server"; 
+            let embedUrl = "https://www.youtube.com/embed/GnK0fzOGLw4";
+            document.getElementById('mainPlayer').src = embedUrl;
+        }
 
     </script>
 </body>
