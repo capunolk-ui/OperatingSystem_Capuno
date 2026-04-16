@@ -46,39 +46,21 @@
         .instruction-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #334155; font-size: 0.95rem; line-height: 1.5; }
         .instruction-list li::before { content: "-"; color: var(--accent-blue); position: absolute; left: 0; font-weight: 900; }
 
-        /* Footer Note */
         .footer-note {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(15, 23, 42, 0.8);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            z-index: 1001;
+            position: fixed; top: 20px; right: 20px;
+            background: rgba(15, 23, 42, 0.8); padding: 10px 20px; border-radius: 10px;
+            font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); z-index: 1001;
         }
 
-        .bottom-footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            width: 100%;
-        }
+        .bottom-footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #94a3b8; width: 100%; }
 
-        /* Video Styles */
         .video-wrapper {
             width: 100%; background: #000; border-radius: 16px; overflow: hidden;
-            display: none; 
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); 
-            border: 2px solid rgba(59, 130, 246, 0.3);
+            display: none; box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); border: 2px solid rgba(59, 130, 246, 0.3);
         }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* Navigation Styles */
         nav {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
             background: var(--nav-bg); backdrop-filter: blur(20px); border-radius: 100px;
@@ -94,8 +76,7 @@
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
             background: #fff; min-width: 320px; border-radius: 18px; padding: 15px;
-            opacity: 0; visibility: hidden; transition: 0.3s; 
-            box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+            opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 15px 45px rgba(0,0,0,0.7);
         }
         .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
         .dropdown div {
@@ -146,12 +127,17 @@
             </li>
 
             <li class="menu-item">
-                <a class="menu-link">Windows <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link">Windows Installation <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
+                    <div onclick="playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT', '')"><i class="fab fa-windows"></i> Windows NT</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', '')"><i class="fab fa-windows"></i> Windows 95</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista', '')"><i class="fab fa-windows"></i> Windows Vista</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', '')"><i class="fab fa-windows"></i> Windows XP</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', '')"><i class="fas fa-terminal"></i> Server 2008</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', '')"><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8', '')"><i class="fab fa-windows"></i> Windows 8</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', '')"><i class="fab fa-windows"></i> Windows 10</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', '')"><i class="fab fa-windows"></i> Windows 11</div>
                 </div>
             </li>
 
@@ -178,7 +164,6 @@
                 <h1 class="content-title">${title}</h1>
                 <div class="content-text">${text}</div>
             `;
-            
             const wrapper = document.getElementById('videoWrapper');
             if(url) {
                 wrapper.style.display = 'block';
@@ -194,7 +179,7 @@
         function showHome() {
             const homeContent = `
                 <h1 class="content-title">OPERATING SYSTEM</h1>
-                <p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It handles tasks like running applications, managing memory, organizing files, controlling devices, and ensuring security.</p>
+                <p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine.</p>
             `;
             playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", homeContent);
         }
@@ -207,7 +192,7 @@
                         <h1 class="content-title" style="text-align:left;">ABOUT</h1>
                         <h2 style="color:var(--accent-blue); margin-bottom:10px;">EMMANUEL C. CAPUNO</h2>
                         <p style="font-weight:700; color:#64748b; margin-bottom:20px;">BSIT - NS-2A</p>
-                        <p class="content-text">This website serves as the final project for our Operating Systems course, offering a comprehensive guide to Windows OS installation, configuration, and management. Here, you'll find:</p>
+                        <p class="content-text">This website serves as the final project for our Operating Systems course, offering a comprehensive guide to Windows OS installation, configuration, and management.</p>
                         <ul class="instruction-list">
                             <li>Hands-on labs covering key OS concepts.</li>
                             <li>Step-by-step video demonstrations of Windows installations.</li>
@@ -221,54 +206,22 @@
             `;
         }
 
-        /* --- UPDATED CASE STUDY FUNCTIONS --- */
+        /* --- CASE STUDY FUNCTIONS --- */
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>In Windows Server 2008, adding users is a straightforward process... Bulk adding code: <a href='https://ggle.in/bulkusers' target='_blank'>https://ggle.in/bulkusers</a></p>`); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>A DHCP server automatically assigns IP addresses and network configuration parameters to client devices.</p>`); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>File sharing allows users and administrators to store and manage files across a network efficiently.</p>`); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>RAID technology combines multiple physical disks into a single logical unit for redundancy and performance.</p>`); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p class='content-text'>IIS 7.0 is the built-in web server in Windows Server 2008 for hosting applications and sites.</p>`); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p class='content-text'>Group Policy centrally manages user and computer settings across a domain.</p>`); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p class='content-text'>WDS enables network-based installation of Windows operating systems efficiently.</p>`); }
 
-        function showCS1() {
-            const text = `
-                <p class="content-text">In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p>
-                <p class="content-text">To access the code I used in adding users in bulk method, kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank" style="color:var(--accent-blue);">https://ggle.in/bulkusers</a></p>
-            `;
-            playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", text);
-        }
-
-        function showCS2() {
-            const text = `<p class="content-text">A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`;
-            playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", text);
-        }
-
-        function showCS3() {
-            const text = `<p class="content-text">File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`;
-            playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", text);
-        }
-
-        function showCS4() {
-            const text = `<p class="content-text">RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`;
-            playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", text);
-        }
-
-        function showCS5() {
-            const text = `<p class="content-text">Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`;
-            playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", text);
-        }
-
-        function showCS6() {
-            const text = `<p class="content-text">Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`;
-            playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", text);
-        }
-
-        function showCS7() {
-            const text = `<p class="content-text">Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`;
-            playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", text);
-        }
-
-        /* --- OTHER LAB FUNCTIONS --- */
+        /* --- LAB FUNCTIONS --- */
         function showActiveDirectory() { showCS1(); }
         function showDHCP() { showCS2(); }
         function showWebServerLab() { showCS5(); }
         function showRaidLab() { showCS4(); }
         function playGroupPolicy() { showCS6(); }
         function showFileServerLab() { showCS3(); }
-
     </script>
 </body>
 </html>
