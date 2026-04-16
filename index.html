@@ -20,7 +20,7 @@
             --card-glass: rgba(255, 255, 255, 0.98);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
@@ -65,17 +65,30 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
         .menu { display: flex; list-style: none; align-items: center; }
+        
+        .menu-item { position: relative; }
+
         .menu-link {
             display: block; padding: 12px 18px; color: #94a3b8; text-decoration: none;
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
         .menu-link:hover { color: #fff; transform: translateY(-2px); }
+
+        /* Mobile Fix: Dropdown logic */
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
             background: #fff; min-width: 320px; border-radius: 18px; padding: 15px;
             opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+            pointer-events: none; /* Prevents ghost clicks when hidden */
         }
-        .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
+        
+        .menu-item:hover .dropdown, 
+        .menu-item:focus-within .dropdown { 
+            opacity: 1; 
+            visibility: visible;
+            pointer-events: auto;
+        }
+
         .dropdown div {
             display: flex; align-items: center; padding: 10px 15px; color: #334155;
             text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer;
@@ -88,7 +101,7 @@
 <body onload="showHome()">
 
     <div class="footer-note">
-        FOR ACADEMIC PURPOSE ONLY | © 2026 Emmanuel C. Capuno BSIT-NS-2A
+        FOR ACADEMIC PURPOSE ONLY | © 2026 Emmanuel C. Capuno
     </div>
 
     <div class="main-content">
@@ -105,10 +118,10 @@
 
     <nav>
         <ul class="menu">
-            <li class="menu-item"><a class="menu-link" onclick="showHome()"><i class="fas fa-home"></i></a></li>
+            <li class="menu-item"><a class="menu-link" onclick="showHome()" ontouchstart="showHome()"><i class="fas fa-home"></i></a></li>
             
             <li class="menu-item">
-                <a class="menu-link">Lab Activities <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link" href="javascript:void(0)">Lab Activities <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown">
                     <div onclick="showActiveDirectory()"><i class="fas fa-users-cog"></i> Active Directory</div>
                     <div onclick="showDHCP()"><i class="fas fa-network-wired"></i> DHCP Server</div>
@@ -120,7 +133,7 @@
             </li>
 
             <li class="menu-item">
-                <a class="menu-link">Windows Installation <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link" href="javascript:void(0)">Installation <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
                     <div onclick="showWin95()"><i class="fab fa-windows"></i> Windows 95</div>
                     <div onclick="showWinNT()"><i class="fab fa-windows"></i> Windows NT</div>
@@ -137,7 +150,7 @@
             </li>
 
             <li class="menu-item">
-                <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link" href="javascript:void(0)">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
                     <div onclick="showCS1()"><i class="fas fa-users"></i> Part 1: Adding Users</div>
                     <div onclick="showCS2()"><i class="fas fa-database"></i> Part 2: DHCP Server</div>
@@ -149,7 +162,7 @@
                 </div>
             </li>
             
-            <li class="menu-item"><a class="menu-link" onclick="showAbout()">About <i class="fas fa-chevron-up"></i></a></li>
+            <li class="menu-item"><a class="menu-link" onclick="showAbout()" ontouchstart="showAbout()">About <i class="fas fa-chevron-up"></i></a></li>
         </ul>
     </nav>
 
@@ -172,7 +185,7 @@
         }
 
         function showHome() {
-            playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", `<p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine.</p>`);
+            playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", `<p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources.</p>`);
         }
 
         /* --- WINDOWS INSTALLATION SECTION --- */
@@ -180,85 +193,72 @@
             playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', 
             `<p class="content-text">Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0" target="_blank">WinWorld</a><br>
             Windows 95 ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a><br><br>
-            If an error occurs after Windows 95 Installation, refer to this link below and download the FIX95CPU_V3_FINAL.ZIP and use the ISO file inside.<br>
-            <a href="https://msfn.org/board/topic/141402-windows-95-21ghz-cpu-limit-broken/" target="_blank">CPU Limit Fix Link</a><br><br>
             <strong>WIN95 PROD KEY:</strong> 12095 0004226 12233</p>`); 
         }
 
         function showWinNT() { 
             playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT INSTALLATION', 
-            `<p class="content-text">Windows NT 4 ISO Link: <a href="https://winworldpc.com/download/4162c2ba-c3b7-18c3-9a11-c3a4e284a2ef" target="_blank">WinWorld</a><br>
-            Windows NT 4 SP6 ISO Link: <a href="https://winworldpc.com/download/f0ce02e5-cca7-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a></p>`); 
+            `<p class="content-text">Windows NT 4 ISO Link: <a href="https://winworldpc.com/download/4162c2ba-c3b7-18c3-9a11-c3a4e284a2ef" target="_blank">WinWorld</a></p>`); 
         }
 
-        function showWin98() {
-            playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98 INSTALLATION',
-            `<p class="content-text">In this video, we will cover the following:<br>- Server installation</p>`);
-        }
+        function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98 INSTALLATION', `<p class="content-text">Server installation</p>`); }
 
         function showWin2000() {
             playVideo('https://www.youtube.com/embed/MbmLy_QDSiI', 'Windows 2000 INSTALLATION',
-            `<p class="content-text">Windows Server 2000 ISO Link: <a href="https://mega.nz/#!0VIBlLTC!EYBAGK4_rm4mV-hBsoacv-HeK17aRTeAuYB-LvOoqS4" target="_blank">Mega Link</a><br><br>
-            <strong>WIN2000 PROD KEY:</strong> DDTPV-TXMX7-BBGJ9-WGY8K-B9GHM<br>
-            <strong>Alternative Key:</strong> VXKC4-2B3YF-W9MFK-QB3DB-9Y7MB</p>`);
+            `<p class="content-text">Windows Server 2000 ISO Link: <a href="https://mega.nz/#!0VIBlLTC!EYBAGK4_rm4mV-hBsoacv-HeK17aRTeAuYB-LvOoqS4" target="_blank">Mega Link</a><br><strong>PROD KEY:</strong> DDTPV-TXMX7-BBGJ9-WGY8K-B9GHM</p>`);
         }
 
-        function showXP() { playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP INSTALLATION', `<p class="content-text">In this video, we will cover the following:<br>- Server installation</p>`); }
-        function showVista() { playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista INSTALLATION', `<p class="content-text">Windows Vista ISO Link: <a href="https://archive.org/details/win-vista-ultimate-x64" target="_blank">Download Here</a><br><strong>PROD KEY:</strong> X9HTF-MKJQQ-XK376-TJ7T4-76PKF</p>`); }
-        
-        function showServer2008() { 
-            playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008 INSTALLATION', 
-            `<p class="content-text">In this video, we will cover the following:<br>- Server installation<br>- Creating an Active Directory<br>- Installing a Domain Controller<br>- Installing a DNS</p>`); 
-        }
-
-        function showWin7() { playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7 INSTALLATION', `<p class="content-text">In this video, we will cover the following:<br>- Server installation</p>`); }
-        function showWin8() { playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8 INSTALLATION', `<p class="content-text">Windows 8 ISO Link: <a href="https://www.techworm.net/2023/03/download-windows-8-1-iso-files.html" target="_blank">Download Here</a><br><strong>PROD KEY:</strong> 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH</p>`); }
-        function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10 INSTALLATION', `<p class="content-text">Windows 10 ISO Link: <a href="https://www.microsoft.com/en-in/software-download/windows10" target="_blank">Download Here</a></p>`); }
-        function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11 INSTALLATION', `<p class="content-text">Windows 11 ISO Link: <a href="https://support.microsoft.com/en-us/windows/create-an-iso-file-for-windows-11-f2fe5a20-a186-4d1b-9ef8-59a2e0eb1178" target="_blank">Download Here</a></p>`); }
+        function showXP() { playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP INSTALLATION', `<p class="content-text">Server installation</p>`); }
+        function showVista() { playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista INSTALLATION', `<p class="content-text"><strong>PROD KEY:</strong> X9HTF-MKJQQ-XK376-TJ7T4-76PKF</p>`); }
+        function showServer2008() { playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008 INSTALLATION', `<p class="content-text">Server installation and AD Setup</p>`); }
+        function showWin7() { playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7 INSTALLATION', `<p class="content-text">Server installation</p>`); }
+        function showWin8() { playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8 INSTALLATION', `<p class="content-text"><strong>PROD KEY:</strong> 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH</p>`); }
+        function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10 INSTALLATION', `<p class="content-text">Official Microsoft Download</p>`); }
+        function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11 INSTALLATION', `<p class="content-text">Official Microsoft ISO</p>`); }
 
         /* --- LAB ACTIVITIES SECTION --- */
         function showActiveDirectory() {
             playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Active Directory - Adding Users", 
-            `<p class='content-text'>- Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.<br>- Group the students according to their section.<br>- Your account belongs to Administrators.<br><br><strong>Show administrator account:</strong><br>- User cannot change password.<br>- Password never expires.<br><br><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>`);
+            `<p class='content-text'>Create User Accounts of all BSIT Students.<br><strong>Domain:</strong> bsit.com</p>`);
         }
 
         function showDHCP() {
             playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "DHCP SERVER", 
-            `<p class='content-text'><strong>Add roles:</strong> DHCP Server<br><strong>Scopes:</strong><br>- number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.<br>- number of female students per yr and section is the host requirement with the ip block 172.16.0.0/16<br>- Server: Last Usable IP add<br>- Exclude: First & Last (10 usable IP Addresses)<br>- Lease Time: 16 hours<br>- Router: Server IP Address<br>- DNS: Server IP Address (8.8.8.8)<br><br>1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)<br>2. Connect the two (2) client OS to your Windows Server Domain USING DHCP.<br>- WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK<br>- WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK<br>3. LOGIN 5 student accounts per section per OS</p>`);
+            `<p class='content-text'>IP Block 10.0.0.0/8 for Male, 172.16.0.0/16 for Female.</p>`);
         }
 
         function showWebServerLab() {
             playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "APP AND WEB SERVER", 
-            `<p class='content-text'>1. Add Application Server Role<br>2. Add Web Server Role<br>3. Add features:<br>- asp.net<br>- windows authentication<br>- dynamic content compression<br>- IIS 6 Management Compatibility<br>4. After installation, create a simple asp.net web application.<br>5. The web page must be accessible to client browser.<br>6. Use the domain name in accessing the web page, not the IP address of the server.</p>`);
+            `<p class='content-text'>Add Application Server Role and Web Server Role (IIS).</p>`);
         }
 
         function showRaidLab() {
             playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "RAID INSTALLATION", 
-            `<p class='content-text'>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations. Each RAID level offers distinct trade-offs to suit different needs.<br><br><strong>Instructions:</strong><br>Perform the RAID installation of the following level:<br>- Stripped Volume<br>- Mirrored Volume<br>- Spanned Volume<br>- RAID 5</p>`);
+            `<p class='content-text'>RAID technology combines multiple physical disks into logical units.<br>Levels: RAID 0, 1, JBOD, 5.</p>`);
         }
 
         function playGroupPolicy() {
             playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "GROUP POLICY", 
-            `<p class='content-text'>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs)....<br><br><strong>Instructions</strong><br>Perform the following rules in Group Policy:<br>- Remove links and access to Windows Update: User(Enable), Admin(Disable)<br>- Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)... [Extended rules]</p>`);
+            `<p class='content-text'>Centralized management of user and computer settings using GPOs.</p>`);
         }
 
         function showFileServerLab() {
             playVideo("https://www.youtube.com/embed/xRTsGrQinik", "FILE SERVER", 
-            `<p class='content-text'>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data...<br><br><strong>Instructions</strong><br>Add roles: File Services, and perform the following:<br>1. Create a "Public" folder... [Extended folder list]</p>`);
+            `<p class='content-text'>Centralized storage system for file management.</p>`);
         }
 
-        /* --- CASE STUDY FUNCTIONS (REMAIN UNTOUCHED) --- */
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users. To access the code I used in adding users in bulk method, kindly access this link: <a href='https://ggle.in/bulkusers' target='_blank'>https://ggle.in/bulkusers</a></p>`); }
-        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network.</p>`); }
-        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently.</p>`); }
-        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both.</p>`); }
-        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p class='content-text'>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008...</p>`); }
-        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p class='content-text'>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain.</p>`); }
-        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p class='content-text'>Windows Deployment Services (WDS) is a server role in Windows Server 2008...</p>`); }
+        /* --- CASE STUDY --- */
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>Bulk adding users using script.</p>`); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>Automated IP assignment in Server 2008.</p>`); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>Shared folders and NTFS permissions.</p>`); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>Software and Hardware RAID management.</p>`); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p class='content-text'>IIS 7.0 hosting.</p>`); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p class='content-text'>Security and software enforcement.</p>`); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p class='content-text'>Network-based installation via WDS.</p>`); }
 
         function showAbout() {
             document.getElementById('videoWrapper').style.display = 'none';
-            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">ABOUT</h1><h2 style="color:var(--accent-blue); text-align:center;">EMMANUEL C. CAPUNO</h2><p style="text-align:center; font-weight:700;">BSIT - NS-2A</p><p class="content-text">This website serves as the final project for our Operating Systems course, offering a comprehensive guide to Windows OS installation, configuration, and management.</p>`;
+            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">ABOUT</h1><h2 style="color:var(--accent-blue); text-align:center;">EMMANUEL C. CAPUNO</h2><p style="text-align:center; font-weight:700;">BSIT - NS-2A</p>`;
         }
     </script>
 </body>
