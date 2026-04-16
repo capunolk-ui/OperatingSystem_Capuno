@@ -108,6 +108,8 @@
         .scrollable { max-height: 400px; overflow-y: auto; }
         
         .bold-label { font-weight: 700; color: #0f172a; }
+        
+        .flex-container { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; }
     </style>
 </head>
 <body onload="showHome()">
@@ -157,18 +159,11 @@
                     <div onclick="showCS4_RAID()"><i class="fas fa-save"></i> Part 4: RAID</div>
                     <div onclick="showCS5_WebServer()"><i class="fas fa-globe"></i> Part 5: Web Server</div>
                     <div onclick="showCS6_GroupPolicy()"><i class="fas fa-user-shield"></i> Part 6: Group Policies</div>
-                    <div onclick="playVideo('', 'Part 7: Windows Deployment', '')"><i class="fas fa-copy"></i> Part 7: Windows Deployment</div>
+                    <div onclick="showCS7_Deployment()"><i class="fas fa-copy"></i> Part 7: Windows Deployment</div>
                 </div>
             </li>
             
-            <li class="menu-item">
-                <a class="menu-link">About <i class="fas fa-chevron-up"></i></a>
-                <div class="dropdown">
-                    <p style="font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 800;">Developer</p>
-                    <h2 style="color:var(--accent-blue); font-size:1.3rem;">EMMANUEL C. CAPUNO</h2>
-                    <p style="font-weight:600; font-size:0.8rem; color:#64748b;">BSIT - NS2A</p>
-                </div>
-            </li>
+            <li class="menu-item"><a class="menu-link" onclick="showAbout()">About <i class="fas fa-chevron-up"></i></a></li>
         </ul>
     </nav>
 
@@ -182,7 +177,7 @@
             const wrapper = document.getElementById('videoWrapper');
             if(url) {
                 wrapper.style.display = 'block';
-                let embedUrl = url.includes('embed') ? url : url.replace("watch?v=", "embed/");
+                let embedUrl = url.includes('embed') ? url : url.replace("watch?v=", "embed/").replace("youtu.be/", "youtube.com/embed/");
                 document.getElementById('mainPlayer').src = embedUrl;
             } else {
                 wrapper.style.display = 'none';
@@ -289,7 +284,7 @@
         }
 
         function playGroupPolicy() {
-            playVideo("https://www.youtube.com/embed/LOAWrQ_iBeA", "Group Policy Management", `
+            playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "Group Policy Management", `
                 <p>Group Policy Management allows administrators to manage and enforce settings for users and computers within an Active Directory domain.</p>
                 <p class="bold-label" style="margin-top:20px;">Instructions</p>
                 <ul class="instruction-list">
@@ -311,13 +306,39 @@
             `);
         }
 
+        function showAbout() {
+            document.getElementById('videoWrapper').style.display = 'none';
+            document.getElementById('pageContent').innerHTML = `
+                <div class="flex-container">
+                    <div style="flex: 1;">
+                        <h1 class="content-title" style="text-align:left;">ABOUT</h1>
+                        <h2 style="color:var(--accent-blue); margin-bottom:10px;">EMMANUEL C. CAPUNO</h2>
+                        <p style="font-weight:700; color:#64748b; margin-bottom:20px;">BSIT - NS2A</p>
+                        <p class="content-text">This website serves as the final project for our Operating Systems course, offering a comprehensive guide to Windows OS installation, configuration, and management. Here, you'll find:</p>
+                        <ul class="instruction-list">
+                            <li>Hands-on labs covering key OS concepts.</li>
+                            <li>Step-by-step video demonstrations of Windows installations.</li>
+                            <li>Case Study Finals which cover system setup, user management, and security.</li>
+                        </ul>
+                        <div style="font-size: 1.5rem; gap: 20px; display: flex; margin-top: 20px; color: var(--text-dark);">
+                            <i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-github"></i>
+                        </div>
+                    </div>
+                    <div style="flex: 0 0 250px;">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Emmanuel&top=shortHair&eyebrows=flatNatural&mouth=smile" alt="Boy Drawing" style="width:100%;">
+                    </div>
+                </div>
+            `;
+        }
+
         /* --- UPDATED CASE STUDY FUNCTIONS --- */
         function showCS1_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 1: Adding Users"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/Fbf34o2YjZI"; }
         function showCS2_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 2: DHCP Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/buwvfMCYZrk"; }
         function showCS3_FileSharing() { showFileServerLab(); document.querySelector('.content-title').innerText = "Part 3: File Sharing"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/xRTsGrQinik"; }
         function showCS4_RAID() { showRaidLab(); document.querySelector('.content-title').innerText = "Part 4: RAID"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/XXjX_WqLi1o"; }
         function showCS5_WebServer() { showWebServerLab(); document.querySelector('.content-title').innerText = "Part 5: Web Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/GnK0fzOGLw4"; }
-        function showCS6_GroupPolicy() { playGroupPolicy(); document.querySelector('.content-title').innerText = "Part 6: Group Policies"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/LOAWrQ_iBeA"; }
+        function showCS6_GroupPolicy() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", ""); }
+        function showCS7_Deployment() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", ""); }
 
     </script>
 </body>
