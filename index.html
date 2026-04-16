@@ -179,43 +179,123 @@
         function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', `<p class="content-text">Windows 10 ISO Link: <a href="https://www.microsoft.com/en-in/software-download/windows10" target="_blank">Download Here</a></p>`); }
         function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', `<p class="content-text">Windows 11 ISO Link: <a href="https://support.microsoft.com/en-us/windows/create-an-iso-file-for-windows-11-f2fe5a20-a186-4d1b-9ef8-59a2e0eb1178" target="_blank">Download Here</a></p>`); }
 
-        /* --- RESTORED UNFILTERED CAPTIONS --- */
-        function showCS1() { 
-            playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", 
-            `<p class='content-text'>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users. To access the code I used in adding users in bulk method, kindly access this link: <a href='https://ggle.in/bulkusers' target='_blank'>https://ggle.in/bulkusers</a></p>`); 
-        }
-        function showCS2() { 
-            playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", 
-            `<p class='content-text'>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); 
-        }
-        function showCS3() { 
-            playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", 
-            `<p class='content-text'>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); 
-        }
-        function showCS4() { 
-            playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", 
-            `<p class='content-text'>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`); 
-        }
-        function showCS5() { 
-            playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", 
-            `<p class='content-text'>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`); 
-        }
-        function showCS6() { 
-            playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", 
-            `<p class='content-text'>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`); 
-        }
-        function showCS7() { 
-            playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", 
-            `<p class='content-text'>Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`); 
+        /* --- LAB ACTIVITY CAPTIONS --- */
+        function showActiveDirectory() {
+            playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Active Directory - Adding Users", 
+            `<p class='content-text'>
+                - Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.<br>
+                - Group the students according to their section.<br>
+                - Your account belongs to Administrators.<br><br>
+                <strong>Show administrator account:</strong><br>
+                - User cannot change password.<br>
+                - Password never expires.<br><br>
+                <strong>Domain:</strong> bsit.com<br>
+                <strong>Common password:</strong> User123
+            </p>`);
         }
 
-        /* --- LAB ACTIVITY REDIRECTS --- */
-        function showActiveDirectory() { showCS1(); }
-        function showDHCP() { showCS2(); }
-        function showWebServerLab() { showCS5(); }
-        function showRaidLab() { showCS4(); }
-        function playGroupPolicy() { showCS6(); }
-        function showFileServerLab() { showCS3(); }
+        function showDHCP() {
+            playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "DHCP SERVER", 
+            `<p class='content-text'>
+                <strong>Add roles:</strong> DHCP Server<br>
+                <strong>Scopes:</strong><br>
+                - number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.<br>
+                - number of female students per yr and section is the host requirement with the ip block 172.16.0.0/16<br>
+                - Server: Last Usable IP add<br>
+                - Exclude: First & Last (10 usable IP Addresses)<br>
+                - Lease Time: 16 hours<br>
+                - Router: Server IP Address<br>
+                - DNS: Server IP Address (8.8.8.8)<br><br>
+                1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)<br>
+                2. Connect the two (2) client OS to your Windows Server Domain USING DHCP.<br>
+                - WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK<br>
+                - WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK<br>
+                3. LOGIN 5 student accounts per section per OS
+            </p>`);
+        }
+
+        function showWebServerLab() {
+            playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "APP AND WEB SERVER", 
+            `<p class='content-text'>
+                1. Add Application Server Role<br>
+                2. Add Web Server Role<br>
+                3. Add features:<br>
+                - asp.net<br>
+                - windows authentication<br>
+                - dynamic content compression<br>
+                - IIS 6 Management Compatibility<br>
+                4. After installation, create a simple asp.net web application.<br>
+                5. The web page must be accessible to client browser.<br>
+                6. Use the domain name in accessing the web page, not the IP address of the server.
+            </p>`);
+        }
+
+        function showRaidLab() {
+            playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "RAID INSTALLATION", 
+            `<p class='content-text'>
+                1. Add Application Server Role<br>
+                2. Add Web Server Role<br>
+                3. Add features:<br>
+                - asp.net<br>
+                - windows authentication<br>
+                - dynamic content compression<br>
+                - IIS 6 Management Compatibility<br>
+                4. After installation, create a simple asp.net web application.<br>
+                5. The web page must be accessible to client browser.<br>
+                6. Use the domain name in accessing the web page, not the IP address of the server.
+            </p>`);
+        }
+
+        function playGroupPolicy() {
+            playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "GROUP POLICY", 
+            `<p class='content-text'>
+                Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.<br><br>
+                <strong>Instructions</strong><br>
+                Perform the following rules in Group Policy:<br>
+                - Remove links and access to Windows Update: User(Enable), Admin(Disable)<br>
+                - Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)<br>
+                - Remove Help menu from the Start Menu: User(Enable), Admin(Disable)<br>
+                - Remove Run menu from the Start Menu: User(Enable), Admin(Disable)<br>
+                - Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)<br>
+                - Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)<br>
+                - Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)<br>
+                - Add Logoff on the Start Menu: Enable<br>
+                - Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)<br>
+                - Internet Explorer Browser Title: Title Bar Text:<br>
+                - Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)<br>
+                - Prevent access to the Command Prompt: User(Enable), Admin(Disable)<br>
+                - Prevent access to registry editing tools: User(Enable), Admin(Disable)<br>
+                - Prohibit access to the Control Panel: User(Enable), Admin(Disable)
+            </p>`);
+        }
+
+        function showFileServerLab() {
+            playVideo("https://www.youtube.com/embed/xRTsGrQinik", "FILE SERVER", 
+            `<p class='content-text'>
+                A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.<br><br>
+                <strong>Instructions</strong><br>
+                Add roles: File Services, and perform the following:<br><br>
+                1. Create a "Public" folder<br>
+                Permissions: Read/Write | Users: All | Files: All files format except *.exe, *.com, *.vb, *.vbs<br>
+                2. Folder: VB.Net<br>
+                Permissions: Read/Write | Users: All | Files: *.zip, *.rar<br>
+                3. Folder: C_Programs<br>
+                Permissions: Read/Write | Users: All | Files: *.c, *.cpp<br>
+                4. Folder: Surname_Section<br>
+                Permissions: Full Control | Users: Domain User | Files: *.c, *.cpp, *.pdf, *.rar,*.docx, *.ppt,*.dwg<br>
+                5. Folder: PHOTO_Male & PHOTO_FEMALE<br>
+                Permissions: Read/Write | Users: Based on Users Gender | Files: *.jpg, *.gif, *.png
+            </p>`);
+        }
+
+        /* --- CASE STUDY FUNCTIONS (UNCHANGED) --- */
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users. To access the code I used in adding users in bulk method, kindly access this link: <a href='https://ggle.in/bulkusers' target='_blank'>https://ggle.in/bulkusers</a></p>`); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p class='content-text'>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p class='content-text'>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p class='content-text'>Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`); }
 
         function showAbout() {
             document.getElementById('videoWrapper').style.display = 'none';
