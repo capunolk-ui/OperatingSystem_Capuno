@@ -36,11 +36,12 @@
             background: var(--card-glass); border-radius: 24px; padding: 40px;
             color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: left;
             backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);
+            margin-bottom: 30px;
         }
 
         .video-wrapper {
             width: 100%; background: #000; border-radius: 16px; overflow: hidden;
-            margin-bottom: 30px; display: none; 
+            display: none; 
             box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); 
             border: 2px solid rgba(59, 130, 246, 0.3);
         }
@@ -49,7 +50,7 @@
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; }
-        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; white-space: pre-line; }
+        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
         
         .instruction-box { background: #f1f5f9; padding: 25px; border-radius: 15px; border-left: 6px solid var(--accent-blue); margin-top: 20px; }
         .instruction-title { font-weight: 700; color: #0f172a; margin-bottom: 10px; display: block; text-transform: uppercase; font-size: 0.9rem; }
@@ -92,12 +93,13 @@
 <body onload="showHome()">
 
     <div class="main-content">
+        <div class="page-card" id="pageContent"></div>
+
         <div id="videoWrapper" class="video-wrapper">
             <div class="video-container">
                 <iframe id="mainPlayer" src="about:blank" allowfullscreen></iframe>
             </div>
         </div>
-        <div class="page-card" id="pageContent"></div>
     </div>
 
     <nav>
@@ -154,12 +156,22 @@
 
     <script>
         function playVideo(url, title, text) {
-            document.getElementById('videoWrapper').style.display = url ? 'block' : 'none';
-            document.getElementById('mainPlayer').src = url ? url : 'about:blank';
+            // Update Text Content
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">${title}</h1>
                 <div class="content-text">${text}</div>
             `;
+            
+            // Handle Video Wrapper
+            const wrapper = document.getElementById('videoWrapper');
+            if(url) {
+                wrapper.style.display = 'block';
+                document.getElementById('mainPlayer').src = url;
+            } else {
+                wrapper.style.display = 'none';
+                document.getElementById('mainPlayer').src = 'about:blank';
+            }
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -174,7 +186,7 @@
             `;
         }
 
-        /* --- LITERAL CAPTIONS FROM SCREENSHOTS --- */
+        /* --- LITERAL CAPTIONS RESTORED --- */
 
         function showActiveDirectory() {
             playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory: Creating Users", `
@@ -278,38 +290,29 @@
                 <p>Add roles: File Services, and perform the following:</p>
                 <div style="margin-top:15px;">
                     <p class="bold-label">1. Create a "Public" folder</p>
-                    <p>Permissions: Read/Write</p>
-                    <p>Users: All</p>
+                    <p>Permissions: Read/Write | Users: All</p>
                     <p>Files: All files format except *.exe, *.com, *.vb, *.vbs</p>
                 </div>
                 <div style="margin-top:15px;">
                     <p class="bold-label">2. Folder: VB.Net</p>
-                    <p>Permissions: Read/Write</p>
-                    <p>Users: All</p>
-                    <p>Files: *.zip, *.rar</p>
+                    <p>Permissions: Read/Write | Users: All | Files: *.zip, *.rar</p>
                 </div>
                 <div style="margin-top:15px;">
                     <p class="bold-label">3. Folder: C_Programs</p>
-                    <p>Permissions: Read/Write</p>
-                    <p>Users: All</p>
-                    <p>Files: *.c, *.cpp</p>
+                    <p>Permissions: Read/Write | Users: All | Files: *.c, *.cpp</p>
                 </div>
                 <div style="margin-top:15px;">
                     <p class="bold-label">4. Folder: Surname_Section</p>
-                    <p>Permissions: Full Control</p>
-                    <p>Users: Domain User</p>
-                    <p>Files: *.c, *.cpp, *.pdf, *.rar, *.docx, *.ppt, *.dwg</p>
+                    <p>Permissions: Full Control | Users: Domain User | Files: *.c, *.cpp, *.pdf, *.rar, *.docx, *.ppt, *.dwg</p>
                 </div>
                 <div style="margin-top:15px;">
                     <p class="bold-label">5. Folder: PHOTO_Male & PHOTO_Female</p>
-                    <p>Permissions: Read/Write</p>
-                    <p>Users: Based on Users Gender</p>
-                    <p>Files: *.jpg, *.gif, *.png</p>
+                    <p>Permissions: Read/Write | Users: Based on Users Gender | Files: *.jpg, *.gif, *.png</p>
                 </div>
             `);
         }
 
-        /* --- CASE STUDY WRAPPERS --- */
+        /* --- CASE STUDY WRAPPERS (Text TOP, Vid BOTTOM) --- */
         function showCombinedCS1() { playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'Part 1: Domain Controller', 'Primary setup for the server environment.'); }
         function showCS2_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 2: Adding Users"; }
         function showCS3_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 3: DHCP Server"; }
