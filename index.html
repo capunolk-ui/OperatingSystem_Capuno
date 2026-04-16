@@ -112,7 +112,7 @@
             <li class="menu-item">
                 <a class="menu-link">Windows <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', 'Successful installation and configuration of Windows 95 within a virtual environment.')"><i class="fab fa-windows"></i> Windows 95</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95', 'Successful installation and configuration of Windows 95.')"><i class="fab fa-windows"></i> Windows 95</div>
                     <div onclick="playVideo('', 'Windows 98', 'Operating system introduced in 1998.')"><i class="fab fa-windows"></i> Windows 98</div>
                     <div onclick="playVideo('', 'Windows NT', 'Operating system for workstations and servers.')"><i class="fab fa-windows"></i> Windows NT</div>
                     <div onclick="playVideo('', 'Windows 2000', 'Enterprise-grade operating system.')"><i class="fab fa-windows"></i> Windows 2000</div>
@@ -121,10 +121,10 @@
                     <div onclick="playVideo('', 'Windows Server 2003', 'Server operating system produced by Microsoft.')"><i class="fas fa-server"></i> Windows Server 2003</div>
                     <div onclick="playVideo('', 'Windows Vista', 'Operating system focused on security and visual style.')"><i class="fab fa-windows"></i> Windows Vista</div>
                     <div onclick="playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', 'Complete installation of Windows Server 2008 R2.')"><i class="fas fa-server"></i> Windows Server 2008</div>
-                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation and configuration of Windows 7 as a client workstation.')"><i class="fab fa-windows"></i> Windows 7</div>
-                    <div onclick="playVideo('', 'Windows 8', 'Introduction of the tiled interface and touch support.')"><i class="fab fa-windows"></i> Windows 8</div>
+                    <div onclick="playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation and configuration of Windows 7.')"><i class="fab fa-windows"></i> Windows 7</div>
+                    <div onclick="playVideo('', 'Windows 8', 'Introduction of the tiled interface.')"><i class="fab fa-windows"></i> Windows 8</div>
                     <div onclick="playVideo('', 'Windows 10', 'The most popular modern Windows operating system.')"><i class="fab fa-windows"></i> Windows 10</div>
-                    <div onclick="playVideo('', 'Windows 11', 'The latest Windows OS with centered start menu.')"><i class="fab fa-windows"></i> Windows 11</div>
+                    <div onclick="playVideo('', 'Windows 11', 'The latest Windows OS.')"><i class="fab fa-windows"></i> Windows 11</div>
                 </div>
             </li>
 
@@ -179,114 +179,67 @@
             `;
         }
 
-        /* --- CASE STUDY FUNCTIONS --- */
+        /* --- UPDATED CASE STUDY FUNCTIONS --- */
 
         function showCombinedCS1() {
             playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 1: DOMAIN CONTROLLER', 
-            `This section covers the configuration of the Active Directory Domain Services role and the management of network users. 
+            `Configuration of the Active Directory Domain Services role and management of network users. 
             <br><br>
-            <strong>Active Directory:</strong> The foundational component for network security and administration. 
+            <strong>Adding Users:</strong> Demonstrating the bulk adding of users to streamline administrative tasks. 
             <br><br>
-            <strong>Adding Users:</strong> In Windows Server 2008, adding users is performed through the ADUC console. This video demonstrates the bulk adding of users to streamline administrative tasks. 
-            <br><br>
-            Access the code used for bulk adding users here: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
+            Access the code used here: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
         }
 
         function showCS2_DHCP() {
-            playVideo('https://www.youtube.com/embed/CUjtsNc3-oA', 'PART 2: DHCP SERVER', 
-            `A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network.`);
+            playVideo('https://www.youtube.com/embed/buwvfMCYZrk', 'PART 2: DHCP SERVER', 
+            `A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses and network configuration parameters to client devices.`);
         }
 
         function showCS3_FileSharing() {
-            playVideo('https://www.youtube.com/embed/97SWEZBB17Y', 'PART 3: FILE SHARING', 
-            `File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access.`);
+            playVideo('https://www.youtube.com/embed/xRTsGrQinik', 'PART 3: FILE SHARING', 
+            `Configuration of shared folders and NTFS permissions to allow users to store and access files across the network efficiently.`);
         }
 
         function showCS4_RAID() {
-            playVideo('https://www.youtube.com/embed/RUJFKDdjQ80', 'PART 4: RAID', 
-            `RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both.`);
+            playVideo('https://www.youtube.com/embed/XXjX_WqLi1o', 'PART 4: RAID', 
+            `Implementation of RAID (Redundant Array of Independent Disks) to improve storage performance and data redundancy.`);
         }
 
         function showCS5_WebServer() {
-            playVideo('https://www.youtube.com/embed/6VuNQgEzraw', 'PART 5: WEB SERVER', 
-            `Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a platform for hosting websites and web services.`);
+            playVideo('https://www.youtube.com/embed/GnK0fzOGLw4', 'PART 5: WEB SERVER', 
+            `Setup of Internet Information Services (IIS) 7.0 to host web applications and services on Windows Server 2008.`);
         }
 
-        /* --- LAB ACTIVITY FUNCTIONS --- */
+        /* --- LAB ACTIVITY FUNCTIONS (FOR REFERENCE) --- */
 
         function showActiveDirectory() {
             document.getElementById('videoWrapper').style.display = 'block';
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/ZXYlduKxtnM";
-            document.getElementById('pageContent').innerHTML = `
-                <h1 class="content-title">Active Directory: Creating Users</h1>
-                <p class="content-text">Active Directory - Adding Users</p>
-                <div class="instruction-box">
-                    <ul class="instruction-list">
-                        <li>Create User Accounts of all BSIT Students with common passwords.</li>
-                        <li>Group the students according to their section.</li>
-                        <li>Your account belongs to Administrators.</li>
-                    </ul>
-                </div>
-            `;
+            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">Active Directory: Creating Users</h1><p class="content-text">Lab session focused on user account management.</p>`;
         }
 
         function showDHCP() {
             document.getElementById('videoWrapper').style.display = 'block';
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/6Fls97KnV74";
-            document.getElementById('pageContent').innerHTML = `
-                <h1 class="content-title">DHCP Role and Joining Domain</h1>
-                <div class="instruction-box">
-                    <span class="instruction-title">Scopes:</span>
-                    <ul class="instruction-list">
-                        <li>Host requirement with IP block 10.0.0.0 /8 for males.</li>
-                        <li>Host requirement with IP block 172.16.0.0 /16 for females.</li>
-                        <li>Lease Time: 16 hours.</li>
-                    </ul>
-                </div>
-            `;
+            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">DHCP Role Lab</h1><p class="content-text">Lab session for DHCP scope configuration.</p>`;
         }
 
         function showWebServerLab() {
             document.getElementById('videoWrapper').style.display = 'block';
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/6VuNQgEzraw";
-            document.getElementById('pageContent').innerHTML = `
-                <h1 class="content-title">Application and Web Server</h1>
-                <div class="instruction-box">
-                    <ul class="instruction-list">
-                        <li>1. Add Application Server Role</li>
-                        <li>2. Add Web Server Role</li>
-                        <li>3. Create a simple asp.net web application.</li>
-                    </ul>
-                </div>
-            `;
+            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">Web Server Lab</h1><p class="content-text">Lab session for IIS role installation.</p>`;
         }
 
         function showRaidLab() {
             document.getElementById('videoWrapper').style.display = 'block';
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/_UjVK-te7_0";
-            document.getElementById('pageContent').innerHTML = `
-                <h1 class="content-title">RAID Installation</h1>
-                <div class="instruction-box">
-                    <span class="instruction-title">Instructions:</span>
-                    <ul class="instruction-list">
-                        <li>Stripped, Mirrored, Spanned, and RAID 5 volumes.</li>
-                    </ul>
-                </div>
-            `;
+            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">RAID Lab</h1><p class="content-text">Lab session for disk management and RAID levels.</p>`;
         }
 
         function showFileServerLab() {
             document.getElementById('videoWrapper').style.display = 'block';
             document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/eIZ1Zy3SE5g";
-            document.getElementById('pageContent').innerHTML = `
-                <h1 class="content-title">File Server Role</h1>
-                <div class="instruction-box">
-                    <span class="instruction-title">Instructions:</span>
-                    <ul class="instruction-list">
-                        <li>Create Public, VB.Net, C_Programs, and Profile specific folders with restrictions.</li>
-                    </ul>
-                </div>
-            `;
+            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">File Server Lab</h1><p class="content-text">Lab session for file services and folder permissions.</p>`;
         }
     </script>
 </body>
