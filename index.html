@@ -39,7 +39,6 @@
             margin-bottom: 30px;
         }
 
-        /* Home Grid Layout */
         .home-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -152,15 +151,13 @@
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="showCombinedCS1()"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
-                    <div onclick="showCS2_AddingUsers()"><i class="fas fa-users"></i> Part 2: Adding Users</div>
-                    <div onclick="showCS3_DHCP()"><i class="fas fa-database"></i> Part 3: DHCP Server</div>
-                    <div onclick="showCS4_FileSharing()"><i class="fas fa-file-alt"></i> Part 4: File Sharing</div>
-                    <div onclick="showCS5_RAID()"><i class="fas fa-save"></i> Part 5: RAID</div>
-                    <div onclick="playVideo('', 'Part 6: Remote Desktop', '')"><i class="fas fa-desktop"></i> Part 6: Remote Desktop</div>
-                    <div onclick="showCS7_WebServer()"><i class="fas fa-globe"></i> Part 7: Web Server</div>
-                    <div onclick="playGroupPolicy()"><i class="fas fa-user-shield"></i> Part 8: Group Policies</div>
-                    <div onclick="playVideo('', 'Part 9: Windows Deployment', '')"><i class="fas fa-copy"></i> Part 9: Windows Deployment</div>
+                    <div onclick="showCS1_AddingUsers()"><i class="fas fa-users"></i> Part 1: Adding Users</div>
+                    <div onclick="showCS2_DHCP()"><i class="fas fa-database"></i> Part 2: DHCP Server</div>
+                    <div onclick="showCS3_FileSharing()"><i class="fas fa-file-alt"></i> Part 3: File Sharing</div>
+                    <div onclick="showCS4_RAID()"><i class="fas fa-save"></i> Part 4: RAID</div>
+                    <div onclick="showCS5_WebServer()"><i class="fas fa-globe"></i> Part 5: Web Server</div>
+                    <div onclick="showCS6_GroupPolicy()"><i class="fas fa-user-shield"></i> Part 6: Group Policies</div>
+                    <div onclick="playVideo('', 'Part 7: Windows Deployment', '')"><i class="fas fa-copy"></i> Part 7: Windows Deployment</div>
                 </div>
             </li>
             
@@ -218,10 +215,9 @@
                 </div>
             `;
             playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", homeContent);
-            document.querySelector('.content-title').innerText = "OPERATING SYSTEM";
         }
 
-        /* --- CONTENT FUNCTIONS (RETAINED) --- */
+        /* --- CONTENT FUNCTIONS --- */
         function showActiveDirectory() {
             playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory: Creating Users", `
                 <p>Active Directory - Adding Users</p>
@@ -281,7 +277,7 @@
 
         function showRaidLab() {
             playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID Installation", `
-                <p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations.</p>
+                <p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both.</p>
                 <p class="bold-label" style="margin-top:20px;">Instructions:</p>
                 <ul class="instruction-list">
                     <li>Stripped Volume</li>
@@ -294,13 +290,12 @@
 
         function playGroupPolicy() {
             playVideo("https://www.youtube.com/embed/LOAWrQ_iBeA", "Group Policy Management", `
-                <p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs).</p>
+                <p>Group Policy Management allows administrators to manage and enforce settings for users and computers within an Active Directory domain.</p>
                 <p class="bold-label" style="margin-top:20px;">Instructions</p>
                 <ul class="instruction-list">
                     <li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li>
                     <li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove Help menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Add Logoff on the Start Menu: Enable</li>
+                    <li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li>
                     <li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li>
                     <li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li>
                 </ul>
@@ -316,12 +311,13 @@
             `);
         }
 
-        function showCombinedCS1() { playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'Part 1: Domain Controller', 'Primary setup for the server environment.'); }
-        function showCS2_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 2: Adding Users"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/Fbf34o2YjZI"; }
-        function showCS3_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 3: DHCP Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/buwvfMCYZrk"; }
-        function showCS4_FileSharing() { showFileServerLab(); document.querySelector('.content-title').innerText = "Part 4: File Sharing"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/xRTsGrQinik"; }
-        function showCS5_RAID() { showRaidLab(); document.querySelector('.content-title').innerText = "Part 5: RAID"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/XXjX_WqLi1o"; }
-        function showCS7_WebServer() { showWebServerLab(); document.querySelector('.content-title').innerText = "Part 7: Web Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/GnK0fzOGLw4"; }
+        /* --- UPDATED CASE STUDY FUNCTIONS --- */
+        function showCS1_AddingUsers() { showActiveDirectory(); document.querySelector('.content-title').innerText = "Part 1: Adding Users"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/Fbf34o2YjZI"; }
+        function showCS2_DHCP() { showDHCP(); document.querySelector('.content-title').innerText = "Part 2: DHCP Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/buwvfMCYZrk"; }
+        function showCS3_FileSharing() { showFileServerLab(); document.querySelector('.content-title').innerText = "Part 3: File Sharing"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/xRTsGrQinik"; }
+        function showCS4_RAID() { showRaidLab(); document.querySelector('.content-title').innerText = "Part 4: RAID"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/XXjX_WqLi1o"; }
+        function showCS5_WebServer() { showWebServerLab(); document.querySelector('.content-title').innerText = "Part 5: Web Server"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/GnK0fzOGLw4"; }
+        function showCS6_GroupPolicy() { playGroupPolicy(); document.querySelector('.content-title').innerText = "Part 6: Group Policies"; document.getElementById('mainPlayer').src = "https://www.youtube.com/embed/LOAWrQ_iBeA"; }
 
     </script>
 </body>
