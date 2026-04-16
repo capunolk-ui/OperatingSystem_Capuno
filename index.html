@@ -131,8 +131,7 @@
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="playVideo('', 'PART 1: DOMAIN CONTROLLER', 'Configuration of the Active Directory Domain Services role.')"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
-                    <div onclick="showCS2()"><i class="fas fa-users"></i> Part 2: Adding Users</div>
+                    <div onclick="showCombinedCS1()"><i class="fas fa-globe"></i> Part 1: Domain Controller</div>
                     <div onclick="showCS3()"><i class="fas fa-database"></i> Part 3: DHCP Server</div>
                     <div onclick="showCS4()"><i class="fas fa-file-alt"></i> Part 4: File Sharing</div>
                     <div onclick="showCS5()"><i class="fas fa-save"></i> Part 5: RAID</div>
@@ -181,9 +180,15 @@
             `;
         }
 
-        function showCS2() {
-            playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 2: ADDING USERS', 
-            `In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.<br><br>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
+        function showCombinedCS1() {
+            playVideo('https://www.youtube.com/embed/ixw2amZnk60', 'PART 1: DOMAIN CONTROLLER', 
+            `This section covers the configuration of the Active Directory Domain Services role and the management of network users. 
+            <br><br>
+            <strong>Active Directory:</strong> The foundational component for network security and administration. 
+            <br><br>
+            <strong>Adding Users:</strong> In Windows Server 2008, adding users is performed through the ADUC console. This video demonstrates the bulk adding of users to streamline administrative tasks. 
+            <br><br>
+            Access the code used for bulk adding users here: <a href="https://ggle.in/bulkusers" target="_blank" class="link-text">https://ggle.in/bulkusers</a>`);
         }
 
         function showCS3() {
