@@ -12,7 +12,8 @@
     
     <style>
         :root {
-            --bg-overlay: rgba(10, 15, 28, 0.75); 
+            /* Your provided technology background */
+            --bg-image: url('https://png.pngtree.com/thumb_back/fw800/background/20190221/ourmid/pngtree-blue-technology-background-circuit-board-background-technology-background-light-image_12411.jpg');
             --text-light: #f8fafc;
             --text-dark: #0f172a;
             --accent-blue: #3b82f6;   
@@ -26,31 +27,34 @@
             color: var(--text-light); font-family: 'Inter', sans-serif;
             min-height: 200vh; 
             overflow-x: hidden;
-            background: #0a0f1c;
+            background-image: var(--bg-image);
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
         }
 
-        .video-bg {
+        /* Fixed Header */
+        header {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .video-bg video {
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .bg-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: var(--bg-overlay);
+            /* Semi-transparent overlay to ensure readability while showing the circuit bg */
+            background: rgba(10, 15, 28, 0.4);
             z-index: 0;
         }
 
@@ -58,7 +62,7 @@
             position: relative; 
             max-width: 900px; 
             margin: 0 auto; 
-            padding: 20px; 
+            padding: 80px 20px 20px 20px; 
             z-index: 1; 
         }
 
@@ -70,7 +74,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
             backdrop-filter: blur(12px); 
             border: 1px solid rgba(255,255,255,0.3);
-            margin-top: 40px;
+            margin-top: 20px;
             z-index: 2;
             min-height: 40vh; 
             display: flex; 
@@ -148,11 +152,7 @@
 </head>
 <body onload="showHome()">
 
-    <div class="video-bg">
-        <video autoplay muted loop playsinline>
-            <source src="https://cdn.pixabay.com/video/2018/04/17/15814-266518788_large.mp4" type="video/mp4">
-        </video>
-    </div>
+    <header>FOR ACADEMIC PURPOSE ONLY | © 2026 Emmanuel C. Capuno BSIT-NS-2A</header>
     <div class="bg-overlay"></div>
 
     <div class="main-content">
@@ -227,7 +227,6 @@
             const arrowBox = document.getElementById('arrowBox');
             const player = document.getElementById('mainPlayer');
             
-            // Reset visibility for new page
             videoReveal.classList.remove('visible');
             
             if(url) {
@@ -240,7 +239,6 @@
                 player.src = '';
             }
 
-            // Scroll to top and re-check scroll logic
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'instant' });
                 checkScroll(); 
@@ -254,8 +252,7 @@
             const card = document.getElementById('pageCard');
             const cardRect = card.getBoundingClientRect();
             
-            // The video starts appearing once the bottom of the text card 
-            // is scrolled into the upper 40% of the screen.
+            // Trigger point: Video reveals once the bottom of the card passes 60% of viewport height
             const triggerPoint = window.innerHeight * 0.6;
 
             if (cardRect.bottom < triggerPoint) {
