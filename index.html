@@ -60,36 +60,35 @@
             z-index: 0;
         }
 
-        .main-content { position: relative; max-width: 900px; margin: 0 auto; padding: 20px; perspective: 1000px; z-index: 1; }
+        .main-content { position: relative; max-width: 900px; margin: 0 auto; padding: 20px; z-index: 1; }
 
         .page-card {
             background: var(--card-glass); border-radius: 24px; padding: 50px;
             color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
             backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);
-            position: sticky; top: 60px; z-index: 2;
-            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-            min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-start;
-            overflow-y: auto; 
+            position: relative; /* Changed from sticky to allow natural scroll for long text */
+            margin-top: 40px;
+            z-index: 2;
+            min-height: 60vh; 
+            display: flex; flex-direction: column; justify-content: flex-start;
         }
 
         .content-title { font-size: 2.2rem; font-weight: 800; color: #1e293b; margin-bottom: 20px; text-transform: uppercase; border-bottom: 3px solid var(--accent-blue); display: inline-block; padding-bottom: 5px; }
-        .content-text { line-height: 1.6; color: #334155; font-size: 1rem; }
+        .content-text { line-height: 1.6; color: #334155; font-size: 1rem; margin-bottom: 20px; }
         .content-text strong { color: #000; }
         .content-text a { color: var(--accent-blue); text-decoration: underline; font-weight: 600; }
         .content-text ul { padding-left: 20px; margin-bottom: 15px; }
         
-        .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); max-height: 200px; overflow-y: auto; }
+        .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); max-height: 300px; overflow-y: auto; }
 
         /* JUMPING ARROW STYLES */
         .scroll-indicator {
-            margin-top: auto;
-            padding-top: 20px;
+            margin-top: 30px;
             text-align: center;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: -10px;
         }
 
         .scroll-indicator i {
@@ -99,26 +98,28 @@
             opacity: 0.6;
         }
 
-        .scroll-indicator:hover i {
-            animation: jumpArrow 0.8s infinite;
+        /* Animation always active to signal more content */
+        .scroll-indicator i {
+            animation: jumpArrow 1.2s infinite;
         }
 
-        /* Staggered jumping effect */
-        .scroll-indicator:hover i:nth-child(1) { animation-delay: 0s; }
-        .scroll-indicator:hover i:nth-child(2) { animation-delay: 0.1s; }
-        .scroll-indicator:hover i:nth-child(3) { animation-delay: 0.2s; }
+        .scroll-indicator i:nth-child(1) { animation-delay: 0s; }
+        .scroll-indicator i:nth-child(2) { animation-delay: 0.15s; }
+        .scroll-indicator i:nth-child(3) { animation-delay: 0.3s; }
 
         @keyframes jumpArrow {
-            0%, 100% { transform: translateY(0); opacity: 0.6; }
-            50% { transform: translateY(15px); opacity: 1; color: #2563eb; }
+            0%, 100% { transform: translateY(0); opacity: 0.4; }
+            50% { transform: translateY(10px); opacity: 1; color: #2563eb; }
         }
 
         .video-reveal-container {
-            margin-top: 80px; opacity: 0; transform: scale(0.85) translateY(100px);
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); z-index: 1;
+            margin-top: 60px; 
+            margin-bottom: 100px;
+            opacity: 0; transform: translateY(50px);
+            transition: all 0.8s ease-out; z-index: 1;
         }
 
-        .video-reveal-container.visible { opacity: 1; transform: scale(1) translateY(0); }
+        .video-reveal-container.visible { opacity: 1; transform: translateY(0); }
 
         .video-wrapper {
             width: 100%; background: #000; border-radius: 20px; overflow: hidden;
@@ -236,23 +237,32 @@
                 arrowBox.style.display = 'none';
                 player.src = '';
             }
-            window.scrollTo(0, 0);
+            // Logic to check scroll visibility
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                checkScroll();
+            }, 100);
         }
 
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-            const card = document.getElementById('pageCard');
+        function checkScroll() {
             const videoReveal = document.getElementById('videoReveal');
-            card.style.opacity = Math.max(1 - (scrollPos / 600), 0);
-            card.style.transform = `scale(${Math.max(1 - (scrollPos / 3000), 0.8)}) translateY(-${scrollPos * 0.3}px)`;
-            if (scrollPos > 300) { videoReveal.classList.add('visible'); } 
-            else { videoReveal.classList.remove('visible'); }
-        });
+            const triggerBottom = window.innerHeight / 5 * 4;
+            const cardRect = document.getElementById('pageCard').getBoundingClientRect();
+            
+            // Video appears when user reaches the end of the white card
+            if (cardRect.bottom < triggerBottom) {
+                videoReveal.classList.add('visible');
+            } else {
+                videoReveal.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', checkScroll);
 
         function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", "<p>An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It acts as an intermediary between computer hardware and the user, providing a stable and consistent environment for applications to run.</p>"); }
         function showAbout() { playVideo("", "ABOUT", `<p><strong>EMMANUEL C. CAPUNO</strong><br>BSIT - NS-2A<br><br>This project is the culmination of our Operating Systems course (ITOS220-T) at the Technological University of the Philippines. It serves as a visual documentation of server management and system administration skills.</p>`); }
 
-        // --- LAB ACTIVITIES (REMAIN INTACT) ---
+        // --- LAB ACTIVITIES ---
         function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `<ul><li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li><li>Group the students according to their section.</li><li>Your account belongs to Administrators.</li></ul><p><strong>Show administrator account:</strong></p><ul><li>User cannot change password.</li><li>Password never expires.</li></ul><p><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>`); }
         function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `<p><strong>Add roles:</strong> DHCP Server</p><p><strong>Scopes:</strong></p><ul><li>number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.</li><li>number of female students per yr and section is the host requirement with the ip block 172.16.0.0/16</li><li>Server: Last Usable IP add</li><li>Exclude: First & Last (10 usable IP Addresses)</li><li>Lease Time: 16 hours</li><li>Router: Server IP Address</li><li>DNS: Server IP Address (8.8.8.8)</li></ul><p>1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)</p><p>2. Connect the two (2) client OS to your Windows Server Domain USING DHCP.</p><ul><li>WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li><li>WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li></ul><p>3. LOGIN 5 student accounts per section per OS</p>`); }
         function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", `<p>1. Add Application Server Role</p><p>2. Add Web Server Role</p><p>3. Add features:</p><ul><li>asp.net</li><li>windows authentication</li><li>dynamic content compression</li><li>IIS 6 Management Compatibility</li></ul><p>4. After installation, create a simple asp.net web application.</p><p>5. The web page must be accessible to client browser.</p><p>6. Use the domain name in accessing the web page, not the IP address of the server.</p>`); }
@@ -260,7 +270,7 @@
         function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `<p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.</p><p><strong>Instructions</strong></p><p>Perform the following rules in Group Policy:</p><ul><li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li><li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove Help menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove Run menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Add Logoff on the Start Menu: Enable</li><li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li><li>Internet Explorer Browser Title: Title Bar Text:</li><li>Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)</li><li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li><li>Prevent access to registry editing tools: User(Enable), Admin(Disable)</li><li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li></ul>`); }
         function showFileServerLab() { playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", `<p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.</p><p><strong>Instructions</strong></p><p>Add roles: File Services, and perform the following:</p><p>1. Create a "Public" folder<br>Permissions: Read/Write<br>Users: All<br>Files: All files format except *.exe, *.com, *.vb, *.vbs</p><p>2. Folder: VB.Net<br>Permissions: Read/Write<br>Users: All<br>Files: *.zip, *.rar</p><p>3. Folder: C_Programs<br>Permissions: Read/Write<br>Users: All<br>Files: *.c, *.cpp</p><p>4. Folder: Surname_Section<br>Permissions: Full Control<br>Users: Domain User<br>Files: *.c, *.cpp, *.pdf, *.rar,*.docx, *.ppt,*.dwg</p><p>5. Folder: PHOTO_Male & PHOTO_FEMALE<br>Permissions: Read/Write<br>Users: Based on Users Gender<br>Files: *.jpg, *.gif, *.png</p>`); }
 
-        // --- INSTALLATION WALKTHROUGHS (REMAIN INTACT) ---
+        // --- INSTALLATION WALKTHROUGHS ---
         function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0">WinWorld</a><br>ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0">WinWorld</a><br><br><strong>Note:</strong> If an error occurs after installation regarding CPU speed, download FIX95CPU_V3_FINAL.ZIP.<br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233`); }
         function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT', 'Complete installation walkthrough for Windows NT 4.0 Workstation.'); }
         function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98', 'Standard installation procedure for Windows 98 Second Edition.'); }
@@ -273,7 +283,7 @@
         function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', 'Modern OS deployment for Windows 10.'); }
         function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', 'Installing Windows 11 bypassing TPM requirements where applicable.'); }
 
-        // --- UPDATED CASE STUDY CAPTIONS ---
+        // --- CASE STUDY ---
         function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "PART 1: Adding Users", `<p>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p><p>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank">https://ggle.in/bulkusers</a></p>`); }
         function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "PART 2: DHCP Server", `<p>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); }
         function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "PART 3: File Sharing", `<p>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); }
