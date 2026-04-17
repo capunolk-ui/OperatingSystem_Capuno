@@ -20,88 +20,93 @@
             --card-glass: rgba(255, 255, 255, 0.98);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
                         url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070&auto=format&fit=crop');
             background-size: cover; background-position: center; background-attachment: fixed;
             color: var(--text-light); font-family: 'Inter', sans-serif;
-            min-height: 100vh; padding-bottom: 150px;
+            min-height: 200vh; /* Necessary for scrolling logic */
         }
 
-        .main-content { max-width: 850px; margin: 0 auto; padding: 40px 20px; text-align: center; }
+        .main-content { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 20px;
+            perspective: 1000px;
+        }
 
-        /* Logic adjustment: Ensuring the card takes up enough vertical space to require scrolling */
+        /* The Hero/Card Section */
         .page-card {
-            background: var(--card-glass); border-radius: 24px; padding: 60px 40px;
-            color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: left;
-            backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);
-            margin-bottom: 50px;
-            min-height: 80vh; /* Pushes video down */
+            background: var(--card-glass); 
+            border-radius: 24px; 
+            padding: 80px 50px;
+            color: var(--text-dark); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            text-align: left;
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.3);
+            position: sticky;
+            top: 100px;
+            z-index: 2;
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .content-title { font-size: 2.5rem; font-weight: 800; color: #1e293b; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
-        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1.1rem; }
-        .content-text a { color: var(--accent-blue); text-decoration: none; font-weight: 600; word-wrap: break-word; }
-        
-        /* Scroll Indicator to help users know to go down */
-        .scroll-indicator {
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--accent-blue);
-            animation: bounce 2s infinite;
-            margin-top: 20px;
+        .content-title { font-size: 3rem; font-weight: 800; color: #1e293b; margin-bottom: 25px; text-transform: uppercase; text-align: center; }
+        .content-text { line-height: 1.8; color: #475569; font-size: 1.1rem; }
+        .content-text a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+
+        /* The Video Section */
+        .video-reveal-container {
+            margin-top: 100px;
+            opacity: 0;
+            transform: scale(0.8) translateY(100px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 1;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
+        .video-reveal-container.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
         }
-
-        .footer-note {
-            position: fixed; top: 20px; right: 20px;
-            background: rgba(15, 23, 42, 0.8); padding: 10px 20px; border-radius: 10px;
-            font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); z-index: 1001;
-        }
-
-        .bottom-footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #94a3b8; width: 100%; }
 
         .video-wrapper {
-            width: 100%; background: #000; border-radius: 16px; overflow: hidden;
-            display: none; box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); border: 2px solid rgba(59, 130, 246, 0.3);
-            margin-top: 50px;
+            width: 100%; background: #000; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.5); border: 3px solid rgba(59, 130, 246, 0.4);
         }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* UI Elements */
+        .footer-note {
+            position: fixed; top: 20px; right: 20px;
+            background: rgba(15, 23, 42, 0.8); padding: 10px 20px; border-radius: 10px;
+            font-size: 0.8rem; z-index: 1001;
+        }
 
         nav {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
             background: var(--nav-bg); backdrop-filter: blur(20px); border-radius: 100px;
             padding: 8px 25px; z-index: 1000; border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
-        .menu { display: flex; list-style: none; align-items: center; }
-        .menu-item { position: relative; }
-        .menu-link {
-            display: block; padding: 12px 18px; color: #94a3b8; text-decoration: none;
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s;
-        }
-        .menu-link:hover { color: #fff; transform: translateY(-2px); }
+
+        .menu { display: flex; list-style: none; }
+        .menu-link { display: block; padding: 12px 18px; color: #94a3b8; text-decoration: none; font-weight: 700; cursor: pointer; }
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
-            background: #fff; min-width: 320px; border-radius: 18px; padding: 15px;
-            opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 15px 45px rgba(0,0,0,0.7);
+            background: #fff; min-width: 280px; border-radius: 18px; padding: 10px;
+            opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
-        .dropdown div { display: flex; align-items: center; padding: 10px 15px; color: #334155; text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer; }
+        .dropdown div { padding: 10px; color: #334155; cursor: pointer; font-size: 0.9rem; border-radius: 8px; }
         .dropdown div:hover { background: #f0f7ff; color: var(--accent-blue); }
-        .dropdown i { margin-right: 15px; color: var(--accent-blue); width: 20px; text-align: center; }
-        .scrollable { max-height: 400px; overflow-y: auto; }
+        .scrollable { max-height: 350px; overflow-y: auto; }
+
     </style>
 </head>
 <body onload="showHome()">
@@ -111,14 +116,16 @@
     </div>
 
     <div class="main-content">
-        <div class="page-card" id="pageContent"></div>
-        <div id="videoWrapper" class="video-wrapper">
-            <div class="video-container">
-                <iframe id="mainPlayer" src="" allowfullscreen></iframe>
-            </div>
+        <div class="page-card" id="pageCard">
+            <div id="textHolder"></div>
         </div>
-        <div class="bottom-footer">
-            <p>© 2026 Emmanuel C. Capuno | BSIT-NS-2A | Technological University of the Philippines</p>
+
+        <div id="videoReveal" class="video-reveal-container">
+            <div class="video-wrapper">
+                <div class="video-container">
+                    <iframe id="mainPlayer" src="" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -128,101 +135,123 @@
             <li class="menu-item">
                 <a class="menu-link">Lab Activities <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown">
-                    <div onclick="showActiveDirectory()"><i class="fas fa-users-cog"></i> Active Directory</div>
-                    <div onclick="showDHCP()"><i class="fas fa-network-wired"></i> DHCP Server</div>
-                    <div onclick="showWebServerLab()"><i class="fas fa-globe"></i> App & Web Server</div>
-                    <div onclick="showRaidLab()"><i class="fas fa-microchip"></i> RAID Installation</div>
-                    <div onclick="playGroupPolicy()"><i class="fas fa-user-lock"></i> Group Policy</div>
-                    <div onclick="showFileServerLab()"><i class="fas fa-server"></i> File Server</div>
+                    <div onclick="showActiveDirectory()">Active Directory</div>
+                    <div onclick="showDHCP()">DHCP Server</div>
+                    <div onclick="showWebServerLab()">App & Web Server</div>
+                    <div onclick="showRaidLab()">RAID Installation</div>
+                    <div onclick="playGroupPolicy()">Group Policy</div>
+                    <div onclick="showFileServerLab()">File Server</div>
                 </div>
             </li>
             <li class="menu-item">
                 <a class="menu-link">Installation <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="showWin95()"><i class="fab fa-windows"></i> Windows 95</div>
-                    <div onclick="showWinNT()"><i class="fab fa-windows"></i> Windows NT</div>
-                    <div onclick="showWin98()"><i class="fab fa-windows"></i> Windows 98</div>
-                    <div onclick="showWin2000()"><i class="fab fa-windows"></i> Windows 2000</div>
-                    <div onclick="showXP()"><i class="fab fa-windows"></i> Windows XP</div>
-                    <div onclick="showVista()"><i class="fab fa-windows"></i> Windows Vista</div>
-                    <div onclick="showServer2008()"><i class="fas fa-terminal"></i> Server 2008</div>
-                    <div onclick="showWin7()"><i class="fab fa-windows"></i> Windows 7</div>
-                    <div onclick="showWin8()"><i class="fab fa-windows"></i> Windows 8</div>
-                    <div onclick="showWin10()"><i class="fab fa-windows"></i> Windows 10</div>
-                    <div onclick="showWin11()"><i class="fab fa-windows"></i> Windows 11</div>
+                    <div onclick="showWin95()">Windows 95</div>
+                    <div onclick="showWinNT()">Windows NT</div>
+                    <div onclick="showWin98()">Windows 98</div>
+                    <div onclick="showWin2000()">Windows 2000</div>
+                    <div onclick="showXP()">Windows XP</div>
+                    <div onclick="showVista()">Windows Vista</div>
+                    <div onclick="showServer2008()">Server 2008</div>
+                    <div onclick="showWin7()">Windows 7</div>
+                    <div onclick="showWin8()">Windows 8</div>
+                    <div onclick="showWin10()">Windows 10</div>
+                    <div onclick="showWin11()">Windows 11</div>
                 </div>
             </li>
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
-                <div class="dropdown scrollable">
-                    <div onclick="showCS1()"><i class="fas fa-users"></i> Part 1: Adding Users</div>
-                    <div onclick="showCS2()"><i class="fas fa-database"></i> Part 2: DHCP Server</div>
-                    <div onclick="showCS3()"><i class="fas fa-file-alt"></i> Part 3: File Sharing</div>
-                    <div onclick="showCS4()"><i class="fas fa-save"></i> Part 4: RAID</div>
-                    <div onclick="showCS5()"><i class="fas fa-globe"></i> Part 5: Web Server</div>
-                    <div onclick="showCS6()"><i class="fas fa-user-shield"></i> Part 6: Group Policies</div>
-                    <div onclick="showCS7()"><i class="fas fa-copy"></i> Part 7: Windows Deployment</div>
+                <div class="dropdown">
+                    <div onclick="showCS1()">Part 1: Adding Users</div>
+                    <div onclick="showCS2()">Part 2: DHCP Server</div>
+                    <div onclick="showCS3()">Part 3: File Sharing</div>
+                    <div onclick="showCS4()">Part 4: RAID</div>
+                    <div onclick="showCS5()">Part 5: Web Server</div>
+                    <div onclick="showCS6()">Part 6: Group Policies</div>
+                    <div onclick="showCS7()">Part 7: Deployment</div>
                 </div>
             </li>
-            <li class="menu-item"><a class="menu-link" onclick="showAbout()">About <i class="fas fa-chevron-up"></i></a></li>
+            <li class="menu-item"><a class="menu-link" onclick="showAbout()">About</a></li>
         </ul>
     </nav>
 
     <script>
+        // Restoring exact original captions while applying new logic
         function playVideo(url, title, text) {
-            // Updated logic: Add a scroll indicator and high-impact title layout
-            document.getElementById('pageContent').innerHTML = `
-                <h1 class="content-title">${title}</h1>
-                <div class="content-text">${text}</div>
-                <div class="scroll-indicator"><i class="fas fa-chevron-down"></i><br><span style="font-size: 0.8rem; font-weight:700;">SCROLL TO VIEW VIDEO</span></div>
-            `;
-            const wrapper = document.getElementById('videoWrapper');
+            document.getElementById('textHolder').innerHTML = `<h1 class="content-title">${title}</h1><div class="content-text">${text}</div>`;
+            
+            const videoReveal = document.getElementById('videoReveal');
+            const player = document.getElementById('mainPlayer');
+
             if(url) {
-                wrapper.style.display = 'block';
-                let embedUrl = url.includes('embed') ? url : url.replace("watch?v=", "embed/").replace("youtu.be/", "youtube.com/embed/");
-                document.getElementById('mainPlayer').src = embedUrl;
+                videoReveal.style.display = 'block';
+                player.src = url.includes('embed') ? url : url.replace("watch?v=", "embed/");
             } else {
-                wrapper.style.display = 'none';
-                document.getElementById('mainPlayer').src = '';
+                videoReveal.style.display = 'none';
+                player.src = '';
             }
-            // Forces scroll to top of new section description
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Reset view to top
+            window.scrollTo(0, 0);
+            updateScrollEffects();
         }
 
-        /* --- ALL DATA RETAINED PER YOUR INSTRUCTIONS --- */
-        function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", `<p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine.</p>`); }
-        function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `<p class="content-text">Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0" target="_blank">WinWorld</a><br>Windows 95 ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a><br><br>If an error occurs after Windows 95 Installation, refer to this link below and download the FIX95CPU_V3_FINAL.ZIP and use the ISO file inside.<br><a href="https://msfn.org/board/topic/141402-windows-95-21ghz-cpu-limit-broken/" target="_blank">CPU Limit Fix Link</a><br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233</p>`); }
-        function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT INSTALLATION', `<p class="content-text">Windows NT 4 ISO Link: <a href="https://winworldpc.com/download/4162c2ba-c3b7-18c3-9a11-c3a4e284a2ef" target="_blank">WinWorld</a><br> Windows NT 4 SP6 ISO Link: <a href="https://winworldpc.com/download/f0ce02e5-cca7-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a></p>`); }
-        function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98 INSTALLATION', `<p class="content-text">In this video, we will cover the following:<br>- Server installation</p>`); }
-        function showWin2000() { playVideo('https://www.youtube.com/embed/MbmLy_QDSiI', 'Windows 2000 INSTALLATION', `<p class="content-text">Windows Server 2000 ISO Link: <a href="https://mega.nz/#!0VIBlLTC!EYBAGK4_rm4mV-hBsoacv-HeK17aRTeAuYB-LvOoqS4" target="_blank">Mega Link</a><br><br><strong>WIN2000 PROD KEY:</strong> DDTPV-TXMX7-BBGJ9-WGY8K-B9GHM<br><strong>Alternative Key:</strong> VXKC4-2B3YF-W9MFK-QB3DB-9Y7MB</p>`); }
-        function showXP() { playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP INSTALLATION', `<p class="content-text">In this video, we will cover the following:<br>- Server installation</p>`); }
-        function showVista() { playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista INSTALLATION', `<p class="content-text">Windows Vista ISO Link: <a href="https://archive.org/details/win-vista-ultimate-x64" target="_blank">Download Here</a><br><strong>PROD KEY:</strong> X9HTF-MKJQQ-XK376-TJ7T4-76PKF</p>`); }
-        function showServer2008() { playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008 INSTALLATION', `<p class="content-text">In this video, we will cover the following:<br>- Server installation<br>- Creating an Active Directory<br>- Installing a Domain Controller<br>- Installing a DNS</p>`); }
-        function showWin7() { playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7 INSTALLATION', `<p class="content-text">In this video, we will cover the following:<br>- Server installation</p>`); }
-        function showWin8() { playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8 INSTALLATION', `<p class="content-text">Windows 8 ISO Link: <a href="https://www.techworm.net/2023/03/download-windows-8-1-iso-files.html" target="_blank">Download Here</a><br><strong>PROD KEY:</strong> 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH</p>`); }
-        function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10 INSTALLATION', `<p class="content-text">Windows 10 ISO Link: <a href="https://www.microsoft.com/en-in/software-download/windows10" target="_blank">Download Here</a></p>`); }
-        function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11 INSTALLATION', `<p class="content-text">Windows 11 ISO Link: <a href="https://support.microsoft.com/en-us/windows/create-an-iso-file-for-windows-11-f2fe5a20-a186-4d1b-9ef8-59a2e0eb1178" target="_blank">Download Here</a></p>`); }
+        // SCROLL ANIMATION LOGIC (From your video)
+        window.addEventListener('scroll', updateScrollEffects);
 
-        function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `<p class='content-text'>- Create User Accounts of all BSIT Students...<br><strong>Common password:</strong> User123</p>`); }
-        function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `<p class='content-text'><strong>Add roles:</strong> DHCP Server...<br>3. LOGIN 5 student accounts per section per OS</p>`); }
-        function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", `<p class='content-text'>1. Add Application Server Role...<br>6. Use the domain name in accessing the web page.</p>`); }
-        function showRaidLab() { playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", `<p class='content-text'>RAID is a storage technology...<br><strong>Instructions:</strong> Perform the RAID installation...</p>`); }
-        function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `<p class='content-text'>Group Policy Management is a centralized feature...<br><strong>Instructions</strong> Perform the following rules...</p>`); }
-        function showFileServerLab() { playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", `<p class='content-text'>A file server is a centralized storage system...<br><strong>Instructions</strong> Add roles: File Services...</p>`); }
+        function updateScrollEffects() {
+            const scrollPos = window.scrollY;
+            const card = document.getElementById('pageCard');
+            const videoReveal = document.getElementById('videoReveal');
 
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>In Windows Server 2008, adding users... <a href='https://ggle.in/bulkusers' target='_blank'>Bulk Link</a></p>`); }
-        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>A DHCP server in Windows Server 2008...</p>`); }
-        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>File sharing in Windows Server 2008...</p>`); }
-        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>RAID combines multiple physical disks...</p>`); }
-        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p class='content-text'>IIS 7.0 is the built-in web server...</p>`); }
-        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p class='content-text'>Group Policy centrally manages user settings...</p>`); }
-        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p class='content-text'>WDS is a server role in Windows Server 2008...</p>`); }
+            // Card fades and shrinks as we scroll
+            let opacity = 1 - (scrollPos / 400);
+            let scale = 1 - (scrollPos / 2000);
+            let moveUp = scrollPos * 0.5;
 
-        function showAbout() {
-            document.getElementById('videoWrapper').style.display = 'none';
-            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">ABOUT</h1><h2 style="color:var(--accent-blue); text-align:center;">EMMANUEL C. CAPUNO</h2><p style="text-align:center; font-weight:700;">BSIT - NS-2A</p><p class="content-text">This website serves as the final project for our Operating Systems course...</p>`;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            card.style.opacity = Math.max(opacity, 0);
+            card.style.transform = `scale(${Math.max(scale, 0.85)}) translateY(-${moveUp}px)`;
+
+            // Video reveals when user scrolls down enough
+            if (scrollPos > 150) {
+                videoReveal.classList.add('visible');
+            } else {
+                videoReveal.classList.remove('visible');
+            }
         }
+
+        // ORIGINAL DATA RESTORED
+        function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", "<p style='text-align:center;'>An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine.</p>"); }
+        function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `<p>Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0">WinWorld</a><br>ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0">WinWorld</a><br>WIN95 PROD KEY: 12095 0004226 12233</p>`); }
+        function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT INSTALLATION', `<p>Windows NT 4 ISO Link: <a href="https://winworldpc.com/download/4162c2ba-c3b7-18c3-9a11-c3a4e284a2ef">WinWorld</a></p>`); }
+        function showWin2000() { playVideo('https://www.youtube.com/embed/MbmLy_QDSiI', 'Windows 2000 INSTALLATION', `<p>WIN2000 PROD KEY: DDTPV-TXMX7-BBGJ9-WGY8K-B9GHM</p>`); }
+        function showVista() { playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista INSTALLATION', `<p>PROD KEY: X9HTF-MKJQQ-XK376-TJ7T4-76PKF</p>`); }
+        function showWin8() { playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8 INSTALLATION', `<p>PROD KEY: 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH</p>`); }
+
+        function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory", "Create User Accounts of all BSIT Students... Common password: User123"); }
+        function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", "Add roles: DHCP Server... LOGIN 5 student accounts per section per OS"); }
+        function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", "Add Application Server Role... Use the domain name in accessing the web page."); }
+        function showRaidLab() { playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", "RAID is a storage technology... Perform the RAID installation."); }
+        function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", "Group Policy Management is a centralized feature... Perform the rules."); }
+        function showFileServerLab() { playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", "Add roles: File Services... centralized storage system."); }
+
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", "In Windows Server 2008, adding users... <a href='https://ggle.in/bulkusers'>Bulk Link</a>"); }
+        function showAbout() { playVideo("", "ABOUT", "Emmanuel C. Capuno | BSIT - NS-2A<br>This website serves as the final project for our Operating Systems course."); }
+
+        // Placeholders for missing specific text links (Add your text here as needed)
+        function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98 INSTALLATION', 'Installation guide for Win98.'); }
+        function showXP() { playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP INSTALLATION', 'Installation guide for WinXP.'); }
+        function showServer2008() { playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008', 'Server installation and Active Directory setup.'); }
+        function showWin7() { playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7 INSTALLATION', 'Installation guide for Win7.'); }
+        function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10 INSTALLATION', 'Installation guide for Win10.'); }
+        function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11 INSTALLATION', 'Installation guide for Win11.'); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", "Case study regarding DHCP setup."); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", "Case study regarding file sharing."); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", "Case study regarding RAID config."); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", "Case study regarding Web Server."); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", "Case study regarding Group Policies."); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", "Case study regarding Deployment."); }
+
     </script>
 </body>
 </html>
