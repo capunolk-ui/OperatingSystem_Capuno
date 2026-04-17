@@ -205,13 +205,15 @@
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
-                    <div onclick="showCS1()">Part 1: Adding Users</div>
-                    <div onclick="showCS2()">Part 2: DHCP Server</div>
-                    <div onclick="showCS3()">Part 3: File Sharing</div>
-                    <div onclick="showCS4()">Part 4: RAID</div>
-                    <div onclick="showCS5()">Part 5: Web Server</div>
-                    <div onclick="showCS6()">Part 6: Group Policies</div>
-                    <div onclick="showCS7()">Part 7: Deployment</div>
+                    <div onclick="showCSDC()">Part 1: Domain Controller</div>
+                    <div onclick="showCS1()">Part 2: Adding Users</div>
+                    <div onclick="showCS2()">Part 3: DHCP Server</div>
+                    <div onclick="showCS3()">Part 4: File Sharing</div>
+                    <div onclick="showCS4()">Part 5: RAID</div>
+                    <div onclick="showCS_Remote()">Part 6: Remote Desktop</div>
+                    <div onclick="showCS5()">Part 7: Web Server</div>
+                    <div onclick="showCS6()">Part 8: Group Policies</div>
+                    <div onclick="showCS7()">Part 9: Deployment</div>
                 </div>
             </li>
             <li class="menu-item"><a class="menu-link" onclick="showAbout()">About</a></li>
@@ -284,13 +286,15 @@
         function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', 'Modern OS deployment for Windows 10.'); }
         function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', 'Installing Windows 11 bypassing TPM requirements where applicable.'); }
 
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "PART 1: Adding Users", `<p>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p><p>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank">https://ggle.in/bulkusers</a></p>`); }
-        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "PART 2: DHCP Server", `<p>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); }
-        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "PART 3: File Sharing", `<p>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); }
-        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "PART 4: RAID", `<p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`); }
-        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "PART 5: Web Server", `<p>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`); }
-        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "PART 6: Group Policy", `<p>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`); }
-        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "PART 7: Deployment", `<p>Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`); }
+        function showCSDC() { playVideo("https://www.youtube.com/embed/LA4MF2ljlXc", "PART 1: Domain Controller", `<p>Domain Name: lab.local</p>`); }
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "PART 2: Adding Users", `<p>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p><p>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank">https://ggle.in/bulkusers</a></p>`); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "PART 3: DHCP Server", `<p>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "PART 4: File Sharing", `<p>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "PART 5: RAID", `<p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`); }
+        function showCS_Remote() { playVideo("", "PART 6: Remote Desktop", `<p>Remote Desktop configuration and management.</p>`); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "PART 7: Web Server", `<p>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "PART 8: Group Policy", `<p>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "PART 9: Deployment", `<p>Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`); }
     </script>
 </body>
 </html>
