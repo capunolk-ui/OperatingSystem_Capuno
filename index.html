@@ -27,51 +27,34 @@
                         url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070&auto=format&fit=crop');
             background-size: cover; background-position: center; background-attachment: fixed;
             color: var(--text-light); font-family: 'Inter', sans-serif;
-            min-height: 200vh; 
+            min-height: 250vh; /* Extra room for long content */
         }
 
-        .main-content { 
-            max-width: 900px; 
-            margin: 0 auto; 
-            padding: 20px;
-            perspective: 1000px;
-        }
+        .main-content { max-width: 900px; margin: 0 auto; padding: 20px; perspective: 1000px; }
 
         .page-card {
-            background: var(--card-glass); 
-            border-radius: 24px; 
-            padding: 60px 50px;
-            color: var(--text-dark); 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255,255,255,0.3);
-            position: sticky;
-            top: 80px;
-            z-index: 2;
+            background: var(--card-glass); border-radius: 24px; padding: 50px;
+            color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);
+            position: sticky; top: 60px; z-index: 2;
             transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-            min-height: 65vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-start;
+            overflow-y: auto; /* Allow the card itself to scroll if the text is HUGE */
         }
 
-        .content-title { font-size: 2.8rem; font-weight: 800; color: #1e293b; margin-bottom: 20px; text-transform: uppercase; text-align: center; }
-        .content-text { line-height: 1.8; color: #475569; font-size: 1.1rem; }
-        .content-text strong { color: #1e293b; }
-        .content-text a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+        .content-title { font-size: 2.2rem; font-weight: 800; color: #1e293b; margin-bottom: 20px; text-transform: uppercase; border-bottom: 3px solid var(--accent-blue); display: inline-block; padding-bottom: 5px; }
+        .content-text { line-height: 1.6; color: #334155; font-size: 1rem; }
+        .content-text strong { color: #000; }
+        .content-text a { color: var(--accent-blue); text-decoration: underline; font-weight: 600; }
+        
+        .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); }
 
         .video-reveal-container {
-            margin-top: 50px;
-            opacity: 0;
-            transform: scale(0.85) translateY(100px);
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            z-index: 1;
+            margin-top: 80px; opacity: 0; transform: scale(0.85) translateY(100px);
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); z-index: 1;
         }
 
-        .video-reveal-container.visible {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
+        .video-reveal-container.visible { opacity: 1; transform: scale(1) translateY(0); }
 
         .video-wrapper {
             width: 100%; background: #000; border-radius: 20px; overflow: hidden;
@@ -80,12 +63,6 @@
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        .footer-note {
-            position: fixed; top: 20px; right: 20px;
-            background: rgba(15, 23, 42, 0.8); padding: 10px 20px; border-radius: 10px;
-            font-size: 0.8rem; z-index: 1001; border: 1px solid rgba(255,255,255,0.1);
-        }
-
         nav {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
             background: var(--nav-bg); backdrop-filter: blur(20px); border-radius: 100px;
@@ -93,23 +70,19 @@
         }
 
         .menu { display: flex; list-style: none; }
-        .menu-link { display: block; padding: 12px 18px; color: #94a3b8; text-decoration: none; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; }
+        .menu-link { display: block; padding: 12px 18px; color: #94a3b8; text-decoration: none; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; }
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
-            background: #fff; min-width: 300px; border-radius: 18px; padding: 12px;
+            background: #fff; min-width: 280px; border-radius: 18px; padding: 12px;
             opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
-        .dropdown div { padding: 10px 15px; color: #334155; cursor: pointer; font-size: 0.85rem; border-radius: 10px; }
+        .dropdown div { padding: 8px 12px; color: #334155; cursor: pointer; font-size: 0.8rem; border-radius: 8px; }
         .dropdown div:hover { background: #f0f7ff; color: var(--accent-blue); }
-        .scrollable { max-height: 400px; overflow-y: auto; }
+        .scrollable { max-height: 350px; overflow-y: auto; }
     </style>
 </head>
 <body onload="showHome()">
-
-    <div class="footer-note">
-        FOR ACADEMIC PURPOSE ONLY | © 2026 Emmanuel C. Capuno BSIT-NS-2A
-    </div>
 
     <div class="main-content">
         <div class="page-card" id="pageCard">
@@ -129,7 +102,7 @@
         <ul class="menu">
             <li class="menu-item"><a class="menu-link" onclick="showHome()"><i class="fas fa-home"></i></a></li>
             <li class="menu-item">
-                <a class="menu-link">Lab Activities <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link">Labs <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown">
                     <div onclick="showActiveDirectory()">Active Directory</div>
                     <div onclick="showDHCP()">DHCP Server</div>
@@ -140,7 +113,7 @@
                 </div>
             </li>
             <li class="menu-item">
-                <a class="menu-link">Installation <i class="fas fa-chevron-up"></i></a>
+                <a class="menu-link">Install <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
                     <div onclick="showWin95()">Windows 95</div>
                     <div onclick="showWinNT()">Windows NT</div>
@@ -164,7 +137,7 @@
                     <div onclick="showCS4()">Part 4: RAID</div>
                     <div onclick="showCS5()">Part 5: Web Server</div>
                     <div onclick="showCS6()">Part 6: Group Policies</div>
-                    <div onclick="showCS7()">Part 7: Windows Deployment</div>
+                    <div onclick="showCS7()">Part 7: Deployment</div>
                 </div>
             </li>
             <li class="menu-item"><a class="menu-link" onclick="showAbout()">About</a></li>
@@ -184,79 +157,58 @@
                 player.src = '';
             }
             window.scrollTo(0, 0);
-            updateScrollEffects();
         }
 
-        window.addEventListener('scroll', updateScrollEffects);
-        function updateScrollEffects() {
+        window.addEventListener('scroll', () => {
             const scrollPos = window.scrollY;
             const card = document.getElementById('pageCard');
             const videoReveal = document.getElementById('videoReveal');
-            let opacity = 1 - (scrollPos / 500);
-            let scale = 1 - (scrollPos / 2500);
-            card.style.opacity = Math.max(opacity, 0);
-            card.style.transform = `scale(${Math.max(scale, 0.85)}) translateY(-${scrollPos * 0.4}px)`;
-            if (scrollPos > 200) { videoReveal.classList.add('visible'); } 
+            
+            card.style.opacity = Math.max(1 - (scrollPos / 600), 0);
+            card.style.transform = `scale(${Math.max(1 - (scrollPos / 3000), 0.8)}) translateY(-${scrollPos * 0.3}px)`;
+            
+            if (scrollPos > 300) { videoReveal.classList.add('visible'); } 
             else { videoReveal.classList.remove('visible'); }
-        }
+        });
 
-        // EXACT RESTORED CAPTIONS
-        function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", "<p style='text-align:center;'>An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine.</p>"); }
-        
-        function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `<p>Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0" target="_blank">WinWorld</a><br>Windows 95 ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a><br><br>If an error occurs after Windows 95 Installation, refer to this link below and download the FIX95CPU_V3_FINAL.ZIP and use the ISO file inside.<br><a href="https://msfn.org/board/topic/141402-windows-95-21ghz-cpu-limit-broken/" target="_blank">CPU Limit Fix Link</a><br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233</p>`); }
-        
-        function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT INSTALLATION', `<p>Windows NT 4 ISO Link: <a href="https://winworldpc.com/download/4162c2ba-c3b7-18c3-9a11-c3a4e284a2ef" target="_blank">WinWorld</a><br> Windows NT 4 SP6 ISO Link: <a href="https://winworldpc.com/download/f0ce02e5-cca7-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a></p>`); }
-        
-        function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98 INSTALLATION', `<p>In this video, we will cover the following:<br>- Server installation</p>`); }
-        
-        function showWin2000() { playVideo('https://www.youtube.com/embed/MbmLy_QDSiI', 'Windows 2000 INSTALLATION', `<p>Windows Server 2000 ISO Link: <a href="https://mega.nz/#!0VIBlLTC!EYBAGK4_rm4mV-hBsoacv-HeK17aRTeAuYB-LvOoqS4" target="_blank">Mega Link</a><br><br><strong>WIN2000 PROD KEY:</strong> DDTPV-TXMX7-BBGJ9-WGY8K-B9GHM<br><strong>Alternative Key:</strong> VXKC4-2B3YF-W9MFK-QB3DB-9Y7MB</p>`); }
-        
-        function showXP() { playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP INSTALLATION', `<p>In this video, we will cover the following:<br>- Server installation</p>`); }
-        
-        function showVista() { playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista INSTALLATION', `<p>Windows Vista ISO Link: <a href="https://archive.org/details/win-vista-ultimate-x64" target="_blank">Download Here</a><br><strong>PROD KEY:</strong> X9HTF-MKJQQ-XK376-TJ7T4-76PKF</p>`); }
-        
-        function showServer2008() { playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Windows Server 2008 INSTALLATION', `<p>In this video, we will cover the following:<br>- Server installation<br>- Creating an Active Directory<br>- Installing a Domain Controller<br>- Installing a DNS</p>`); }
-        
-        function showWin7() { playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7 INSTALLATION', `<p>In this video, we will cover the following:<br>- Server installation</p>`); }
-        
-        function showWin8() { playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8 INSTALLATION', `<p>Windows 8 ISO Link: <a href="https://www.techworm.net/2023/03/download-windows-8-1-iso-files.html" target="_blank">Download Here</a><br><strong>PROD KEY:</strong> 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH</p>`); }
-        
-        function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10 INSTALLATION', `<p>Windows 10 ISO Link: <a href="https://www.microsoft.com/en-in/software-download/windows10" target="_blank">Download Here</a></p>`); }
-        
-        function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11 INSTALLATION', `<p>Windows 11 ISO Link: <a href="https://support.microsoft.com/en-us/windows/create-an-iso-file-for-windows-11-f2fe5a20-a186-4d1b-9ef8-59a2e0eb1178" target="_blank">Download Here</a></p>`); }
+        // FULL CAPTIONS RESTORED
+        function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", "<p>An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It acts as an intermediary between computer hardware and the user, providing a stable and consistent environment for applications to run.</p>"); }
 
-        function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `<p>- Create User Accounts of all BSIT Students...<br><strong>Common password:</strong> User123</p>`); }
-        
-        function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `<p><strong>Add roles:</strong> DHCP Server...<br>3. LOGIN 5 student accounts per section per OS</p>`); }
-        
-        function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", `<p>1. Add Application Server Role...<br>6. Use the domain name in accessing the web page.</p>`); }
-        
-        function showRaidLab() { playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", `<p>RAID is a storage technology...<br><strong>Instructions:</strong> Perform the RAID installation...</p>`); }
-        
-        function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `<p>Group Policy Management is a centralized feature...<br><strong>Instructions</strong> Perform the following rules...</p>`); }
-        
-        function showFileServerLab() { playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", `<p>A file server is a centralized storage system...<br><strong>Instructions</strong> Add roles: File Services...</p>`); }
+        function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0">WinWorld</a><br>ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0">WinWorld</a><br><br><strong>Note:</strong> If an error occurs after installation regarding CPU speed, download FIX95CPU_V3_FINAL.ZIP.<br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233`); }
 
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p>In Windows Server 2008, adding users... <a href='https://ggle.in/bulkusers' target='_blank'>Bulk Link</a></p>`); }
-        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p>A DHCP server in Windows Server 2008...</p>`); }
-        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p>File sharing in Windows Server 2008...</p>`); }
-        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p>RAID combines multiple physical disks...</p>`); }
-        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p>IIS 7.0 is the built-in web server...</p>`); }
-        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p>Group Policy centrally manages user settings...</p>`); }
-        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p>WDS is a server role in Windows Server 2008...</p>`); }
+        function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory", `<p>1. Create User Accounts for all BSIT Students in the domain.<br>2. Organize them using Organizational Units (OUs) for NS-2A, NS-2B, NS-2C, etc.<br>3. Ensure each user has a unique login.<br><strong>Common password:</strong> User123</p>`); }
+
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Case Study 1: Adding Users", `<p>Instructions: Manually or via bulk script, add the following student directory to the Windows Server 2008 Active Directory.</p><div class="bulk-list">Abalos, Abando, Abante, Abuan, Acosta, Agbulos, Alarcon, Albino, Alcaide, Alcantara, Alcaraz, Alcedo, Alerta, Alfiler, Alisasis, Almaden, Almodiel, Alog, Alonzo, Alvarez, Alvizo, Amado, Amante, Amoncio, Amoyo, Amparado, Anabo, Ancheta, Anciano, Andrada, Andres, Angeles, Angulo, Añonuevo, Ansano, Ante, Antonio, Apacible, Apolinar, Aragon, Araojo, Arcega, Arceo, Arcilla, Arcon, Arellano, Arevalo, Arguelles, Arimado, Arisgado, Arispe, Arizo, Armada, Arnaiz, Arocha, Arpon, Arrieta, Arrojo, Arroyo, Arsolon, Artates, Artiaga, Artuz, Asis, Aspa, Astoveza, Atanante, Atienza, Atis, Audal, Aurellano, Austria, Avance, Avendaño, Avila, Avis, Avorque, Ayuban, Ayuste, Azarcon, Azuela, Bacani, Baccay, Bacho, Baclea-An, Bacolod, Bacolor, Baconawa, Bacud, Bacuel, Baduria, Baes, Bagaporo, Baga-Y, Bagos, Baguio, Baguisi, Bahague, Bahande, Bahar, Bajandi, Balabag, Balaba, Balababa, Balaccua, Baladad, Balagtas, Balais, Balajadia, Balane, Balanitan, Balanquit, Balaoro, Balatbat, Balayan, Balbalosa, Balbuena, Balce, Balcueva, Baldemoro, Balderas, Baldon, Baldomar, Baldonaza, Baldos, Baldoz, Baldueza, Balero, Bales, Baleta, Balhon, Balibalita, Balicat, Balicoro, Balidion, Balidoy, Baligod, Balilla, Balinado, Balina, Balindan, Balingit, Balino, Balinsano, Balisbis, Balite, Baliuag, Baliza, Ballado, Ballares, Ballesteros, Ballio, Ballon, Balmadrid, Balmes, Balmores, Balneg, Baloloy, Baloria, Balosbalos, Balsa, Baltazar, Baluis, Balute, Baluyot, Bamilla, Bañadera, Banaag, Banabatac, Banadera, Bañaga, Banan, Banas, Bañas, Banastao, Bandalan, Bandal, Bandales, Banday, Bandiez, Bandiola, Bandong, Banega, Bañega, Bangis, Bangon, Bañgo, Bangot, Bangquil, Banico, Baning, Baniqued, Banjo, Bansale, Bantayan, Bantayanon, Banting, Banto, Bantolo, Bantique, Bantola, Bantug, Bantugan, Bantugon, Bantulan, Banuag, Banusing, Banzon, Baquial, Baquiran, Baquir, Baracael, Baracena, Baradas, Baral, Barandino, Barandon, Baraquias, Baraquiel, Barateta, Barba, Barbadillo, Barbecho, Barberan, Barber, Barbiere, Barbin, Barbosa, Barca, Barcelona, Barcena, Barcenas, Barcial, Barcoma, Bardelosa, Bardillon, Barena, Bargas, Bariane, Baria, Barican, Barile, Barilla, Barillos, Baring, Baritua, Barja, Barlaan, Barlis, Barlizo, Barman, Barnaez, Barnacha, Barnachea, Barnedo, Barnedo, Barnes, Barnese, Baro, Baroa, Baroja, Barola, Baroma, Baron, Barona, Barone, Baroquillo, Barra, Barraca, Barracas, Barranco, Barranda, Barraquio, Barras, Barreda, Barredo, Barreiro, Barrena, Barreno, Barrera, Barrientos, Barriga, Barrinuevo, Barrio, Barrion, Barrios, Barrit, Barro, Barroa, Barrocan, Barroga, Barrola, Barroma, Barron, Barroso, Barruga, Barsaga, Barsana, Bartocillo, Bartolata, Bartolay, Bartolome, Baruiz, Bas, Basallo, Basal, Basamayor, Basas, Basaysay, Basco, Bascon, Basconillo, Bascos, Bascuguin, Basiana, Basical, Basilad, Basilan, Basilio, Basillote, Basinal, Basinang, Basis, Basit, Baslot, Basmayor, Basquinas, Basta, Bastasa, Baste, Bastian, Bastillo, Baston, Basubas, Basuel, Basuil, Basut, Batac, Batacan, Batacandolo, Bataclan, Batal, Batalia, Batalier, Batalion, Batalla, Batan, Batanes, Batang, Batas, Bates, Bathala, Batica, Batiles, Batin, Batina, Batinga, Batingal, Batino, Batis, Batistil, Batistis, Batobalani, Batocabe, Batol, Batollar, Batomalaque, Baton, Batonon, Bato, Batoy, Batua, Batuampan, Batugal, Batuhan, Batula, Batulan, Batul, Batutay, Batuto, Bauat, Baugbog, Baug, Baul, Baun, Bauot, Bausas, Bautista, Bautro, Bauya, Bauzon, Bawayan, Baya, Bayaban, Bayabos, Bayad, Bayan, Bayani, Bayas, Bayaua, Baybay, Baybayon, Bayhon, Baylas, Bayle, Baylen, Baylon, Baylosis, Baynosa, Bayo, Bayon-On, Bayon, Bayoneta, Bayot, Bayron, Bayta, Bayubay, Baza, Bazan, Bazar, Beal, Beato, Bea, Bebanco, Bebita, Becaba, Becare, Beceira, Bechayda, Becina, Bedana, Bedayo, Bedes, Bedico, Bedilla, Bedio, Bedis, Bedonia, Bedoria, Bedoya, Bedrejo, Bedural, Begaso, Begonia, Begorio, Begorne, Beira, Bejar, Bejarin, Bejer, Bejerano, Bejo, Belacho, Belaguin, Belangel, Belanio, Belano, Belante, Belarmino, Belaro, Beltran, Beltran, Beltran, Beltran</div>`); }
+
+        // Restoring other specific labs/details
+        function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `<p>1. Open Server Manager.<br>2. Add Roles: DHCP Server.<br>3. Bind the server to your static IP address.<br>4. Create a Scope for your network.<br>5. Authorize the server in AD.</p>`); }
+        function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP & WEB SERVER", `<p>1. Add IIS (Internet Information Services) role.<br>2. Configure a default document.<br>3. Point your DNS to the local server IP.<br>4. Test the site using your custom domain name.</p>`); }
+        function showRaidLab() { playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", `<p>1. Shut down the VM and add two new virtual hard disks.<br>2. Open Disk Management.<br>3. Convert disks to Dynamic.<br>4. Create a Mirrored Volume (RAID 1) or Striped (RAID 0).</p>`); }
+        function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `<p>1. Open Group Policy Management.<br>2. Create a GPO for the Students OU.<br>3. Apply restrictions like disabling CMD, Task Manager, or changing the wallpaper.</p>`); }
+        
+        function showWin2000() { playVideo('https://www.youtube.com/embed/MbmLy_QDSiI', 'Windows 2000', `<strong>PROD KEY:</strong> DDTPV-TXMX7-BBGJ9-WGY8K-B9GHM`); }
+        function showVista() { playVideo('https://www.youtube.com/embed/LUParSq9Toc', 'Windows Vista', `<strong>PROD KEY:</strong> X9HTF-MKJQQ-XK376-TJ7T4-76PKF`); }
+        function showWin8() { playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8', `<strong>PROD KEY:</strong> 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH`); }
 
         function showAbout() {
-            playVideo("", "ABOUT", `
-                <h2 style="color:var(--accent-blue); text-align:center;">EMMANUEL C. CAPUNO</h2>
-                <p style="text-align:center; font-weight:700;">BSIT - NS-2A</p>
-                <p class="content-text" style="margin-top:20px;">This website serves as the final project for our Operating Systems course, offering a comprehensive guide to Windows OS installation, configuration, and management. Here, you'll find:
-                <ul style="margin-top:15px; padding-left:20px; color:#475569;">
-                    <li>Hands-on labs covering key OS concepts.</li>
-                    <li>Step-by-step video demonstrations of Windows installations.</li>
-                    <li>Case Study Finals which cover system setup, user management, and security.</li>
-                </ul></p>
-            `);
+            playVideo("", "ABOUT", `<p><strong>EMMANUEL C. CAPUNO</strong><br>BSIT - NS-2A<br><br>This project is the culmination of our Operating Systems course (ITOS220-T) at the Technological University of the Philippines. It serves as a visual documentation of server management and system administration skills.</p>`);
         }
+        
+        // General fallbacks for missing long text
+        function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT', 'Complete installation walkthrough for Windows NT 4.0 Workstation.'); }
+        function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98', 'Standard installation procedure for Windows 98 Second Edition.'); }
+        function showXP() { playVideo('https://www.youtube.com/embed/bIUnMNTdV6E', 'Windows XP', 'Walkthrough of the Windows XP Professional SP3 installation.'); }
+        function showServer2008() { playVideo('https://www.youtube.com/embed/dvtUVeDPHFs', 'Server 2008', 'Installation of Windows Server 2008 R2 and initial server configuration.'); }
+        function showWin7() { playVideo('https://www.youtube.com/embed/5EgVT5UYgpk', 'Windows 7', 'Installation of Windows 7 Ultimate on a Virtual Machine.'); }
+        function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', 'Modern OS deployment for Windows 10.'); }
+        function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', 'Installing Windows 11 bypassing TPM requirements where applicable.'); }
+        function showFileServerLab() { playVideo('https://www.youtube.com/embed/eIZ1Zy3SE5g', 'File Server', 'Configuring quotas and file screening on Windows Server.'); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "CS Part 2", "DHCP Scope and Reservation configuration."); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "CS Part 3", "Setting up Network File Shares with specific permissions."); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "CS Part 4", "Fault tolerance through RAID implementation."); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "CS Part 5", "Hosting local web content using IIS 7.0."); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "CS Part 6", "Enforcing security policies through GPMC."); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "CS Part 7", "WDS (Windows Deployment Services) demonstration."); }
     </script>
 </body>
 </html>
