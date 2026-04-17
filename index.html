@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* VIDEO BACKGROUND STYLES */
         .video-bg {
             position: fixed;
             top: 0;
@@ -79,29 +78,39 @@
         .content-text a { color: var(--accent-blue); text-decoration: underline; font-weight: 600; }
         .content-text ul { padding-left: 20px; margin-bottom: 15px; }
         
-        .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); }
+        .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); max-height: 200px; overflow-y: auto; }
 
+        /* JUMPING ARROW STYLES */
         .scroll-indicator {
             margin-top: auto;
-            padding-top: 30px;
+            padding-top: 20px;
             text-align: center;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: -10px;
         }
 
         .scroll-indicator i {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--accent-blue);
-            transition: transform 0.3s ease;
-            cursor: pointer;
+            margin: -8px 0;
+            opacity: 0.6;
         }
 
         .scroll-indicator:hover i {
-            animation: bounceArrow 0.6s infinite alternate;
+            animation: jumpArrow 0.8s infinite;
         }
 
-        @keyframes bounceArrow {
-            from { transform: translateY(0); }
-            to { transform: translateY(10px); }
+        /* Staggered jumping effect */
+        .scroll-indicator:hover i:nth-child(1) { animation-delay: 0s; }
+        .scroll-indicator:hover i:nth-child(2) { animation-delay: 0.1s; }
+        .scroll-indicator:hover i:nth-child(3) { animation-delay: 0.2s; }
+
+        @keyframes jumpArrow {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(15px); opacity: 1; color: #2563eb; }
         }
 
         .video-reveal-container {
@@ -150,6 +159,8 @@
         <div class="page-card" id="pageCard">
             <div id="textHolder"></div>
             <div class="scroll-indicator" id="arrowBox">
+                <i class="fas fa-chevron-down"></i>
+                <i class="fas fa-chevron-down"></i>
                 <i class="fas fa-chevron-down"></i>
             </div>
         </div>
@@ -218,7 +229,7 @@
             
             if(url) {
                 videoReveal.style.display = 'block';
-                arrowBox.style.display = 'block';
+                arrowBox.style.display = 'flex';
                 player.src = url.includes('embed') ? url : url.replace("watch?v=", "embed/");
             } else {
                 videoReveal.style.display = 'none';
@@ -241,113 +252,15 @@
         function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", "<p>An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It acts as an intermediary between computer hardware and the user, providing a stable and consistent environment for applications to run.</p>"); }
         function showAbout() { playVideo("", "ABOUT", `<p><strong>EMMANUEL C. CAPUNO</strong><br>BSIT - NS-2A<br><br>This project is the culmination of our Operating Systems course (ITOS220-T) at the Technological University of the Philippines. It serves as a visual documentation of server management and system administration skills.</p>`); }
 
-        function showActiveDirectory() { 
-            playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `
-                <ul>
-                    <li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li>
-                    <li>Group the students according to their section.</li>
-                    <li>Your account belongs to Administrators.</li>
-                </ul>
-                <p><strong>Show administrator account:</strong></p>
-                <ul>
-                    <li>User cannot change password.</li>
-                    <li>Password never expires.</li>
-                </ul>
-                <p><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>
-            `); 
-        }
+        // --- LAB ACTIVITIES (REMAIN INTACT) ---
+        function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `<ul><li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li><li>Group the students according to their section.</li><li>Your account belongs to Administrators.</li></ul><p><strong>Show administrator account:</strong></p><ul><li>User cannot change password.</li><li>Password never expires.</li></ul><p><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>`); }
+        function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `<p><strong>Add roles:</strong> DHCP Server</p><p><strong>Scopes:</strong></p><ul><li>number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.</li><li>number of female students per yr and section is the host requirement with the ip block 172.16.0.0/16</li><li>Server: Last Usable IP add</li><li>Exclude: First & Last (10 usable IP Addresses)</li><li>Lease Time: 16 hours</li><li>Router: Server IP Address</li><li>DNS: Server IP Address (8.8.8.8)</li></ul><p>1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)</p><p>2. Connect the two (2) client OS to your Windows Server Domain USING DHCP.</p><ul><li>WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li><li>WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li></ul><p>3. LOGIN 5 student accounts per section per OS</p>`); }
+        function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", `<p>1. Add Application Server Role</p><p>2. Add Web Server Role</p><p>3. Add features:</p><ul><li>asp.net</li><li>windows authentication</li><li>dynamic content compression</li><li>IIS 6 Management Compatibility</li></ul><p>4. After installation, create a simple asp.net web application.</p><p>5. The web page must be accessible to client browser.</p><p>6. Use the domain name in accessing the web page, not the IP address of the server.</p>`); }
+        function showRaidLab() { playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", `<p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations. Each RAID level offers distinct trade-offs to suit different needs.</p><p><strong>Instructions:</strong></p><p>Perform the RAID installation of the following level:</p><ul><li>Stripped Volume</li><li>Mirrored Volume</li><li>Spanned Volume</li><li>RAID 5</li></ul>`); }
+        function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `<p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.</p><p><strong>Instructions</strong></p><p>Perform the following rules in Group Policy:</p><ul><li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li><li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove Help menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove Run menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Add Logoff on the Start Menu: Enable</li><li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li><li>Internet Explorer Browser Title: Title Bar Text:</li><li>Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)</li><li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li><li>Prevent access to registry editing tools: User(Enable), Admin(Disable)</li><li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li></ul>`); }
+        function showFileServerLab() { playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", `<p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.</p><p><strong>Instructions</strong></p><p>Add roles: File Services, and perform the following:</p><p>1. Create a "Public" folder<br>Permissions: Read/Write<br>Users: All<br>Files: All files format except *.exe, *.com, *.vb, *.vbs</p><p>2. Folder: VB.Net<br>Permissions: Read/Write<br>Users: All<br>Files: *.zip, *.rar</p><p>3. Folder: C_Programs<br>Permissions: Read/Write<br>Users: All<br>Files: *.c, *.cpp</p><p>4. Folder: Surname_Section<br>Permissions: Full Control<br>Users: Domain User<br>Files: *.c, *.cpp, *.pdf, *.rar,*.docx, *.ppt,*.dwg</p><p>5. Folder: PHOTO_Male & PHOTO_FEMALE<br>Permissions: Read/Write<br>Users: Based on Users Gender<br>Files: *.jpg, *.gif, *.png</p>`); }
 
-        function showDHCP() { 
-            playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `
-                <p><strong>Add roles:</strong> DHCP Server</p>
-                <p><strong>Scopes:</strong></p>
-                <ul>
-                    <li>number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.</li>
-                    <li>number of female students per yr and section is the host requirement with the ip block 172.16.0.0/16</li>
-                    <li>Server: Last Usable IP add</li>
-                    <li>Exclude: First & Last (10 usable IP Addresses)</li>
-                    <li>Lease Time: 16 hours</li>
-                    <li>Router: Server IP Address</li>
-                    <li>DNS: Server IP Address (8.8.8.8)</li>
-                </ul>
-                <p>1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)</p>
-                <p>2. Connect the two (2) client OS to your Windows Server Domain USING DHCP.</p>
-                <ul>
-                    <li>WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li>
-                    <li>WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li>
-                </ul>
-                <p>3. LOGIN 5 student accounts per section per OS</p>
-            `); 
-        }
-
-        function showWebServerLab() { 
-            playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", `
-                <p>1. Add Application Server Role</p>
-                <p>2. Add Web Server Role</p>
-                <p>3. Add features:</p>
-                <ul>
-                    <li>asp.net</li>
-                    <li>windows authentication</li>
-                    <li>dynamic content compression</li>
-                    <li>IIS 6 Management Compatibility</li>
-                </ul>
-                <p>4. After installation, create a simple asp.net web application.</p>
-                <p>5. The web page must be accessible to client browser.</p>
-                <p>6. Use the domain name in accessing the web page, not the IP address of the server.</p>
-            `); 
-        }
-
-        function showRaidLab() { 
-            playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", `
-                <p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations. Each RAID level offers distinct trade-offs to suit different needs.</p>
-                <p><strong>Instructions:</strong></p>
-                <p>Perform the RAID installation of the following level:</p>
-                <ul>
-                    <li>Stripped Volume</li>
-                    <li>Mirrored Volume</li>
-                    <li>Spanned Volume</li>
-                    <li>RAID 5</li>
-                </ul>
-            `); 
-        }
-
-        function playGroupPolicy() { 
-            playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `
-                <p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.</p>
-                <p><strong>Instructions</strong></p>
-                <p>Perform the following rules in Group Policy:</p>
-                <ul>
-                    <li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li>
-                    <li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove Help menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove Run menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)</li>
-                    <li>Add Logoff on the Start Menu: Enable</li>
-                    <li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li>
-                    <li>Internet Explorer Browser Title: Title Bar Text:</li>
-                    <li>Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)</li>
-                    <li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li>
-                    <li>Prevent access to registry editing tools: User(Enable), Admin(Disable)</li>
-                    <li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li>
-                </ul>
-            `); 
-        }
-
-        function showFileServerLab() { 
-            playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", `
-                <p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.</p>
-                <p><strong>Instructions</strong></p>
-                <p>Add roles: File Services, and perform the following:</p>
-                <p>1. Create a "Public" folder<br>Permissions: Read/Write<br>Users: All<br>Files: All files format except *.exe, *.com, *.vb, *.vbs</p>
-                <p>2. Folder: VB.Net<br>Permissions: Read/Write<br>Users: All<br>Files: *.zip, *.rar</p>
-                <p>3. Folder: C_Programs<br>Permissions: Read/Write<br>Users: All<br>Files: *.c, *.cpp</p>
-                <p>4. Folder: Surname_Section<br>Permissions: Full Control<br>Users: Domain User<br>Files: *.c, *.cpp, *.pdf, *.rar,*.docx, *.ppt,*.dwg</p>
-                <p>5. Folder: PHOTO_Male & PHOTO_FEMALE<br>Permissions: Read/Write<br>Users: Based on Users Gender<br>Files: *.jpg, *.gif, *.png</p>
-            `); 
-        }
-
+        // --- INSTALLATION WALKTHROUGHS (REMAIN INTACT) ---
         function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0">WinWorld</a><br>ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0">WinWorld</a><br><br><strong>Note:</strong> If an error occurs after installation regarding CPU speed, download FIX95CPU_V3_FINAL.ZIP.<br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233`); }
         function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT', 'Complete installation walkthrough for Windows NT 4.0 Workstation.'); }
         function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98', 'Standard installation procedure for Windows 98 Second Edition.'); }
@@ -360,13 +273,14 @@
         function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', 'Modern OS deployment for Windows 10.'); }
         function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', 'Installing Windows 11 bypassing TPM requirements where applicable.'); }
 
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Case Study 1: Adding Users", `<p>Instructions: Manually or via bulk script, add the following student directory to the Windows Server 2008 Active Directory.</p><div class="bulk-list">Abalos, Abando, Abante, Abuan, Acosta, Agbulos, Alarcon, Albino, Alcaide, Alcantara, Alcaraz, Alcedo, Alerta, Alfiler, Alisasis, Almaden, Almodiel, Alog, Alonzo, Alvarez, Alvizo, Amado, Amante, Amoncio, Amoyo, Amparado, Anabo, Ancheta, Anciano, Andrada, Andres, Angeles, Angulo, Añonuevo, Ansano, Ante, Antonio, Apacible, Apolinar, Aragon, Araojo, Arcega, Arceo, Arcilla, Arcon, Arellano, Arevalo, Arguelles, Arimado, Arisgado, Arispe, Arizo, Armada, Arnaiz, Arocha, Arpon, Arrieta, Arrojo, Arroyo, Arsolon, Artates, Artiaga, Artuz, Asis, Aspa, Astoveza, Atanante, Atienza, Atis, Audal, Aurellano, Austria, Avance, Avendaño, Avila, Avis, Avorque, Ayuban, Ayuste, Azarcon, Azuela, Bacani, Baccay, Bacho, Baclea-An, Bacolod, Bacolor, Baconawa, Bacud, Bacuel, Baduria, Baes, Bagaporo, Baga-Y, Bagos, Baguio, Baguisi, Bahague, Bahande, Bahar, Bajandi, Balabag, Balaba, Balababa, Balaccua, Baladad, Balagtas, Balais, Balajadia, Balane, Balanitan, Balanquit, Balaoro, Balatbat, Balayan, Balbalosa, Balbuena, Balce, Balcueva, Baldemoro, Balderas, Baldon, Baldomar, Baldonaza, Baldonaza, Bales, Baleta, Balhon, Balibalita, Balicat, Balicoro, Balidion, Balidoy, Baligod, Balilla, Balinado, Balina, Balindan, Balingit, Balino, Balinsano, Balisbis, Balite, Baliuag, Baliza, Ballado, Ballares, Ballesteros, Ballio, Ballon, Balmadrid, Balmes, Balmores, Balneg, Baloloy, Baloria, Balosbalos, Balsa, Baltazar, Baluis, Balute, Baluyot, Bamilla, Bañadera, Banaag, Banabatac, Banadera, Bañaga, Banan, Banas, Bañas, Banastao, Bandalan, Bandal, Bandales, Banday, Bandiez, Bandiola, Bandong, Banega, Bañega, Bangis, Bangon, Bañgo, Bangot, Bangquil, Banico, Baning, Baniqued, Banjo, Bansale, Bantayan, Bantayanon, Banting, Banto, Bantolo, Bantique, Bantola, Bantug, Bantugan, Bantugon, Bantulan, Banuag, Banusing, Banzon, Baquial, Baquiran, Baquir, Baracael, Baracena, Baradas, Baral, Barandino, Barandon, Baraquias, Baraquiel, Barateta, Barba, Barbadillo, Barbecho, Barberan, Barber, Barbiere, Barbin, Barbosa, Barca, Barcelona, Barcena, Barcenas, Barcial, Barcoma, Bardelosa, Bardillon, Barena, Bargas, Bariane, Baria, Barican, Barile, Barilla, Barillos, Baring, Baritua, Barja, Barlaan, Barlis, Barlizo, Barman, Barnaez, Barnacha, Barnachea, Barnedo, Barnedo, Barnes, Barnese, Baro, Baroa, Baroja, Barola, Baroma, Baron, Barona, Barone, Baroquillo, Barra, Barraca, Barracas, Barranco, Barranda, Barraquio, Barras, Barreda, Barredo, Barreiro, Barrena, Barreno, Barrera, Barrientos, Barriga, Barrinuevo, Barrio, Barrion, Barrios, Barrit, Barro, Barroa, Barrocan, Barroga, Barrola, Barroma, Barron, Barroso, Barruga, Barsaga, Barsaga, Barsana, Bartocillo, Bartolata, Bartolay, Bartolome, Baruiz, Bas, Basallo, Basal, Basamayor, Basas, Basaysay, Basco, Bascon, Basconillo, Bascos, Bascuguin, Basiana, Basical, Basilad, Basilan, Basilio, Basillote, Basinal, Basinang, Basis, Basit, Baslot, Basmayor, Basquinas, Basta, Bastasa, Baste, Bastian, Bastillo, Baston, Basubas, Basuel, Basuil, Basut, Batac, Batacan, Batacandolo, Bataclan, Batal, Batalia, Batalier, Batalion, Batalla, Batan, Batanes, Batang, Batas, Bates, Bathala, Batica, Batiles, Batin, Batina, Batinga, Batingal, Batino, Batis, Batistil, Batistis, Batobalani, Batocabe, Batol, Batollar, Batomalaque, Baton, Batonon, Bato, Batoy, Batua, Batuampan, Batugal, Batuhan, Batula, Batulan, Batul, Batutay, Batuto, Bauat, Baugbog, Baug, Baul, Baun, Bauot, Bausas, Bautista, Bautro, Bauya, Bauzon, Bawayan, Baya, Bayaban, Bayabos, Bayad, Bayan, Bayani, Bayas, Bayaua, Baybay, Baybayon, Bayhon, Baylas, Bayle, Baylen, Baylon, Baylosis, Baynosa, Bayo, Bayon-On, Bayon, Bayoneta, Bayot, Bayron, Bayta, Bayubay, Baza, Bazan, Bazar, Beal, Beato, Bea, Bebanco, Bebita, Becaba, Becare, Beceira, Bechayda, Becina, Bedana, Bedayo, Bedes, Bedico, Bedilla, Bedio, Bedis, Bedonia, Bedoria, Bedoya, Bedrejo, Bedural, Begaso, Begonia, Begorio, Begorne, Beira, Bejar, Bejarin, Bejer, Bejerano, Bejo, Belacho, Belaguin, Belangel, Belanio, Belano, Belante, Belarmino, Belaro, Beltran</div>`); }
-        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "CS Part 2", "DHCP Scope and Reservation configuration."); }
-        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "CS Part 3", "Setting up Network File Shares with specific permissions."); }
-        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "CS Part 4", "Fault tolerance through RAID implementation."); }
-        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "CS Part 5", "Hosting local web content using IIS 7.0."); }
-        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "CS Part 6", "Enforcing security policies through GPMC."); }
-        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "CS Part 7", "WDS (Windows Deployment Services) demonstration."); }
+        // --- UPDATED CASE STUDY CAPTIONS ---
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "PART 1: Adding Users", `<p>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p><p>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank">https://ggle.in/bulkusers</a></p>`); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "PART 2: DHCP Server", `<p>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "PART 3: File Sharing", `<p>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "PART 4: RAID", `<p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "PART 5: Web Server", `<p>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "PART 6: Group Policy", `<p>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "PART 7: Deployment", `<p>Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`); }
     </script>
 </body>
 </html>
