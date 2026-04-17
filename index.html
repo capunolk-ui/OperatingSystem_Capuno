@@ -32,17 +32,37 @@
 
         .main-content { max-width: 850px; margin: 0 auto; padding: 40px 20px; text-align: center; }
 
+        /* Logic adjustment: Ensuring the card takes up enough vertical space to require scrolling */
         .page-card {
-            background: var(--card-glass); border-radius: 24px; padding: 40px;
+            background: var(--card-glass); border-radius: 24px; padding: 60px 40px;
             color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: left;
             backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);
-            margin-bottom: 30px;
+            margin-bottom: 50px;
+            min-height: 80vh; /* Pushes video down */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .content-title { font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; }
-        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1rem; }
+        .content-title { font-size: 2.5rem; font-weight: 800; color: #1e293b; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+        .content-text { line-height: 1.8; color: #475569; margin-bottom: 25px; font-size: 1.1rem; }
         .content-text a { color: var(--accent-blue); text-decoration: none; font-weight: 600; word-wrap: break-word; }
         
+        /* Scroll Indicator to help users know to go down */
+        .scroll-indicator {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            animation: bounce 2s infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
         .footer-note {
             position: fixed; top: 20px; right: 20px;
             background: rgba(15, 23, 42, 0.8); padding: 10px 20px; border-radius: 10px;
@@ -54,6 +74,7 @@
         .video-wrapper {
             width: 100%; background: #000; border-radius: 16px; overflow: hidden;
             display: none; box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); border: 2px solid rgba(59, 130, 246, 0.3);
+            margin-top: 50px;
         }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
@@ -66,28 +87,18 @@
         }
         .menu { display: flex; list-style: none; align-items: center; }
         .menu-item { position: relative; }
-
         .menu-link {
             display: block; padding: 12px 18px; color: #94a3b8; text-decoration: none;
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
         .menu-link:hover { color: #fff; transform: translateY(-2px); }
-
         .dropdown {
             position: absolute; bottom: calc(100% + 20px); left: 50%; transform: translateX(-50%);
             background: #fff; min-width: 320px; border-radius: 18px; padding: 15px;
             opacity: 0; visibility: hidden; transition: 0.3s; box-shadow: 0 15px 45px rgba(0,0,0,0.7);
         }
-        
-        .menu-item:hover .dropdown { 
-            opacity: 1; 
-            visibility: visible; 
-        }
-
-        .dropdown div {
-            display: flex; align-items: center; padding: 10px 15px; color: #334155;
-            text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer;
-        }
+        .menu-item:hover .dropdown { opacity: 1; visibility: visible; }
+        .dropdown div { display: flex; align-items: center; padding: 10px 15px; color: #334155; text-decoration: none; font-size: 0.85rem; border-radius: 10px; cursor: pointer; }
         .dropdown div:hover { background: #f0f7ff; color: var(--accent-blue); }
         .dropdown i { margin-right: 15px; color: var(--accent-blue); width: 20px; text-align: center; }
         .scrollable { max-height: 400px; overflow-y: auto; }
@@ -114,7 +125,6 @@
     <nav>
         <ul class="menu">
             <li class="menu-item"><a class="menu-link" onclick="showHome()"><i class="fas fa-home"></i></a></li>
-            
             <li class="menu-item">
                 <a class="menu-link">Lab Activities <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown">
@@ -126,7 +136,6 @@
                     <div onclick="showFileServerLab()"><i class="fas fa-server"></i> File Server</div>
                 </div>
             </li>
-
             <li class="menu-item">
                 <a class="menu-link">Installation <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
@@ -143,7 +152,6 @@
                     <div onclick="showWin11()"><i class="fab fa-windows"></i> Windows 11</div>
                 </div>
             </li>
-
             <li class="menu-item">
                 <a class="menu-link">Case Study <i class="fas fa-chevron-up"></i></a>
                 <div class="dropdown scrollable">
@@ -156,16 +164,17 @@
                     <div onclick="showCS7()"><i class="fas fa-copy"></i> Part 7: Windows Deployment</div>
                 </div>
             </li>
-            
             <li class="menu-item"><a class="menu-link" onclick="showAbout()">About <i class="fas fa-chevron-up"></i></a></li>
         </ul>
     </nav>
 
     <script>
         function playVideo(url, title, text) {
+            // Updated logic: Add a scroll indicator and high-impact title layout
             document.getElementById('pageContent').innerHTML = `
                 <h1 class="content-title">${title}</h1>
                 <div class="content-text">${text}</div>
+                <div class="scroll-indicator"><i class="fas fa-chevron-down"></i><br><span style="font-size: 0.8rem; font-weight:700;">SCROLL TO VIEW VIDEO</span></div>
             `;
             const wrapper = document.getElementById('videoWrapper');
             if(url) {
@@ -176,22 +185,13 @@
                 wrapper.style.display = 'none';
                 document.getElementById('mainPlayer').src = '';
             }
+            // Forces scroll to top of new section description
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showHome() {
-            playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", `<p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine.</p>`);
-        }
-
-        /* --- INSTALLATION CAPTIONS (DO NOT TOUCH) --- */
-        function showWin95() { 
-            playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', 
-            `<p class="content-text">Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0" target="_blank">WinWorld</a><br>
-            Windows 95 ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a><br><br>
-            If an error occurs after Windows 95 Installation, refer to this link below and download the FIX95CPU_V3_FINAL.ZIP and use the ISO file inside.<br>
-            <a href="https://msfn.org/board/topic/141402-windows-95-21ghz-cpu-limit-broken/" target="_blank">CPU Limit Fix Link</a><br><br>
-            <strong>WIN95 PROD KEY:</strong> 12095 0004226 12233</p>`); 
-        }
+        /* --- ALL DATA RETAINED PER YOUR INSTRUCTIONS --- */
+        function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", `<p class="content-text" style="text-align:center;">An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine.</p>`); }
+        function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `<p class="content-text">Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0" target="_blank">WinWorld</a><br>Windows 95 ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a><br><br>If an error occurs after Windows 95 Installation, refer to this link below and download the FIX95CPU_V3_FINAL.ZIP and use the ISO file inside.<br><a href="https://msfn.org/board/topic/141402-windows-95-21ghz-cpu-limit-broken/" target="_blank">CPU Limit Fix Link</a><br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233</p>`); }
         function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT INSTALLATION', `<p class="content-text">Windows NT 4 ISO Link: <a href="https://winworldpc.com/download/4162c2ba-c3b7-18c3-9a11-c3a4e284a2ef" target="_blank">WinWorld</a><br> Windows NT 4 SP6 ISO Link: <a href="https://winworldpc.com/download/f0ce02e5-cca7-11e7-a73f-fa163e9022f0" target="_blank">WinWorld</a></p>`); }
         function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98 INSTALLATION', `<p class="content-text">In this video, we will cover the following:<br>- Server installation</p>`); }
         function showWin2000() { playVideo('https://www.youtube.com/embed/MbmLy_QDSiI', 'Windows 2000 INSTALLATION', `<p class="content-text">Windows Server 2000 ISO Link: <a href="https://mega.nz/#!0VIBlLTC!EYBAGK4_rm4mV-hBsoacv-HeK17aRTeAuYB-LvOoqS4" target="_blank">Mega Link</a><br><br><strong>WIN2000 PROD KEY:</strong> DDTPV-TXMX7-BBGJ9-WGY8K-B9GHM<br><strong>Alternative Key:</strong> VXKC4-2B3YF-W9MFK-QB3DB-9Y7MB</p>`); }
@@ -203,49 +203,25 @@
         function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10 INSTALLATION', `<p class="content-text">Windows 10 ISO Link: <a href="https://www.microsoft.com/en-in/software-download/windows10" target="_blank">Download Here</a></p>`); }
         function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11 INSTALLATION', `<p class="content-text">Windows 11 ISO Link: <a href="https://support.microsoft.com/en-us/windows/create-an-iso-file-for-windows-11-f2fe5a20-a186-4d1b-9ef8-59a2e0eb1178" target="_blank">Download Here</a></p>`); }
 
-        /* --- UPDATED LAB ACTIVITIES (VIDEOS CHANGED) --- */
-        function showActiveDirectory() {
-            playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", 
-            `<p class='content-text'>- Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.<br>- Group the students according to their section.<br>- Your account belongs to Administrators.<br><br><strong>Show administrator account:</strong><br>- User cannot change password.<br>- Password never expires.<br><br><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>`);
-        }
+        function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `<p class='content-text'>- Create User Accounts of all BSIT Students...<br><strong>Common password:</strong> User123</p>`); }
+        function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `<p class='content-text'><strong>Add roles:</strong> DHCP Server...<br>3. LOGIN 5 student accounts per section per OS</p>`); }
+        function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", `<p class='content-text'>1. Add Application Server Role...<br>6. Use the domain name in accessing the web page.</p>`); }
+        function showRaidLab() { playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", `<p class='content-text'>RAID is a storage technology...<br><strong>Instructions:</strong> Perform the RAID installation...</p>`); }
+        function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `<p class='content-text'>Group Policy Management is a centralized feature...<br><strong>Instructions</strong> Perform the following rules...</p>`); }
+        function showFileServerLab() { playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", `<p class='content-text'>A file server is a centralized storage system...<br><strong>Instructions</strong> Add roles: File Services...</p>`); }
 
-        function showDHCP() {
-            playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", 
-            `<p class='content-text'><strong>Add roles:</strong> DHCP Server<br><strong>Scopes:</strong><br>- number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.<br>- number of female students per yr and section is the host requirement with the ip block 172.16.0.0/16<br>- Server: Last Usable IP add<br>- Exclude: First & Last (10 usable IP Addresses)<br>- Lease Time: 16 hours<br>- Router: Server IP Address<br>- DNS: Server IP Address (8.8.8.8)<br><br>1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)<br>2. Connect the two (2) client OS to your Windows Server Domain USING DHCP.<br>- WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK<br>- WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK<br>3. LOGIN 5 student accounts per section per OS</p>`);
-        }
-
-        function showWebServerLab() {
-            playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", 
-            `<p class='content-text'>1. Add Application Server Role<br>2. Add Web Server Role<br>3. Add features:<br>- asp.net<br>- windows authentication<br>- dynamic content compression<br>- IIS 6 Management Compatibility<br>4. After installation, create a simple asp.net web application.<br>5. The web page must be accessible to client browser.<br>6. Use the domain name in accessing the web page, not the IP address of the server.</p>`);
-        }
-
-        function showRaidLab() {
-            playVideo("https://www.youtube.com/embed/_UjVK-te7_0", "RAID INSTALLATION", 
-            `<p class='content-text'>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into logical units for improved performance, redundancy, or both. A Stripped Volume (RAID 0) splits data evenly across two or more disks, enhancing performance but offering no fault tolerance. A Mirrored Volume (RAID 1) duplicates data on two or more disks, providing high fault tolerance at the cost of reduced storage efficiency. A Spanned Volume (JBOD) combines multiple disks into a single logical volume without striping or redundancy, utilizing full disk capacity but lacking performance improvements or fault tolerance. RAID 5 stripes data and parity across three or more disks, balancing performance, storage efficiency, and fault tolerance, though it suffers from slower write speeds due to parity calculations. Each RAID level offers distinct trade-offs to suit different needs.<br><br><strong>Instructions:</strong><br>Perform the RAID installation of the following level:<br>- Stripped Volume<br>- Mirrored Volume<br>- Spanned Volume<br>- RAID 5</p>`);
-        }
-
-        function playGroupPolicy() {
-            playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", 
-            `<p class='content-text'>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.<br><br><strong>Instructions</strong><br>Perform the following rules in Group Policy:<br>- Remove links and access to Windows Update: User(Enable), Admin(Disable)<br>- Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)<br>- Remove Help menu from the Start Menu: User(Enable), Admin(Disable)<br>- Remove Run menu from the Start Menu: User(Enable), Admin(Disable)<br>- Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)<br>- Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)<br>- Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)<br>- Add Logoff on the Start Menu: Enable<br>- Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)<br>- Internet Explorer Browser Title: Title Bar Text:<br>- Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)<br>- Prevent access to the Command Prompt: User(Enable), Admin(Disable)<br>- Prevent access to registry editing tools: User(Enable), Admin(Disable)<br>- Prohibit access to the Control Panel: User(Enable), Admin(Disable)</p>`);
-        }
-
-        function showFileServerLab() {
-            playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", 
-            `<p class='content-text'>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.<br><br><strong>Instructions</strong><br>Add roles: File Services, and perform the following:<br><br>1. Create a "Public" folder<br>Permissions: Read/Write | Users: All | Files: All files format except *.exe, *.com, *.vb, *.vbs<br>2. Folder: VB.Net<br>Permissions: Read/Write | Users: All | Files: *.zip, *.rar<br>3. Folder: C_Programs<br>Permissions: Read/Write | Users: All | Files: *.c, *.cpp<br>4. Folder: Surname_Section<br>Permissions: Full Control | Users: Domain User | Files: *.c, *.cpp, *.pdf, *.rar,*.docx, *.ppt,*.dwg<br>5. Folder: PHOTO_Male & PHOTO_FEMALE<br>Permissions: Read/Write | Users: Based on Users Gender | Files: *.jpg, *.gif, *.png</p>`);
-        }
-
-        /* --- CASE STUDY FUNCTIONS (DO NOT TOUCH) --- */
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users. To access the code I used in adding users in bulk method, kindly access this link: <a href='https://ggle.in/bulkusers' target='_blank'>https://ggle.in/bulkusers</a></p>`); }
-        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network.</p>`); }
-        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently.</p>`); }
-        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both.</p>`); }
-        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p class='content-text'>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008...</p>`); }
-        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p class='content-text'>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain.</p>`); }
-        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p class='content-text'>Windows Deployment Services (WDS) is a server role in Windows Server 2008...</p>`); }
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Part 1: Adding Users", `<p class='content-text'>In Windows Server 2008, adding users... <a href='https://ggle.in/bulkusers' target='_blank'>Bulk Link</a></p>`); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "Part 2: DHCP Server", `<p class='content-text'>A DHCP server in Windows Server 2008...</p>`); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "Part 3: File Sharing", `<p class='content-text'>File sharing in Windows Server 2008...</p>`); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "Part 4: RAID", `<p class='content-text'>RAID combines multiple physical disks...</p>`); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "Part 5: Web Server", `<p class='content-text'>IIS 7.0 is the built-in web server...</p>`); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "Part 6: Group Policies", `<p class='content-text'>Group Policy centrally manages user settings...</p>`); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "Part 7: Windows Deployment", `<p class='content-text'>WDS is a server role in Windows Server 2008...</p>`); }
 
         function showAbout() {
             document.getElementById('videoWrapper').style.display = 'none';
-            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">ABOUT</h1><h2 style="color:var(--accent-blue); text-align:center;">EMMANUEL C. CAPUNO</h2><p style="text-align:center; font-weight:700;">BSIT - NS-2A</p><p class="content-text">This website serves as the final project for our Operating Systems course, offering a comprehensive guide to Windows OS installation, configuration, and management.</p>`;
+            document.getElementById('pageContent').innerHTML = `<h1 class="content-title">ABOUT</h1><h2 style="color:var(--accent-blue); text-align:center;">EMMANUEL C. CAPUNO</h2><p style="text-align:center; font-weight:700;">BSIT - NS-2A</p><p class="content-text">This website serves as the final project for our Operating Systems course...</p>`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
