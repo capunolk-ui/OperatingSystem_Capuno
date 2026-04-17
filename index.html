@@ -50,6 +50,30 @@
         
         .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); }
 
+        /* SCROLL ARROW STYLES */
+        .scroll-indicator {
+            margin-top: auto;
+            padding-top: 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .scroll-indicator i {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .scroll-indicator:hover i {
+            animation: bounceArrow 0.6s infinite alternate;
+        }
+
+        @keyframes bounceArrow {
+            from { transform: translateY(0); }
+            to { transform: translateY(10px); }
+        }
+
         .video-reveal-container {
             margin-top: 80px; opacity: 0; transform: scale(0.85) translateY(100px);
             transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); z-index: 1;
@@ -88,6 +112,9 @@
     <div class="main-content">
         <div class="page-card" id="pageCard">
             <div id="textHolder"></div>
+            <div class="scroll-indicator" id="arrowBox">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
 
         <div id="videoReveal" class="video-reveal-container">
@@ -149,12 +176,17 @@
         function playVideo(url, title, text) {
             document.getElementById('textHolder').innerHTML = `<h1 class="content-title">${title}</h1><div class="content-text">${text}</div>`;
             const videoReveal = document.getElementById('videoReveal');
+            const arrowBox = document.getElementById('arrowBox');
             const player = document.getElementById('mainPlayer');
+            
+            // Show arrow only if there is a video to scroll to
             if(url) {
                 videoReveal.style.display = 'block';
+                arrowBox.style.display = 'block';
                 player.src = url.includes('embed') ? url : url.replace("watch?v=", "embed/");
             } else {
                 videoReveal.style.display = 'none';
+                arrowBox.style.display = 'none';
                 player.src = '';
             }
             window.scrollTo(0, 0);
@@ -172,8 +204,6 @@
 
         function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", "<p>An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It acts as an intermediary between computer hardware and the user, providing a stable and consistent environment for applications to run.</p>"); }
         function showAbout() { playVideo("", "ABOUT", `<p><strong>EMMANUEL C. CAPUNO</strong><br>BSIT - NS-2A<br><br>This project is the culmination of our Operating Systems course (ITOS220-T) at the Technological University of the Philippines. It serves as a visual documentation of server management and system administration skills.</p>`); }
-
-        // --- UPDATED LAB ACTIVITIES (EXACT CAPTIONS) ---
 
         function showActiveDirectory() { 
             playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `
@@ -282,7 +312,6 @@
             `); 
         }
 
-        // --- INSTALLATION & CASE STUDY (REMAINS UNCHANGED) ---
         function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0">WinWorld</a><br>ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0">WinWorld</a><br><br><strong>Note:</strong> If an error occurs after installation regarding CPU speed, download FIX95CPU_V3_FINAL.ZIP.<br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233`); }
         function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT', 'Complete installation walkthrough for Windows NT 4.0 Workstation.'); }
         function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98', 'Standard installation procedure for Windows 98 Second Edition.'); }
