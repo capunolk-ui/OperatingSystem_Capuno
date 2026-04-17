@@ -12,7 +12,8 @@
     
     <style>
         :root {
-            --bg-overlay: rgba(10, 15, 28, 0.75); 
+            /* Changed overlay to your provided circuit board image */
+            --bg-image: url('https://png.pngtree.com/thumb_back/fw800/background/20190221/ourmid/pngtree-blue-technology-background-circuit-board-background-technology-background-light-image_12411.jpg');
             --text-light: #f8fafc;
             --text-dark: #0f172a;
             --accent-blue: #3b82f6;   
@@ -24,30 +25,34 @@
 
         body {
             color: var(--text-light); font-family: 'Inter', sans-serif;
-            min-height: 250vh; 
+            min-height: 200vh; 
             overflow-x: hidden;
+            /* Applying the circuit background to the whole body */
+            background-image: var(--bg-image);
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
         }
 
+        /* Video Background stays for the Home/Intro feel, but overlay is now the circuit */
         .video-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             overflow: hidden;
         }
 
         .video-bg video {
             min-width: 100%;
             min-height: 100%;
-            width: auto;
-            height: auto;
+            object-fit: cover;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            object-fit: cover;
         }
 
         .bg-overlay {
@@ -56,17 +61,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--bg-overlay);
-            z-index: 0;
+            /* Using the circuit image as the primary overlay for every page */
+            background: var(--bg-image) no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.9; /* Slight transparency so video movement can peak through if video exists */
+            z-index: -1;
         }
 
         .main-content { position: relative; max-width: 900px; margin: 0 auto; padding: 20px; z-index: 1; }
 
         .page-card {
             background: var(--card-glass); border-radius: 24px; padding: 50px;
-            color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            color: var(--text-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
             backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3);
-            position: relative; /* Changed from sticky to allow natural scroll for long text */
+            position: relative; 
             margin-top: 40px;
             z-index: 2;
             min-height: 60vh; 
@@ -78,8 +86,6 @@
         .content-text strong { color: #000; }
         .content-text a { color: var(--accent-blue); text-decoration: underline; font-weight: 600; }
         .content-text ul { padding-left: 20px; margin-bottom: 15px; }
-        
-        .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); max-height: 300px; overflow-y: auto; }
 
         /* JUMPING ARROW STYLES */
         .scroll-indicator {
@@ -95,11 +101,6 @@
             font-size: 1.5rem;
             color: var(--accent-blue);
             margin: -8px 0;
-            opacity: 0.6;
-        }
-
-        /* Animation always active to signal more content */
-        .scroll-indicator i {
             animation: jumpArrow 1.2s infinite;
         }
 
@@ -114,7 +115,7 @@
 
         .video-reveal-container {
             margin-top: 60px; 
-            margin-bottom: 100px;
+            margin-bottom: 150px;
             opacity: 0; transform: translateY(50px);
             transition: all 0.8s ease-out; z-index: 1;
         }
@@ -123,7 +124,7 @@
 
         .video-wrapper {
             width: 100%; background: #000; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 0 50px rgba(59, 130, 246, 0.5); border: 3px solid rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.6); border: 3px solid rgba(59, 130, 246, 0.5);
         }
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
@@ -150,7 +151,7 @@
 <body onload="showHome()">
 
     <div class="video-bg">
-        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070">
+        <video autoplay muted loop playsinline>
             <source src="https://cdn.pixabay.com/video/2018/04/17/15814-266518788_large.mp4" type="video/mp4">
         </video>
     </div>
@@ -237,7 +238,7 @@
                 arrowBox.style.display = 'none';
                 player.src = '';
             }
-            // Logic to check scroll visibility
+            
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 checkScroll();
@@ -249,7 +250,6 @@
             const triggerBottom = window.innerHeight / 5 * 4;
             const cardRect = document.getElementById('pageCard').getBoundingClientRect();
             
-            // Video appears when user reaches the end of the white card
             if (cardRect.bottom < triggerBottom) {
                 videoReveal.classList.add('visible');
             } else {
@@ -262,7 +262,7 @@
         function showHome() { playVideo("https://www.youtube.com/embed/GjNp0bBrjmU", "OPERATING SYSTEM", "<p>An operating system (OS) is the core software that manages a computer's hardware and software resources, enabling users to interact with the machine. It acts as an intermediary between computer hardware and the user, providing a stable and consistent environment for applications to run.</p>"); }
         function showAbout() { playVideo("", "ABOUT", `<p><strong>EMMANUEL C. CAPUNO</strong><br>BSIT - NS-2A<br><br>This project is the culmination of our Operating Systems course (ITOS220-T) at the Technological University of the Philippines. It serves as a visual documentation of server management and system administration skills.</p>`); }
 
-        // --- LAB ACTIVITIES ---
+        // LAB ACTIVITIES
         function showActiveDirectory() { playVideo("https://www.youtube.com/embed/ZXYlduKxtnM", "Active Directory - Adding Users", `<ul><li>Create User Accounts of all BSIT Students (1st to 4th year) with common passwords.</li><li>Group the students according to their section.</li><li>Your account belongs to Administrators.</li></ul><p><strong>Show administrator account:</strong></p><ul><li>User cannot change password.</li><li>Password never expires.</li></ul><p><strong>Domain:</strong> bsit.com<br><strong>Common password:</strong> User123</p>`); }
         function showDHCP() { playVideo("https://www.youtube.com/embed/6Fls97KnV74", "DHCP SERVER", `<p><strong>Add roles:</strong> DHCP Server</p><p><strong>Scopes:</strong></p><ul><li>number of male students per yr and section is the host requirement with the ip block 10.0.0.0 /8.</li><li>number of female students per yr and section is the host requirement with the ip block 172.16.0.0/16</li><li>Server: Last Usable IP add</li><li>Exclude: First & Last (10 usable IP Addresses)</li><li>Lease Time: 16 hours</li><li>Router: Server IP Address</li><li>DNS: Server IP Address (8.8.8.8)</li></ul><p>1. Create client OS, 1 Windows XP (LASTNAME-XP), and 1 Windows 7(LASTNAME-WIN7)</p><p>2. Connect the two (2) client OS to your Windows Server Domain USING DHCP.</p><ul><li>WINDOW XP IP ADDRESS MUST BELONG TO CLASS A NETWORK</li><li>WINDOW 7 IP ADDRESS MUST BELONG TO CLASS B NETWORK</li></ul><p>3. LOGIN 5 student accounts per section per OS</p>`); }
         function showWebServerLab() { playVideo("https://www.youtube.com/embed/6VuNQgEzraw", "APP AND WEB SERVER", `<p>1. Add Application Server Role</p><p>2. Add Web Server Role</p><p>3. Add features:</p><ul><li>asp.net</li><li>windows authentication</li><li>dynamic content compression</li><li>IIS 6 Management Compatibility</li></ul><p>4. After installation, create a simple asp.net web application.</p><p>5. The web page must be accessible to client browser.</p><p>6. Use the domain name in accessing the web page, not the IP address of the server.</p>`); }
@@ -270,7 +270,16 @@
         function playGroupPolicy() { playVideo("https://www.youtube.com/embed/5vy_3c5jMrs", "GROUP POLICY", `<p>Group Policy Management is a centralized feature in Microsoft Windows that allows administrators to manage and enforce settings for users and computers within an Active Directory domain using Group Policy Objects (GPOs). It enables control over security settings (e.g., password policies, user rights), software deployment (e.g., automated installations), system configurations (e.g., desktop and network settings), and compliance auditing, ensuring consistency, security, and efficiency across the network. By applying GPOs, administrators can streamline policy enforcement, reduce manual configuration, and maintain organizational standards in a networked environment.</p><p><strong>Instructions</strong></p><p>Perform the following rules in Group Policy:</p><ul><li>Remove links and access to Windows Update: User(Enable), Admin(Disable)</li><li>Remove Network Connections from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove Help menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove Run menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Pictures icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Music icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Remove My Network Places icon menu from the Start Menu: User(Enable), Admin(Disable)</li><li>Add Logoff on the Start Menu: Enable</li><li>Remove Task Manager from CTRL+ALT+DEL: User(Enable), Admin(Disable)</li><li>Internet Explorer Browser Title: Title Bar Text:</li><li>Prohibit access to properties of components of a LAN Connections: User(Enable), Admin(Disable)</li><li>Prevent access to the Command Prompt: User(Enable), Admin(Disable)</li><li>Prevent access to registry editing tools: User(Enable), Admin(Disable)</li><li>Prohibit access to the Control Panel: User(Enable), Admin(Disable)</li></ul>`); }
         function showFileServerLab() { playVideo("https://www.youtube.com/embed/eIZ1Zy3SE5g", "FILE SERVER", `<p>A file server is a centralized storage system within a network that allows multiple users to store, access, and manage files and data. It provides a shared location for documents, media, and other resources, enabling collaboration and efficient data management. File servers often include features like access control, user permissions, and backup capabilities to ensure data security and availability. They can be implemented using dedicated hardware or software solutions and are commonly used in businesses, schools, and organizations to streamline file sharing, reduce redundancy, and maintain centralized control over critical data.</p><p><strong>Instructions</strong></p><p>Add roles: File Services, and perform the following:</p><p>1. Create a "Public" folder<br>Permissions: Read/Write<br>Users: All<br>Files: All files format except *.exe, *.com, *.vb, *.vbs</p><p>2. Folder: VB.Net<br>Permissions: Read/Write<br>Users: All<br>Files: *.zip, *.rar</p><p>3. Folder: C_Programs<br>Permissions: Read/Write<br>Users: All<br>Files: *.c, *.cpp</p><p>4. Folder: Surname_Section<br>Permissions: Full Control<br>Users: Domain User<br>Files: *.c, *.cpp, *.pdf, *.rar,*.docx, *.ppt,*.dwg</p><p>5. Folder: PHOTO_Male & PHOTO_FEMALE<br>Permissions: Read/Write<br>Users: Based on Users Gender<br>Files: *.jpg, *.gif, *.png</p>`); }
 
-        // --- INSTALLATION WALKTHROUGHS ---
+        // CASE STUDY (YOUR UPDATED CAPTIONS)
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "PART 1: Adding Users", `<p>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p><p>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank">https://ggle.in/bulkusers</a></p>`); }
+        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "PART 2: DHCP Server", `<p>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); }
+        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "PART 3: File Sharing", `<p>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); }
+        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "PART 4: RAID", `<p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`); }
+        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "PART 5: Web Server", `<p>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`); }
+        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "PART 6: Group Policy", `<p>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`); }
+        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "PART 7: Deployment", `<p>Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`); }
+
+        // INSTALLS
         function showWin95() { playVideo('https://www.youtube.com/embed/XKuVJd7hV6I', 'Windows 95 INSTALLATION', `Floppy Disc Link: <a href="https://winworldpc.com/download/db57f85a-f039-11e7-a562-fa163e9022f0">WinWorld</a><br>ISO: <a href="https://winworldpc.com/download/df61214c-cca9-11e7-a73f-fa163e9022f0">WinWorld</a><br><br><strong>Note:</strong> If an error occurs after installation regarding CPU speed, download FIX95CPU_V3_FINAL.ZIP.<br><br><strong>WIN95 PROD KEY:</strong> 12095 0004226 12233`); }
         function showWinNT() { playVideo('https://www.youtube.com/embed/QHsH2SIcljk', 'Windows NT', 'Complete installation walkthrough for Windows NT 4.0 Workstation.'); }
         function showWin98() { playVideo('https://www.youtube.com/embed/1LdKz1lMZJ4', 'Windows 98', 'Standard installation procedure for Windows 98 Second Edition.'); }
@@ -282,15 +291,6 @@
         function showWin8() { playVideo('https://www.youtube.com/embed/b2tE9Ey8d2w', 'Windows 8', `<strong>PROD KEY:</strong> 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH`); }
         function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', 'Modern OS deployment for Windows 10.'); }
         function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', 'Installing Windows 11 bypassing TPM requirements where applicable.'); }
-
-        // --- CASE STUDY ---
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "PART 1: Adding Users", `<p>In Windows Server 2008, adding users is a straightforward process performed through the Server Manager or Active Directory Users and Computers (ADUC) console for domain environments. In this video, I used the bulk adding of users.</p><p>To access the code, I used in adding users in bulk method kindly access this link: <a href="https://ggle.in/bulkusers" target="_blank">https://ggle.in/bulkusers</a></p>`); }
-        function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "PART 2: DHCP Server", `<p>A DHCP (Dynamic Host Configuration Protocol) server in Windows Server 2008 automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to client devices on a network. This eliminates the need for manual IP address assignment, reducing errors and simplifying network administration.</p>`); }
-        function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "PART 3: File Sharing", `<p>File sharing in Windows Server 2008 allows users and administrators to store, access, and manage files across a network efficiently. This is typically configured using shared folders and NTFS permissions to control access. The File Services role can be installed via Server Manager, enabling features like DFS (Distributed File System) for centralized file management and replication across multiple servers.</p>`); }
-        function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "PART 4: RAID", `<p>RAID (Redundant Array of Independent Disks) is a storage technology that combines multiple physical disks into a single logical unit to improve performance, redundancy, or both. Windows Server 2008 supports software-based RAID (managed by the OS) and works with hardware RAID (managed by a dedicated controller).</p>`); }
-        function showCS5() { playVideo("https://www.youtube.com/embed/GnK0fzOGLw4", "PART 5: Web Server", `<p>Internet Information Services (IIS) 7.0 is the built-in web server in Windows Server 2008, providing a secure and scalable platform for hosting websites, web applications, and services. It supports ASP.NET, PHP, FTP, and HTTP/HTTPS protocols, making it versatile for different web hosting needs.</p>`); }
-        function showCS6() { playVideo("https://www.youtube.com/embed/9ASXDFfy_fo", "PART 6: Group Policy", `<p>Group Policy is a powerful feature in Windows Server 2008 that allows administrators to centrally manage user and computer settings across a domain. It enforces security configurations, deploys software, and controls system and application behaviors through Group Policy Objects (GPOs).</p>`); }
-        function showCS7() { playVideo("https://www.youtube.com/embed/Ns8WP1gm_is", "PART 7: Deployment", `<p>Windows Deployment Services (WDS) is a server role in Windows Server 2008 that enables network-based installation of Windows operating systems, allowing administrators to deploy Windows images (e.g., Windows 7, Windows Server 2008) to multiple computers efficiently.</p>`); }
     </script>
 </body>
 </html>
