@@ -12,7 +12,7 @@
     
     <style>
         :root {
-            --bg-overlay: rgba(10, 15, 28, 0.85); 
+            --bg-overlay: rgba(10, 15, 28, 0.75); 
             --text-light: #f8fafc;
             --text-dark: #0f172a;
             --accent-blue: #3b82f6;   
@@ -23,14 +23,45 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
-                        url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
             color: var(--text-light); font-family: 'Inter', sans-serif;
             min-height: 250vh; 
+            overflow-x: hidden;
         }
 
-        .main-content { max-width: 900px; margin: 0 auto; padding: 20px; perspective: 1000px; }
+        /* VIDEO BACKGROUND STYLES */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-bg video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-overlay);
+            z-index: 0;
+        }
+
+        .main-content { position: relative; max-width: 900px; margin: 0 auto; padding: 20px; perspective: 1000px; z-index: 1; }
 
         .page-card {
             background: var(--card-glass); border-radius: 24px; padding: 50px;
@@ -50,7 +81,6 @@
         
         .bulk-list { background: #f1f5f9; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid var(--accent-blue); }
 
-        /* SCROLL ARROW STYLES */
         .scroll-indicator {
             margin-top: auto;
             padding-top: 30px;
@@ -108,6 +138,13 @@
     </style>
 </head>
 <body onload="showHome()">
+
+    <div class="video-bg">
+        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1558494949-ef010cbdcc48?q=80&w=2070">
+            <source src="https://cdn.pixabay.com/video/2018/04/17/15814-266518788_large.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="bg-overlay"></div>
 
     <div class="main-content">
         <div class="page-card" id="pageCard">
@@ -179,7 +216,6 @@
             const arrowBox = document.getElementById('arrowBox');
             const player = document.getElementById('mainPlayer');
             
-            // Show arrow only if there is a video to scroll to
             if(url) {
                 videoReveal.style.display = 'block';
                 arrowBox.style.display = 'block';
@@ -324,7 +360,7 @@
         function showWin10() { playVideo('https://www.youtube.com/embed/LuEVJ53eZWo', 'Windows 10', 'Modern OS deployment for Windows 10.'); }
         function showWin11() { playVideo('https://www.youtube.com/embed/TY94JLR6-U8', 'Windows 11', 'Installing Windows 11 bypassing TPM requirements where applicable.'); }
 
-        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Case Study 1: Adding Users", `<p>Instructions: Manually or via bulk script, add the following student directory to the Windows Server 2008 Active Directory.</p><div class="bulk-list">Abalos, Abando, Abante, Abuan, Acosta, Agbulos, Alarcon, Albino, Alcaide, Alcantara, Alcaraz, Alcedo, Alerta, Alfiler, Alisasis, Almaden, Almodiel, Alog, Alonzo, Alvarez, Alvizo, Amado, Amante, Amoncio, Amoyo, Amparado, Anabo, Ancheta, Anciano, Andrada, Andres, Angeles, Angulo, Añonuevo, Ansano, Ante, Antonio, Apacible, Apolinar, Aragon, Araojo, Arcega, Arceo, Arcilla, Arcon, Arellano, Arevalo, Arguelles, Arimado, Arisgado, Arispe, Arizo, Armada, Arnaiz, Arocha, Arpon, Arrieta, Arrojo, Arroyo, Arsolon, Artates, Artiaga, Artuz, Asis, Aspa, Astoveza, Atanante, Atienza, Atis, Audal, Aurellano, Austria, Avance, Avendaño, Avila, Avis, Avorque, Ayuban, Ayuste, Azarcon, Azuela, Bacani, Baccay, Bacho, Baclea-An, Bacolod, Bacolor, Baconawa, Bacud, Bacuel, Baduria, Baes, Bagaporo, Baga-Y, Bagos, Baguio, Baguisi, Bahague, Bahande, Bahar, Bajandi, Balabag, Balaba, Balababa, Balaccua, Baladad, Balagtas, Balais, Balajadia, Balane, Balanitan, Balanquit, Balaoro, Balatbat, Balayan, Balbalosa, Balbuena, Balce, Balcueva, Baldemoro, Balderas, Baldon, Baldomar, Baldonaza, Baldonaza, Bales, Baleta, Balhon, Balibalita, Balicat, Balicoro, Balidion, Balidoy, Baligod, Balilla, Balinado, Balina, Balindan, Balingit, Balino, Balinsano, Balisbis, Balite, Baliuag, Baliza, Ballado, Ballares, Ballesteros, Ballio, Ballon, Balmadrid, Balmes, Balmores, Balneg, Baloloy, Baloria, Balosbalos, Balsa, Baltazar, Baluis, Balute, Baluyot, Bamilla, Bañadera, Banaag, Banabatac, Banadera, Bañaga, Banan, Banas, Bañas, Banastao, Bandalan, Bandal, Bandales, Banday, Bandiez, Bandiola, Bandong, Banega, Bañega, Bangis, Bangon, Bañgo, Bangot, Bangquil, Banico, Baning, Baniqued, Banjo, Bansale, Bantayan, Bantayanon, Banting, Banto, Bantolo, Bantique, Bantola, Bantug, Bantugan, Bantugon, Bantulan, Banuag, Banusing, Banzon, Baquial, Baquiran, Baquir, Baracael, Baracena, Baradas, Baral, Barandino, Barandon, Baraquias, Baraquiel, Barateta, Barba, Barbadillo, Barbecho, Barberan, Barber, Barbiere, Barbin, Barbosa, Barca, Barcelona, Barcena, Barcenas, Barcial, Barcoma, Bardelosa, Bardillon, Barena, Bargas, Bariane, Baria, Barican, Barile, Barilla, Barillos, Baring, Baritua, Barja, Barlaan, Barlis, Barlizo, Barman, Barnaez, Barnacha, Barnachea, Barnedo, Barnedo, Barnes, Barnese, Baro, Baroa, Baroja, Barola, Baroma, Baron, Barona, Barone, Baroquillo, Barra, Barraca, Barracas, Barranco, Barranda, Barraquio, Barras, Barreda, Barredo, Barreiro, Barrena, Barreno, Barrera, Barrientos, Barriga, Barrinuevo, Barrio, Barrion, Barrios, Barrit, Barro, Barroa, Barrocan, Barroga, Barrola, Barroma, Barron, Barroso, Barruga, Barsaga, Barsana, Bartocillo, Bartolata, Bartolay, Bartolome, Baruiz, Bas, Basallo, Basal, Basamayor, Basas, Basaysay, Basco, Bascon, Basconillo, Bascos, Bascuguin, Basiana, Basical, Basilad, Basilan, Basilio, Basillote, Basinal, Basinang, Basis, Basit, Baslot, Basmayor, Basquinas, Basta, Bastasa, Baste, Bastian, Bastillo, Baston, Basubas, Basuel, Basuil, Basut, Batac, Batacan, Batacandolo, Bataclan, Batal, Batalia, Batalier, Batalion, Batalla, Batan, Batanes, Batang, Batas, Bates, Bathala, Batica, Batiles, Batin, Batina, Batinga, Batingal, Batino, Batis, Batistil, Batistis, Batobalani, Batocabe, Batol, Batollar, Batomalaque, Baton, Batonon, Bato, Batoy, Batua, Batuampan, Batugal, Batuhan, Batula, Batulan, Batul, Batutay, Batuto, Bauat, Baugbog, Baug, Baul, Baun, Bauot, Bausas, Bautista, Bautro, Bauya, Bauzon, Bawayan, Baya, Bayaban, Bayabos, Bayad, Bayan, Bayani, Bayas, Bayaua, Baybay, Baybayon, Bayhon, Baylas, Bayle, Baylen, Baylon, Baylosis, Baynosa, Bayo, Bayon-On, Bayon, Bayoneta, Bayot, Bayron, Bayta, Bayubay, Baza, Bazan, Bazar, Beal, Beato, Bea, Bebanco, Bebita, Becaba, Becare, Beceira, Bechayda, Becina, Bedana, Bedayo, Bedes, Bedico, Bedilla, Bedio, Bedis, Bedonia, Bedoria, Bedoya, Bedrejo, Bedural, Begaso, Begonia, Begorio, Begorne, Beira, Bejar, Bejarin, Bejer, Bejerano, Bejo, Belacho, Belaguin, Belangel, Belanio, Belano, Belante, Belarmino, Belaro, Beltran</div>`); }
+        function showCS1() { playVideo("https://www.youtube.com/embed/Fbf34o2YjZI", "Case Study 1: Adding Users", `<p>Instructions: Manually or via bulk script, add the following student directory to the Windows Server 2008 Active Directory.</p><div class="bulk-list">Abalos, Abando, Abante, Abuan, Acosta, Agbulos, Alarcon, Albino, Alcaide, Alcantara, Alcaraz, Alcedo, Alerta, Alfiler, Alisasis, Almaden, Almodiel, Alog, Alonzo, Alvarez, Alvizo, Amado, Amante, Amoncio, Amoyo, Amparado, Anabo, Ancheta, Anciano, Andrada, Andres, Angeles, Angulo, Añonuevo, Ansano, Ante, Antonio, Apacible, Apolinar, Aragon, Araojo, Arcega, Arceo, Arcilla, Arcon, Arellano, Arevalo, Arguelles, Arimado, Arisgado, Arispe, Arizo, Armada, Arnaiz, Arocha, Arpon, Arrieta, Arrojo, Arroyo, Arsolon, Artates, Artiaga, Artuz, Asis, Aspa, Astoveza, Atanante, Atienza, Atis, Audal, Aurellano, Austria, Avance, Avendaño, Avila, Avis, Avorque, Ayuban, Ayuste, Azarcon, Azuela, Bacani, Baccay, Bacho, Baclea-An, Bacolod, Bacolor, Baconawa, Bacud, Bacuel, Baduria, Baes, Bagaporo, Baga-Y, Bagos, Baguio, Baguisi, Bahague, Bahande, Bahar, Bajandi, Balabag, Balaba, Balababa, Balaccua, Baladad, Balagtas, Balais, Balajadia, Balane, Balanitan, Balanquit, Balaoro, Balatbat, Balayan, Balbalosa, Balbuena, Balce, Balcueva, Baldemoro, Balderas, Baldon, Baldomar, Baldonaza, Baldonaza, Bales, Baleta, Balhon, Balibalita, Balicat, Balicoro, Balidion, Balidoy, Baligod, Balilla, Balinado, Balina, Balindan, Balingit, Balino, Balinsano, Balisbis, Balite, Baliuag, Baliza, Ballado, Ballares, Ballesteros, Ballio, Ballon, Balmadrid, Balmes, Balmores, Balneg, Baloloy, Baloria, Balosbalos, Balsa, Baltazar, Baluis, Balute, Baluyot, Bamilla, Bañadera, Banaag, Banabatac, Banadera, Bañaga, Banan, Banas, Bañas, Banastao, Bandalan, Bandal, Bandales, Banday, Bandiez, Bandiola, Bandong, Banega, Bañega, Bangis, Bangon, Bañgo, Bangot, Bangquil, Banico, Baning, Baniqued, Banjo, Bansale, Bantayan, Bantayanon, Banting, Banto, Bantolo, Bantique, Bantola, Bantug, Bantugan, Bantugon, Bantulan, Banuag, Banusing, Banzon, Baquial, Baquiran, Baquir, Baracael, Baracena, Baradas, Baral, Barandino, Barandon, Baraquias, Baraquiel, Barateta, Barba, Barbadillo, Barbecho, Barberan, Barber, Barbiere, Barbin, Barbosa, Barca, Barcelona, Barcena, Barcenas, Barcial, Barcoma, Bardelosa, Bardillon, Barena, Bargas, Bariane, Baria, Barican, Barile, Barilla, Barillos, Baring, Baritua, Barja, Barlaan, Barlis, Barlizo, Barman, Barnaez, Barnacha, Barnachea, Barnedo, Barnedo, Barnes, Barnese, Baro, Baroa, Baroja, Barola, Baroma, Baron, Barona, Barone, Baroquillo, Barra, Barraca, Barracas, Barranco, Barranda, Barraquio, Barras, Barreda, Barredo, Barreiro, Barrena, Barreno, Barrera, Barrientos, Barriga, Barrinuevo, Barrio, Barrion, Barrios, Barrit, Barro, Barroa, Barrocan, Barroga, Barrola, Barroma, Barron, Barroso, Barruga, Barsaga, Barsaga, Barsana, Bartocillo, Bartolata, Bartolay, Bartolome, Baruiz, Bas, Basallo, Basal, Basamayor, Basas, Basaysay, Basco, Bascon, Basconillo, Bascos, Bascuguin, Basiana, Basical, Basilad, Basilan, Basilio, Basillote, Basinal, Basinang, Basis, Basit, Baslot, Basmayor, Basquinas, Basta, Bastasa, Baste, Bastian, Bastillo, Baston, Basubas, Basuel, Basuil, Basut, Batac, Batacan, Batacandolo, Bataclan, Batal, Batalia, Batalier, Batalion, Batalla, Batan, Batanes, Batang, Batas, Bates, Bathala, Batica, Batiles, Batin, Batina, Batinga, Batingal, Batino, Batis, Batistil, Batistis, Batobalani, Batocabe, Batol, Batollar, Batomalaque, Baton, Batonon, Bato, Batoy, Batua, Batuampan, Batugal, Batuhan, Batula, Batulan, Batul, Batutay, Batuto, Bauat, Baugbog, Baug, Baul, Baun, Bauot, Bausas, Bautista, Bautro, Bauya, Bauzon, Bawayan, Baya, Bayaban, Bayabos, Bayad, Bayan, Bayani, Bayas, Bayaua, Baybay, Baybayon, Bayhon, Baylas, Bayle, Baylen, Baylon, Baylosis, Baynosa, Bayo, Bayon-On, Bayon, Bayoneta, Bayot, Bayron, Bayta, Bayubay, Baza, Bazan, Bazar, Beal, Beato, Bea, Bebanco, Bebita, Becaba, Becare, Beceira, Bechayda, Becina, Bedana, Bedayo, Bedes, Bedico, Bedilla, Bedio, Bedis, Bedonia, Bedoria, Bedoya, Bedrejo, Bedural, Begaso, Begonia, Begorio, Begorne, Beira, Bejar, Bejarin, Bejer, Bejerano, Bejo, Belacho, Belaguin, Belangel, Belanio, Belano, Belante, Belarmino, Belaro, Beltran</div>`); }
         function showCS2() { playVideo("https://www.youtube.com/embed/buwvfMCYZrk", "CS Part 2", "DHCP Scope and Reservation configuration."); }
         function showCS3() { playVideo("https://www.youtube.com/embed/xRTsGrQinik", "CS Part 3", "Setting up Network File Shares with specific permissions."); }
         function showCS4() { playVideo("https://www.youtube.com/embed/XXjX_WqLi1o", "CS Part 4", "Fault tolerance through RAID implementation."); }
